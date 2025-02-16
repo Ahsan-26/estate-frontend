@@ -14,12 +14,12 @@ const Footer = () => {
       >
         {/* Left Section - Logo & Description */}
         <Box maxW="250px" textAlign="left">
-          <Text fontSize="2xl" fontWeight="bold">
-            ESTATE
-            <Text as="span" color="yellow.500" fontSize="3xl" ml={1}>
-              1
-            </Text>
-          </Text>
+            {/* Image */}
+        <img 
+          src="/images/logo.png"  
+          alt="Sample Image" 
+          style={{ width: "110px", height: "38px", marginBottom: "8px" }}  
+        />
           <Text fontSize="sm" color="gray.600" mt={2}>
             Lorem ipsum dolor sit amnsectetur Sit sagittis volutpat sed ut augue odio natoque elementum.
           </Text>
