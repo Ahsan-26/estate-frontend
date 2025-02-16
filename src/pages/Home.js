@@ -4,8 +4,9 @@ import WhatWeDo from "../components/WhatWeDo";
 import ExpertSection from "../components/ExpertSection";
 import ReviewsSection from "../components/ReviewsSection";
 import TakeCareSection from "../components/TakeCareSection";
+import FAQs from "../components/Faqs";
 import HowWeWork from "../components/HowWeWork";
-import FAQs from "../components/FAQs";
+
 
 const Home = () => {
     return (

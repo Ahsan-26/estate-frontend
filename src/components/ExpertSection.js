@@ -3,7 +3,7 @@ import { Box, Text, VStack, HStack, Grid, Image } from "@chakra-ui/react";
 
 const ExpertSection = () => {
   return (
-    <Box as="section" position="relative" w="77vw">
+    <Box as="section" position="relative" w="100vw">
       {/* Background Image with 70% height */}
       <Box
         position="absolute"
