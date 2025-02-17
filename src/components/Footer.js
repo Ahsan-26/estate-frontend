@@ -14,10 +14,10 @@ const Footer = () => {
       >
         {/* Left Section - Logo & Description */}
         <Box maxW="250px" textAlign="left">
-            {/* Image */}
+          
         <img 
           src="/images/logo.png"  
-          alt="Sample Image" 
+          alt="logo" 
           style={{ width: "110px", height: "38px", marginBottom: "8px" }}  
         />
           <Text fontSize="sm" color="gray.600" mt={2}>

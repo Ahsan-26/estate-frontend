@@ -1,11 +1,9 @@
 import React from "react";
-import CareerHero from "../components/careerHero";
 import FAQs from "../components/Faqs";
-import Header from "../components/Header";
-import PartnerHero from "../components/PartnerHero";
-import PartnerWithUs from "../components/PartnerWithUs";
-import PartnerWork from "../components/PartnerWork";
-import PartnerFinalSection from "../components/PartnerFinalSection";
+import PartnerHero from "../components/Partner/PartnerHero";
+import PartnerWithUs from "../components/Partner/PartnerWithUs";
+import PartnerWork from "../components/Partner/PartnerWork";
+import PartnerFinalSection from "../components/Partner/PartnerFinalSection";
 
 const Partner = () => {
     return (

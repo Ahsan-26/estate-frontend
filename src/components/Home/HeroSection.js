@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Text, Image, VStack, HStack, Flex } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { PrimaryButton, SecondaryButton } from "./Buttons"; // ✅ Import Buttons
+import { PrimaryButton, SecondaryButton } from "../Buttons"; // ✅ Import Buttons
 
 const images = [
   "/images/hero_image1.png",

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text, VStack, HStack, Image, Grid } from "@chakra-ui/react";
-import { PrimaryButton, SecondaryButton } from "./Buttons";
+import { PrimaryButton, SecondaryButton } from "../Buttons";
 
 const WhatWeDo = () => {
   return (

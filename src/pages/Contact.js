@@ -1,16 +1,16 @@
 import React from "react";
-import CareerHero from "../components/careerHero";
-import FAQs from "../components/Faqs";
-import Header from "../components/Header";
-import ApplyCareer from "../components/applyCareer";
-import ContactHero from "../components/ContactHero";
+import ContactHero from "../components/Contact/ContactHero";
+import ContactSupport from "../components/Contact/ContactSupport";
+import ContactFAQ from "../components/Contact/ContactFAQ";
+import ContactHelp from "../components/Contact/ContactHelp";
 
 const Contact = () => {
     return (
       <div>
-    
         <ContactHero />
-        <FAQs/>
+        <ContactSupport />
+        <ContactFAQ />
+        <ContactHelp />
       </div>
     );
   };

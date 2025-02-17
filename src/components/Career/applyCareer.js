@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, VStack, HStack, Button, Link, Flex } from "@chakra-ui/react";
+import { Box, Text, Button, Link, Flex } from "@chakra-ui/react";
 
 const ApplyCareer = () => {
   return (

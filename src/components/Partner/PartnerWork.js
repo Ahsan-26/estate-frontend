@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, VStack, HStack, Grid, Circle } from "@chakra-ui/react";
+import { Box, Text, VStack, Grid, Circle } from "@chakra-ui/react";
 
 const steps = [
   {

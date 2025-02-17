@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Text, VStack, HStack, Image, Button, Flex, List, ListItem, Icon } from "@chakra-ui/react";
+import { Box, Text, HStack, Image, Button, Flex, List, ListItem, Icon } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
 
 const TakeCareSection = () => {

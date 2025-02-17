@@ -1,6 +1,6 @@
 import React from "react";
 import { 
-  Box, Flex, Button, Link as ChakraLink, Text, IconButton, Collapse, VStack, useDisclosure 
+  Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
@@ -18,15 +18,12 @@ const Header = () => {
     >
       <Flex justify="space-between" align="center">
         
-        {/* Left Section - Logo */}
-        <Text fontSize="2xl" fontWeight="bold">
-          ESTATE
-          <Text as="span" color="yellow.500" fontSize="3xl" ml={1}>
-            1
-          </Text>
-        </Text>
+        {/* ✅ Left Section - Logo (Clickable) */}
+        <ChakraLink as={Link} to="/" display="flex" alignItems="center">
+          <Image src="/images/logo.png" alt="EstateOne Logo" h="40px" />
+        </ChakraLink>
 
-        {/* Mobile Menu Button (Hidden on Large Screens) */}
+        {/* ✅ Mobile Menu Button */}
         <IconButton 
           display={{ base: "flex", md: "none" }} // ✅ Show only on mobile
           icon={isOpen ? <FaTimes /> : <FaBars />} 
@@ -36,10 +33,10 @@ const Header = () => {
           fontSize="20px"
         />
 
-        {/* Desktop Navigation Links */}
+        {/* ✅ Desktop Navigation Links */}
         <Flex 
           gap={6} fontWeight="bold" 
-          display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on tablet/desktop
+          display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on larger screens
         >
           <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
           <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
@@ -47,7 +44,7 @@ const Header = () => {
           <ChakraLink as={Link} to="/career" color="black" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
         </Flex>
 
-        {/* Right Section - Buttons (Hidden on Mobile) */}
+        {/* ✅ Right Section - Buttons (Hidden on Mobile) */}
         <Flex 
           gap={4} 
           display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on larger screens
@@ -75,7 +72,7 @@ const Header = () => {
 
       </Flex>
 
-      {/* Mobile Menu (Collapsible) */}
+      {/* ✅ Mobile Menu (Collapsible) */}
       <Collapse in={isOpen} animateOpacity>
         <VStack 
           bg="white"

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, VStack, HStack, Grid, Image } from "@chakra-ui/react";
+import { Box, Text, VStack, Grid, Image } from "@chakra-ui/react";
 
 const ExpertSection = () => {
   return (
