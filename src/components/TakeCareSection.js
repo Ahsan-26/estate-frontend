@@ -34,22 +34,30 @@ const TakeCareSection = () => {
   };
 
   return (
-    <Box as="section"  px={{ base: 5, md: 20 }}>
-      <Flex direction={{ base: "column", md: "row" }} align="center" justify="space-between" gap={10}>
+    <Box as="section" px={{ base: 5, md: 20 }} py={{ base: 10, md: 16 }}>
+      <Flex 
+        direction={{ base: "column", lg: "row" }} 
+        align="center" 
+        justify="space-between" 
+        gap={{ base: 6, md: 10 }}
+      >
         
         {/* Left Side - Text & Tabs */}
-        <Box maxW="600px">
+        <Box maxW={{ base: "100%", lg: "600px" }} textAlign={{ base: "center", lg: "left" }}>
           <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
             What we Take Care of
           </Text>
 
           {/* Tabs */}
-          <HStack mt={4} spacing={4}>
+          <HStack mt={4} spacing={2} justify={{ base: "center", lg: "flex-start" }} flexWrap="wrap">
             <Button 
               bg={activeTab === "buyers" ? "yellow.400" : "transparent"} 
               color={activeTab === "buyers" ? "white" : "black"} 
               _hover={{ bg: "yellow.500", color: "white" }}
               onClick={() => setActiveTab("buyers")}
+              fontSize={{ base: "sm", md: "md" }}
+              px={4} py={2}
+              borderRadius="md"
             >
               For Buyers
             </Button>
@@ -58,6 +66,9 @@ const TakeCareSection = () => {
               color={activeTab === "sellers" ? "white" : "black"} 
               _hover={{ bg: "yellow.500", color: "white" }}
               onClick={() => setActiveTab("sellers")}
+              fontSize={{ base: "sm", md: "md" }}
+              px={4} py={2}
+              borderRadius="md"
             >
               For Sellers
             </Button>
@@ -66,6 +77,9 @@ const TakeCareSection = () => {
               color={activeTab === "management" ? "white" : "black"} 
               _hover={{ bg: "yellow.500", color: "white" }}
               onClick={() => setActiveTab("management")}
+              fontSize={{ base: "sm", md: "md" }}
+              px={4} py={2}
+              borderRadius="md"
             >
               For Property Management
             </Button>
@@ -74,16 +88,22 @@ const TakeCareSection = () => {
           {/* Tab Content - List */}
           <List spacing={3} mt={6}>
             {tabData[activeTab].map((item, index) => (
-              <ListItem key={index} display="flex" alignItems="center">
+              <ListItem key={index} display="flex" alignItems="center" fontSize={{ base: "sm", md: "md" }}>
                 <Icon as={FaCheckCircle} color="yellow.400" mr={3} />
                 {item}
               </ListItem>
             ))}
           </List>
         </Box>
+
         {/* Right Side - Image with Branding */}
-        <Box >
-          <Image src="/images/house_icon.png" alt="House" w="400px" mt="20"/>
+        <Box display="flex" justifyContent="center" flexShrink={0}>
+          <Image 
+            src="/images/house_icon.png" 
+            alt="House" 
+            w={{ base: "100%", sm: "400px", md: "450px" }} 
+            maxW="500px"
+          />
         </Box>
 
       </Flex>

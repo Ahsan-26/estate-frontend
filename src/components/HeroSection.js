@@ -9,19 +9,20 @@ import { PrimaryButton, SecondaryButton } from "./Buttons"; // ✅ Import Button
 
 const images = [
   "/images/hero_image1.png",
-  "/images/hero_image1.png",
-  "/images/hero_image1.png",
+  "/images/hero_image2.png",
+  "/images/hero_image3.png",
 ];
 
 const HeroSection = () => {
   return (
     <Box 
       as="section"
-      bg="#F8F5E8" // Light cream background
+      bgGradient="linear(to-b, #FEFEF9, #F7F3EA)"
       py={{ base: 10, md: 16 }} 
       px={{ base: 5, md: 20 }}
       textAlign={{ base: "center", md: "left" }}
     >
+      
       <Flex 
         direction={{ base: "column", md: "row" }}
         align="center"
@@ -63,11 +64,9 @@ const HeroSection = () => {
         {/* Right Section - Image Slider */}
         <Box w={{ base: "100%", md: "500px" }}>
           <Swiper 
-            modules={[Navigation, Pagination, Autoplay]} 
+            modules={[Autoplay]} 
             spaceBetween={50} 
             slidesPerView={1} 
-            navigation 
-            pagination={{ clickable: true }} 
             autoplay={{ delay: 3000 }}
           >
             {images.map((image, index) => (
