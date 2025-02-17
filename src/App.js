@@ -4,6 +4,9 @@ import { ChakraProvider, Box } from "@chakra-ui/react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import Career from "./pages/Career";
+import Partner from "./pages/Partner";
+import Contact from "./pages/Contact";
 
 const App = () => {
   return (
@@ -12,6 +15,9 @@ const App = () => {
       <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/career" element={<Career/>} />
+        <Route path="/partner" element={<Partner/>} />
+        <Route path="/contact" element={<Contact/>} />
       </Routes>
       <Footer/>
     </Router>

@@ -14,7 +14,7 @@ const Header = () => {
       bg="white"
       borderBottom="1px solid"
       borderColor="gray.200"
-      py={4} px={6}
+      py={4} px={{ base: 4, md: 6 }}
     >
       <Flex justify="space-between" align="center">
         
@@ -28,7 +28,7 @@ const Header = () => {
 
         {/* Mobile Menu Button (Hidden on Large Screens) */}
         <IconButton 
-          display={{ base: "block", md: "none" }} 
+          display={{ base: "flex", md: "none" }} // ✅ Show only on mobile
           icon={isOpen ? <FaTimes /> : <FaBars />} 
           aria-label="Toggle Menu" 
           onClick={onToggle}
@@ -39,7 +39,7 @@ const Header = () => {
         {/* Desktop Navigation Links */}
         <Flex 
           gap={6} fontWeight="bold" 
-          display={{ base: "none", md: "flex" }} // Hide on mobile, show on tablet/desktop
+          display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on tablet/desktop
         >
           <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
           <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
@@ -50,12 +50,19 @@ const Header = () => {
         {/* Right Section - Buttons (Hidden on Mobile) */}
         <Flex 
           gap={4} 
-          display={{ base: "none", md: "flex" }} // Hide on mobile, show on tablet/desktop
+          display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on larger screens
         >
-          <Button bg="yellow.500" color="white" fontWeight="bold" _hover={{ bg: "yellow.600" }}>
+          <Button 
+            as={Link} to="/contact"
+            bg="yellow.500" 
+            color="white" 
+            fontWeight="bold" 
+            _hover={{ bg: "yellow.600" }}
+          >
             Contact Us
           </Button>
           <Button 
+            as={Link} to="/hotline"
             bg="yellow.100" 
             color="yellow.600" 
             fontWeight="bold"
@@ -75,21 +82,32 @@ const Header = () => {
           p={4}
           spacing={4}
           align="stretch"
-          display={{ base: "flex", md: "none" }} // Show only on mobile
+          display={{ base: "flex", md: "none" }} // ✅ Show only on mobile
         >
           <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
           <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
           <ChakraLink as={Link} to="/faqs" color="black" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
           <ChakraLink as={Link} to="/career" color="black" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-          <Button bg="yellow.500" color="white" fontWeight="bold" _hover={{ bg: "yellow.600" }}>
+
+          {/* ✅ Mobile Menu Buttons */}
+          <Button 
+            as={Link} to="/contact"
+            bg="yellow.500" 
+            color="white" 
+            fontWeight="bold" 
+            _hover={{ bg: "yellow.600" }}
+            width="full"
+          >
             Contact Us
           </Button>
           <Button 
+            as={Link} to="/hotline"
             bg="yellow.100" 
             color="yellow.600" 
             fontWeight="bold"
             leftIcon={<FaPhoneAlt />}
             _hover={{ bg: "yellow.200" }}
+            width="full"
           >
             Hotline
           </Button>

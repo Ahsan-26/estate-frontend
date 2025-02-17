@@ -3,14 +3,15 @@ import CareerHero from "../components/careerHero";
 import FAQs from "../components/Faqs";
 import Header from "../components/Header";
 import ApplyCareer from "../components/applyCareer";
-const Career = () => {
+import ContactHero from "../components/ContactHero";
+
+const Contact = () => {
     return (
       <div>
     
-        <CareerHero />
-        <ApplyCareer/>
+        <ContactHero />
         <FAQs/>
       </div>
     );
   };
-  export default Career;
+  export default Contact;
