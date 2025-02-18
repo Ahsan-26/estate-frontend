@@ -43,7 +43,7 @@ const HeroSection = () => {
           
           {/* Buttons (Using Reusable Components) */}
           <HStack spacing={4} mt={4}>
-            <PrimaryButton text="Book a free call" to="/call" />
+          <PrimaryButton text="Book a free call" isPopover={true} />
             <SecondaryButton text="WhatsApp us" to="/whatsapp" />
           </HStack>
 
