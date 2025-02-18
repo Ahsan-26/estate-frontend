@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { 
   Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";  // ✅ Import useLocation
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
-  const { isOpen, onToggle } = useDisclosure(); // Controls mobile menu
+  const { isOpen, onToggle, onClose } = useDisclosure(); // ✅ Controls mobile menu
+  const location = useLocation(); // ✅ Track the current route
+
+  // ✅ Automatically close menu when route changes
+  useEffect(() => {
+    onClose(); // Close the mobile menu when user navigates
+  }, [location.pathname, onClose]); // Runs when pathname changes
 
   return (
     <Box 
@@ -25,7 +31,7 @@ const Header = () => {
 
         {/* ✅ Mobile Menu Button */}
         <IconButton 
-          display={{ base: "flex", md: "none" }} // ✅ Show only on mobile
+          display={{ base: "flex", md: "none" }} 
           icon={isOpen ? <FaTimes /> : <FaBars />} 
           aria-label="Toggle Menu" 
           onClick={onToggle}
@@ -36,7 +42,7 @@ const Header = () => {
         {/* ✅ Desktop Navigation Links */}
         <Flex 
           gap={6} fontWeight="bold" 
-          display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on larger screens
+          display={{ base: "none", md: "flex" }}
         >
           <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
           <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
@@ -47,7 +53,7 @@ const Header = () => {
         {/* ✅ Right Section - Buttons (Hidden on Mobile) */}
         <Flex 
           gap={4} 
-          display={{ base: "none", md: "flex" }} // ✅ Hide on mobile, show on larger screens
+          display={{ base: "none", md: "flex" }}
         >
           <Button 
             as={Link} to="/contact"
@@ -79,7 +85,7 @@ const Header = () => {
           p={4}
           spacing={4}
           align="stretch"
-          display={{ base: "flex", md: "none" }} // ✅ Show only on mobile
+          display={{ base: "flex", md: "none" }}
         >
           <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
           <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
