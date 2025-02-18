@@ -1,10 +1,8 @@
 import React from "react";
-import { Box, Text, Image, VStack, HStack, Flex } from "@chakra-ui/react";
+import { Box, Text, Image, VStack, HStack, Flex, Stack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { PrimaryButton, SecondaryButton } from "../Buttons"; // ✅ Import Buttons
 
 const images = [
@@ -22,36 +20,35 @@ const HeroSection = () => {
       px={{ base: 5, md: 20 }}
       textAlign={{ base: "center", md: "left" }}
     >
-      
       <Flex 
         direction={{ base: "column", md: "row" }}
         align="center"
         justify="space-between"
-        gap={10}
+        gap={{ base: 6, md: 10 }}
       >
         {/* Left Section - Text Content */}
-        <VStack align="stretch" spacing={5} maxW="600px">
-          <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
+        <VStack align={{ base: "center", md: "start" }} spacing={5} maxW="600px">
+          <Text fontSize={{ base: "xl", md: "4xl" }} fontWeight="bold">
             Property Solutions <br /> Made Easy
           </Text>
-          <Text fontSize="md" color="gray.700" textAlign="justify">
+          <Text fontSize={{ base: "sm", md: "md" }} color="gray.700" textAlign="justify">
             With EstateOne, we simplify every aspect of property ownership.
             Whether you’re buying, managing, or selling, our experts are here to
             guide you through the process. Explore premium properties, get
             professional management, and maximize returns on your sales—all in one seamless experience.
           </Text>
-          
-          {/* Buttons (Using Reusable Components) */}
-          <HStack spacing={4} mt={4}>
+
+          {/* Buttons (Stack on mobile) */}
+          <Stack direction={{ base: "column", sm: "row" }} spacing={4} mt={4} w="full" align="center">
             <PrimaryButton text="Book a free call" to="/call" />
             <SecondaryButton text="WhatsApp us" to="/whatsapp" />
-          </HStack>
+          </Stack>
 
           {/* Google Rating & Trust Statement */}
-          <HStack mt={6} spacing={3}>
-            <Image src="/images/google_rating.png" alt="Google Rating" w="120px" />
+          <HStack mt={6} spacing={3} justify={{ base: "center", md: "start" }}>
+            <Image src="/images/google_rating.png" alt="Google Rating" w={{ base: "90px", md: "120px" }} />
             <VStack align="start" spacing={0}>
-              <Text fontSize="sm" fontWeight="bold">
+              <Text fontSize="sm" fontWeight="bold" textAlign={{ base: "center", md: "left" }}>
                 Trusted by <Text as="span" color="yellow.500">thousands of happy clients</Text>
               </Text>
               <Text fontSize="sm" color="gray.600">
@@ -65,18 +62,25 @@ const HeroSection = () => {
         <Box w={{ base: "100%", md: "500px" }}>
           <Swiper 
             modules={[Autoplay]} 
-            spaceBetween={50} 
+            spaceBetween={30} 
             slidesPerView={1} 
             autoplay={{ delay: 3000 }}
+            style={{ width: "100%", borderRadius: "10px" }}
           >
             {images.map((image, index) => (
               <SwiperSlide key={index}>
-                <Image src={image} alt={`Hero ${index + 1}`} w="100%" borderRadius="10px" />
+                <Image 
+                  src={image} 
+                  alt={`Hero ${index + 1}`} 
+                  w="100%" 
+                  maxH={{ base: "500px", md: "auto" }} 
+                  objectFit="cover" 
+                  borderRadius="10px" 
+                />
               </SwiperSlide>
             ))}
           </Swiper>
         </Box>
-
       </Flex>
     </Box>
   );
