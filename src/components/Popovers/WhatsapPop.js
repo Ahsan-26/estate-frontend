@@ -59,15 +59,15 @@ export default function WhatsAppPopover({ isOpen, onClose }) {
           <ModalBody>
             <Flex direction="column" align="center" justify="center" textAlign="center">
               <Image src="/images/Whatsapp_POP.png" alt="WhatsApp Assistance" boxSize="100px" mb={4} />
-              <Text fontSize="md" fontWeight="medium" maxW="352px" mb={4}>
+              <Text fontSize="md" fontWeight="medium" maxW="359px" mb={4}>
                 If you don’t find your desired slot, no worries! You can still WhatsApp us your queries, and we’ll be happy to assist you.
               </Text>
               <Flex gap={3} w="100%" maxW="320px" justify="center">
                 <Button onClick={handleExit} variant="outline" colorScheme="gray" px={4} flex={1} h="40px" fontSize="sm">
                   Exit
                 </Button>
-                <Button colorScheme="green" px={4} flex={1} h="40px" fontSize="sm">
-                  📲 WhatsApp us
+                <Button colorScheme="#25D366" px={4} flex={1} h="40px" fontSize="sm">
+                   WhatsApp us
                 </Button>
               </Flex>
             </Flex>
