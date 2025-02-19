@@ -47,7 +47,8 @@ export const SecondaryButton = ({ text }) => {
       border="2px solid #25D366"
       color=" white"
       bg="#25D366"
-     rightIcon={<FaArrowRight />} 
+      _hover={{ bg: "#25D366" }}
+      rightIcon={<FaArrowRight />} 
       px={6}
       onClick={() => window.location.href = whatsappUrl} // Open WhatsApp chat
     >

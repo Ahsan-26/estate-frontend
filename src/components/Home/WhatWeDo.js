@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Text, VStack, HStack, Image, Grid } from "@chakra-ui/react";
-import { PrimaryButton, SecondaryButton } from "../Buttons";
+import { Box, Text, VStack, Image, Grid, Button } from "@chakra-ui/react";
 
 const WhatWeDo = () => {
   return (
@@ -37,13 +36,7 @@ const WhatWeDo = () => {
         we make real estate simple, stress-free, and truly yours.
       </Text>
 
-      {/* Buttons */}
-      <HStack spacing={4} mt={6} justify="center">
-        <PrimaryButton text="Book a free call" isPopover={true} />
-        <SecondaryButton text="WhatsApp us" to="/whatsapp" />
-      </HStack>
-
-      {/* Service Cards with Flip Animation */}
+      {/* Service Cards */}
       <Grid 
         templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} 
         gap={6} 
@@ -52,28 +45,22 @@ const WhatWeDo = () => {
         mx="auto"
       >
         {services.map((service, index) => (
-          <Box key={index} sx={styles.flipCard}>
-            <Box sx={styles.flipCardInner}>
-              
-              {/* Front Side */}
-              <VStack sx={styles.flipCardFront}>
-                <Image src={service.icon} alt={service.title} boxSize="50px" />
-                <Text fontSize="lg" fontWeight="bold" textAlign="center">{service.title}</Text>
-              </VStack>
-
-              {/* Back Side */}
-              <VStack sx={styles.flipCardBack}>
-                <Text fontSize="md" fontWeight="bold" textAlign="center">
-                  {service.backText}
-                </Text>
-                <HStack spacing={1} mt={3}>
-                <PrimaryButton text="Book a free call" isPopover={true} />
-                <SecondaryButton text="WhatsApp us" to="/whatsapp" />
-                </HStack>
-              </VStack>
-
-            </Box>
-          </Box>
+          <VStack key={index} sx={styles.card}>
+            <Image src={service.icon} alt={service.title} boxSize="60px" />
+            <Text fontSize="lg" fontWeight="bold" textAlign="center">{service.title}</Text>
+            <Button 
+              bg="yellow.100" 
+              color="yellow.700" 
+              fontSize="sm"
+              fontWeight="bold"
+              borderRadius="full"
+              px={6} 
+              py={2}
+              _hover={{ bg: "yellow.200" }}
+            >
+              {service.buttonText}
+            </Button>
+          </VStack>
         ))}
       </Grid>
     </Box>
@@ -85,65 +72,36 @@ const services = [
   {
     title: "Discover Tailored Property Solutions for You",
     icon: "/images/buy_icon.png",
-    backText: "Whether you're seeking your dream home, investment property, or commercial space, our experts provide personalized guidance to help you make an informed decision based on your needs.",
+    buttonText: "BUY",
   },
   {
     title: "Let Us Manage Your Property, Maximize Your Returns",
     icon: "/images/manage_icon.png",
-    backText: "We take care of everything—from finding tenants and managing rent to handling finances and ensuring everything is compliant. Let us make your property profitable and stress-free",
+    buttonText: "MANAGE",
   },
   {
-    title: "Sell Your Property with Confidence",
+    title: "Sell Your Property with Confidence and Ease",
     icon: "/images/sale_icon.png",
-    backText: "Get the right value for your property with our transparent, end-to-end selling services. We provide honest market evaluations and connect you with genuine buyers, ensuring a smooth and rewarding selling experience.",
+    buttonText: "SELL",
   }
 ];
 
 // Embedded CSS Styles
 const styles = {
-  flipCard: {
+  card: {
+    bg: "yellow.50",
+    borderRadius: "12px",
+    boxShadow: "md",
+    p: 6,
+    align: "center",
+    textAlign: "center",
+    spacing: 4,
     width: "100%",
-    height: "220px", // Adjust height as needed
-    perspective: "1000px", // 3D effect
-  },
-  flipCardInner: {
-    width: "100%",
-    height: "100%",
-    position: "relative",
-    transition: "transform 0.6s ease-in-out",
-    transformStyle: "preserve-3d",
-    "&:hover": {
-      transform: "rotateY(180deg)",
+    transition: "all 0.3s ease",
+    _hover: {
+      transform: "translateY(-5px)",
+      boxShadow: "lg",
     },
-  },
-  flipCardFront: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    backfaceVisibility: "hidden",
-    borderRadius: "10px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    bg: "gray.50",
-    boxShadow: "md",
-    p: 6,
-  },
-  flipCardBack: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    backfaceVisibility: "hidden",
-    transform: "rotateY(180deg)",
-    borderRadius: "10px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    bg: "white",
-    color: "black",
-    boxShadow: "md",
-    p: 6,
   },
 };
 
