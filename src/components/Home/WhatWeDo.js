@@ -39,7 +39,7 @@ const WhatWeDo = () => {
 
       {/* Buttons */}
       <HStack spacing={4} mt={6} justify="center">
-        <PrimaryButton text="Book a free call" to="/call" />
+        <PrimaryButton text="Book a free call" isPopover={true} />
         <SecondaryButton text="WhatsApp us" to="/whatsapp" />
       </HStack>
 
@@ -67,7 +67,7 @@ const WhatWeDo = () => {
                   {service.backText}
                 </Text>
                 <HStack spacing={1} mt={3}>
-                <PrimaryButton text="Book a free call" to="/call" />
+                <PrimaryButton text="Book a free call" isPopover={true} />
                 <SecondaryButton text="WhatsApp us" to="/whatsapp" />
                 </HStack>
               </VStack>

@@ -19,12 +19,15 @@ import {
 import { motion } from "framer-motion";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import SchedulePopover from "./SchedulePopover"; // ✅ Import SchedulePopover
 
 export default function QueryPopover({ isOpen, onClose }) {
   const [queryType, setQueryType] = useState("sell");
   const [phone, setPhone] = useState("");
+  const [isScheduleOpen, setIsScheduleOpen] = useState(false); // ✅ State for Schedule Popover
 
   return (
+    <>
     <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "lg" }} isCentered>
       <ModalOverlay />
       <ModalContent
@@ -76,12 +79,20 @@ export default function QueryPopover({ isOpen, onClose }) {
           </Box>
 
           <Flex justifyContent="center" mt={4}>
-            <Button colorScheme="green" px={8}>
+            <Button colorScheme="green" px={8}
+             onClick={() => {
+              onClose(); 
+              setTimeout(() => setIsScheduleOpen(true), 200); 
+            }}
+            >
               Next →
             </Button>
           </Flex>
         </ModalBody>
       </ModalContent>
     </Modal>
+      {/* ✅ Schedule Popover */}
+      <SchedulePopover isOpen={isScheduleOpen} onClose={() => setIsScheduleOpen(false)} />
+    </>
   );
 }
