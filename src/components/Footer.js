@@ -16,7 +16,7 @@ const Footer = () => {
         <Box maxW="250px" textAlign="left">
           
         <img 
-          src="/images/logo.png"  
+          src="/images/logo.svg"  
           alt="logo" 
           style={{ width: "110px", height: "38px", marginBottom: "8px" }}  
         />

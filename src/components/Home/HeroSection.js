@@ -18,19 +18,30 @@ const HeroSection = () => {
       py={{ base: 10, md: 16 }} 
       px={{ base: 5, md: 20 }}
       textAlign={{ base: "center", md: "left" }}
+      minH="100vh" // ✅ Ensuring Full View Height
+      display="flex"
+      alignItems="center"
     >
       <Flex 
         direction={{ base: "column", md: "row" }}
         align="center"
-        justify="space-between"
-        gap={{ base: 6, md: 10 }}
+        justify="center"
+        gap={{ base: 6, md: 12, lg: 16 }} // ✅ Adjusting gap dynamically
+        w="100%"
+        maxW="1400px" // ✅ Limiting max width to prevent excessive spacing
+        mx="auto"
       >
         {/* Left Section - Text Content */}
-        <VStack align={{ base: "center", md: "start" }} spacing={5} maxW="600px">
-          <Text fontSize={{ base: "xl", md: "4xl" }} fontWeight="bold">
+        <VStack 
+          align={{ base: "center", md: "start" }} 
+          spacing={6} 
+          maxW={{ base: "100%", md: "50%" }} // ✅ Allocating proper width
+          flexGrow={1} // ✅ Allowing flex growth to balance layout
+        >
+          <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }} fontWeight="bold">
             Property Solutions <br /> Made Easy
           </Text>
-          <Text fontSize={{ base: "sm", md: "md" }} color="gray.700" textAlign="justify">
+          <Text fontSize={{ base: "sm", md: "md", lg: "lg" }} color="gray.700" textAlign={{ base: "center", md: "left" }}>
             With EstateOne, we simplify every aspect of property ownership.
             Whether you’re buying, managing, or selling, our experts are here to
             guide you through the process. Explore premium properties, get
@@ -38,14 +49,20 @@ const HeroSection = () => {
           </Text>
 
           {/* Buttons (Stack on mobile) */}
-          <Stack direction={{ base: "column", sm: "row" }} spacing={4} mt={4} w="full" align="center">
-          <PrimaryButton text="Book a free call" isPopover={true} />
+          <Stack 
+            direction={{ base: "column", sm: "row" }} 
+            spacing={4} 
+            mt={4} 
+            w="full" 
+            align={{ base: "center", md: "start" }}
+          >
+            <PrimaryButton text="Book a free call" isPopover={true} />
             <SecondaryButton text="WhatsApp us" to="/whatsapp" />
           </Stack>
 
           {/* Google Rating & Trust Statement */}
-          <HStack mt={12} position={"absolute"} spacing={3} justify={{ base: "center", md: "start" }}>
-            <Image src="/images/google_rating.png" alt="Google Rating" w={{ base: "90px", md: "120px" }} />
+          <HStack mt={6} spacing={3} justify={{ base: "center", md: "start" }}>
+            <Image src="/images/google_rating.png" alt="Google Rating" w={{ base: "90px", md: "120px", lg: "140px" }} />
             <VStack align="start" spacing={0}>
               <Text fontSize="sm" fontWeight="bold" textAlign={{ base: "center", md: "left" }}>
                 Trusted by <Text as="span" color="yellow.500">thousands of happy clients</Text>
@@ -58,10 +75,14 @@ const HeroSection = () => {
         </VStack>
 
         {/* Right Section - Image Slider */}
-        <Box w={{ base: "100%", md: "500px" }}>
+        <Box 
+          w={{ base: "90%", md: "45%", lg: "40%" }} // ✅ Optimized Image Width 
+          maxW="500px"
+          flexGrow={1} // ✅ Allowing Flex Growth
+        >
           <Swiper 
             modules={[Autoplay]} 
-            spaceBetween={30} 
+            spaceBetween={20} 
             slidesPerView={1} 
             autoplay={{ delay: 3000 }}
             style={{ width: "100%", borderRadius: "10px" }}
@@ -72,7 +93,7 @@ const HeroSection = () => {
                   src={image} 
                   alt={`Hero ${index + 1}`} 
                   w="100%" 
-                  maxH={{ base: "500px", md: "auto" }} 
+                  maxH={{ base: "430px", md: "auto" }} 
                   objectFit="cover" 
                   borderRadius="10px" 
                 />

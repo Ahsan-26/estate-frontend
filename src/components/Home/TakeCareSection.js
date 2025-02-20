@@ -39,11 +39,13 @@ const TakeCareSection = () => {
         direction={{ base: "column", lg: "row" }} 
         align="center" 
         justify="space-between" 
-        gap={{ base: 6, md: 10 }}
+        gap={{ base: 6, lg: 8 }}  // ✅ Reduced space on large screens
+        maxW="1100px"  // ✅ Limits content width for better alignment
+        mx="auto"
       >
         
         {/* Left Side - Text & Tabs */}
-        <Box maxW={{ base: "100%", lg: "600px" }} textAlign={{ base: "center", lg: "left" }}>
+        <Box flex="1" textAlign={{ base: "center", lg: "left" }}>
           <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
             What we Take Care of
           </Text>
@@ -97,11 +99,11 @@ const TakeCareSection = () => {
         </Box>
 
         {/* Right Side - Image with Branding */}
-        <Box display="flex" justifyContent="center" flexShrink={0}>
+        <Box flex="1" display="flex" justifyContent="center">
           <Image 
             src="/images/house_icon.png" 
             alt="House" 
-            w={{ base: "100%", sm: "400px", md: "450px" }} 
+            w={{ base: "90%", sm: "400px", md: "450px", lg: "480px" }}  
             maxW="500px"
           />
         </Box>
@@ -110,4 +112,5 @@ const TakeCareSection = () => {
     </Box>
   );
 };
+
 export default TakeCareSection;
