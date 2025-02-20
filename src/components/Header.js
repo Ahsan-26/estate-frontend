@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { 
   Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";  // ✅ Import useLocation
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
+import PropertyAdvicePopover from "./Popovers/HotlinePopover"; // ✅ Import PropertyAdvicePopover
 
 const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure(); // ✅ Controls mobile menu
@@ -13,6 +14,7 @@ const Header = () => {
   useEffect(() => {
     onClose(); // Close the mobile menu when user navigates
   }, [location.pathname, onClose]); // Runs when pathname changes
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false); // ✅ Define state
 
   return (
     <Box 
@@ -64,13 +66,16 @@ const Header = () => {
           >
             Contact Us
           </Button>
-          <Button 
-            as={Link} to="/hotline"
-            bg="yellow.100" 
-            color="yellow.600" 
+          <Button
+            bg="yellow.100"
+            color="yellow.600"
             fontWeight="bold"
             leftIcon={<FaPhoneAlt />}
             _hover={{ bg: "yellow.200" }}
+            onClick={(e) => {
+              e.preventDefault(); // ✅ Prevent navigation
+              setIsPopoverOpen(true); // ✅ Opens the popover
+            }}
           >
             Hotline
           </Button>
@@ -102,21 +107,26 @@ const Header = () => {
             width="full"
           >
             Contact Us
-          </Button>
-          <Button 
-            as={Link} to="/hotline"
-            bg="yellow.100" 
-            color="yellow.600" 
+            </Button>
+          <Button
+            bg="yellow.100"
+            color="yellow.600"
             fontWeight="bold"
             leftIcon={<FaPhoneAlt />}
             _hover={{ bg: "yellow.200" }}
             width="full"
+            onClick={(e) => {
+              e.preventDefault(); 
+              setIsPopoverOpen(true); 
+            }}
           >
             Hotline
           </Button>
         </VStack>
       </Collapse>
 
+      {/* ✅ Property Advice Popover */}
+      <PropertyAdvicePopover isOpen={isPopoverOpen} onClose={() => setIsPopoverOpen(false)} />
     </Box>
   );
 };

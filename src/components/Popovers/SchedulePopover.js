@@ -1,24 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Box, Text, VStack, HStack, Button, Modal, ModalOverlay, ModalContent, ModalBody, 
-  Grid, Icon, Select, Divider, Flex
+  Grid, Icon, Select, Divider,ModalCloseButton,Flex
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaGlobe, FaSun, FaMoon } from "react-icons/fa";
+import WhatsapPop from "./WhatsapPop";
+
+const generateDates = (numDays = 6) => {
+  const days = [];
+  const today = new Date();
+  
+  for (let i = 0; i < numDays; i++) {
+    const futureDate = new Date();
+    futureDate.setDate(today.getDate() + i);
+    
+    days.push({
+      day: futureDate.getDate(),
+      label: futureDate.toLocaleDateString('en-US', { weekday: 'short' }) // e.g., Mon, Tue
+    });
+  }
+  return days;
+};
+
+const generateTimeSlots = (startHour = 12, endHour = 20, interval = 30) => {
+  let slots = [];
+  for (let hour = startHour; hour < endHour; hour++) {
+    for (let minutes = 0; minutes < 60; minutes += interval) {
+      const time = new Date();
+      time.setHours(hour);
+      time.setMinutes(minutes);
+
+      slots.push(time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }));
+    }
+  }
+  return slots;
+};
 
 const SchedulePopover = ({ isOpen, onClose }) => {
-  const [selectedDate, setSelectedDate] = useState("17");
+  const [showWhatsapPop, setShowWhatsapPop] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dates, setDates] = useState([]);
+  const [slots, setSlots] = useState([]);
 
-
-  const dates = [
-    { day: "16", label: "Today" },
-    { day: "17", label: "FRI" },
-    { day: "18", label: "SAT" },
-    { day: "19", label: "SUN" },
-    { day: "20", label: "MON" },
-    { day: "21", label: "TUE" }
-  ];
-
-  const slots = ["12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM"];
+  useEffect(() => {
+    setDates(generateDates()); 
+    setSlots(generateTimeSlots()); 
+    setSelectedDate(generateDates()[0]?.day); // Select the first available date by default
+  }, []);
+  const handleBackClick = () => {
+    onClose();
+    setShowWhatsapPop(true);
+  };
+  if (showWhatsapPop) {
+    return <WhatsapPop isOpen={showWhatsapPop} onClose={() => setShowWhatsapPop(false)} />;
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -27,8 +62,14 @@ const SchedulePopover = ({ isOpen, onClose }) => {
         borderRadius="lg" 
         boxShadow="2xl" 
         p={{ base: 4, md: 6 }} 
-        minW={{ base: "90%", md: "700px" }} // ✅ Adjust modal width based on screen size
+        minW={{ base: "90%", md: "700px" }}
       >
+             <ModalCloseButton 
+          size="lg" // Adjust size
+          top={3} right={3} // Position in the top right
+          color="gray.500" 
+          _hover={{ color: "black" }}
+        />
         <ModalBody p={0}>
           <Flex 
             direction={{ base: "column", md: "row" }} 
@@ -42,11 +83,12 @@ const SchedulePopover = ({ isOpen, onClose }) => {
               w={{ base: "100%", md: "35%" }} 
               textAlign={{ base: "center", md: "left" }}
             >
-              <Button 
+            <Button 
                 variant="link" 
                 leftIcon={<FaArrowLeft />} 
+                
                 color="black" 
-                onClick={onClose} 
+                onClick={handleBackClick} 
                 mb={{ base: 3, md: 0 }}
               >
                 Back
@@ -79,7 +121,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                     color={selectedDate === date.day ? "white" : "black"} 
                     _hover={{ bg: "yellow.600", color: "white" }}
                     onClick={() => setSelectedDate(date.day)}
-                    flex={{ base: "1 1 30%", md: "auto" }} // ✅ Auto-adjusts width on small screens
+                    flex={{ base: "1 1 30%", md: "auto" }}
                   >
                     {date.day} <br /> {date.label}
                   </Button>
@@ -105,7 +147,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   <Icon as={FaSun} color="yellow.500" mr={2} /> Afternoon
                 </Text>
                 <Grid templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(4, 1fr)" }} gap={2}>
-                  {slots.slice(3, 7).map((slot, index) => (
+                  {slots.slice(0, 6).map((slot, index) => (
                     <Button key={index} size="sm" borderRadius="full" variant="outline" _hover={{ bg: "gray.100" }}>
                       {slot}
                     </Button>
@@ -116,7 +158,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   <Icon as={FaMoon} color="blue.500" mr={2} /> Evening
                 </Text>
                 <Grid templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(4, 1fr)" }} gap={2}>
-                  {slots.slice(7).map((slot, index) => (
+                  {slots.slice(6, 12).map((slot, index) => (
                     <Button key={index} size="sm" borderRadius="full" variant="outline" _hover={{ bg: "gray.100" }}>
                       {slot}
                     </Button>

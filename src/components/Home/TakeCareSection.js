@@ -51,9 +51,9 @@ const TakeCareSection = () => {
           {/* Tabs */}
           <HStack mt={4} spacing={2} justify={{ base: "center", lg: "flex-start" }} flexWrap="wrap">
             <Button 
-              bg={activeTab === "buyers" ? "yellow.400" : "transparent"} 
+              bg={activeTab === "buyers" ? "yellow.500" : "transparent"} 
               color={activeTab === "buyers" ? "white" : "black"} 
-              _hover={{ bg: "yellow.500", color: "white" }}
+              _hover={{ bg: "yellow.600", color: "white" }}
               onClick={() => setActiveTab("buyers")}
               fontSize={{ base: "sm", md: "md" }}
               px={4} py={2}
@@ -62,9 +62,9 @@ const TakeCareSection = () => {
               For Buyers
             </Button>
             <Button 
-              bg={activeTab === "sellers" ? "yellow.400" : "transparent"} 
+              bg={activeTab === "sellers" ? "yellow.500" : "transparent"} 
               color={activeTab === "sellers" ? "white" : "black"} 
-              _hover={{ bg: "yellow.500", color: "white" }}
+              _hover={{ bg: "yellow.600", color: "white" }}
               onClick={() => setActiveTab("sellers")}
               fontSize={{ base: "sm", md: "md" }}
               px={4} py={2}
@@ -73,9 +73,9 @@ const TakeCareSection = () => {
               For Sellers
             </Button>
             <Button 
-              bg={activeTab === "management" ? "yellow.400" : "transparent"} 
+              bg={activeTab === "management" ? "yellow.500" : "transparent"} 
               color={activeTab === "management" ? "white" : "black"} 
-              _hover={{ bg: "yellow.500", color: "white" }}
+              _hover={{ bg: "yellow.600", color: "white" }}
               onClick={() => setActiveTab("management")}
               fontSize={{ base: "sm", md: "md" }}
               px={4} py={2}
@@ -89,7 +89,7 @@ const TakeCareSection = () => {
           <List spacing={3} mt={6}>
             {tabData[activeTab].map((item, index) => (
               <ListItem key={index} display="flex" alignItems="center" fontSize={{ base: "sm", md: "md" }}>
-                <Icon as={FaCheckCircle} color="yellow.400" mr={3} />
+                <Icon as={FaCheckCircle} color="yellow.500" mr={3} />
                 {item}
               </ListItem>
             ))}
@@ -110,5 +110,4 @@ const TakeCareSection = () => {
     </Box>
   );
 };
-
 export default TakeCareSection;

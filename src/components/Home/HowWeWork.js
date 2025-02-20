@@ -7,7 +7,7 @@ const HowWeWork = () => {
   const sections = [
     {
       title: "BUY",
-      color: "#e78f00",
+      color: "yellow.500",
       items: [
         "Book a Consultation (Meet 1)",
         "Understand Market & Investment Areas",
@@ -25,7 +25,7 @@ const HowWeWork = () => {
     },
     {
       title: "MANAGE",
-      color: "#e78f00",
+      color: "yellow.500",
       items: [
         "Schedule a Consultation",
         "Understand Your Objectives: Long-Term Rental Income Short-Term Rental Income (Airbnb, etc.)",
@@ -42,7 +42,7 @@ const HowWeWork = () => {
     },
     {
       title: "SELL",
-      color: "#e78f00",
+      color: "yellow.500",
       items: [
         "Book a consultation",
         "Evaluate Market Value & Finalize Selling Price",
@@ -127,7 +127,7 @@ const HowWeWork = () => {
             <Button 
               bg={section.color} 
               color="white" 
-              _hover={{ bg: "orange.500" }} 
+              _hover={{ bg: "yellow.600" }} 
               width="full" 
               mt={4}
             >

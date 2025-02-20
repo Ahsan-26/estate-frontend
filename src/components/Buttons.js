@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom"; // ✅ Use react-router-dom
-import QueryPopover from "./Popovers/QueryPopover"; 
+import QueryPopover from "./Popovers/QueryPopover";
+
+
 
 // ✅ Primary Button (Used for "Book a free call")
 export const PrimaryButton = ({ text, to, isPopover }) => {
@@ -37,18 +39,18 @@ export const PrimaryButton = ({ text, to, isPopover }) => {
 };
 
 // ✅ Secondary Button (Used for "WhatsApp us")
-export const SecondaryButton = ({ text, to }) => {
-  const navigate = useNavigate(); // ✅ Use useNavigate properly
+export const SecondaryButton = ({ text }) => {
+  const whatsappUrl = "https://wa.me/919548056061"; // Correct WhatsApp URL format
 
   return (
     <Button 
-      border="2px solid #EAB308"
-      color="#EAB308"
-      bg="transparent"
-      _hover={{ bg: "yellow.100" }}
+      border="2px solid #25D366"
+      color=" white"
+      bg="#25D366"
+      _hover={{ bg: "#25D366" }}
       rightIcon={<FaArrowRight />} 
       px={6}
-      onClick={() => navigate(to)} // ✅ Correct navigation
+      onClick={() => window.location.href = whatsappUrl} // Open WhatsApp chat
     >
       {text}
     </Button>
