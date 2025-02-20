@@ -2,19 +2,33 @@ import React, { useEffect, useState } from "react";
 import { 
   Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image
 } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";  // ✅ Import useLocation
+import { Link, useLocation } from "react-router-dom";  
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
-import PropertyAdvicePopover from "./Popovers/HotlinePopover"; // ✅ Import PropertyAdvicePopover
+import PropertyAdvicePopover from "./Popovers/HotlinePopover"; 
 
 const Header = () => {
-  const { isOpen, onToggle, onClose } = useDisclosure(); // ✅ Controls mobile menu
-  const location = useLocation(); // ✅ Track the current route
+  const { isOpen, onToggle, onClose } = useDisclosure(); 
+  const location = useLocation(); 
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [visible, setVisible] = useState(true);
 
-  // ✅ Automatically close menu when route changes
+  // ✅ Hide/show header on scroll
   useEffect(() => {
-    onClose(); // Close the mobile menu when user navigates
-  }, [location.pathname, onClose]); // Runs when pathname changes
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false); // ✅ Define state
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 50);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
+  // ✅ Close menu when navigating to another page
+  useEffect(() => {
+    onClose();
+  }, [location.pathname, onClose]); 
 
   return (
     <Box 
@@ -22,13 +36,25 @@ const Header = () => {
       bg="white"
       borderBottom="1px solid"
       borderColor="gray.200"
-      py={4} px={{ base: 4, md: 6 }}
+      py={{ base: 3, md: 4 }}  
+      px={{ base: 4, md: 10, lg: 20 }}
+      position="fixed" // ✅ Fix header on top
+      top={visible ? "0" : "-80px"} // ✅ Hide when scrolling down
+      left="0"
+      right="0"
+      transition="top 0.3s ease-in-out"
+      zIndex="1000"
     >
-      <Flex justify="space-between" align="center">
+      <Flex 
+        justify="space-between" 
+        align="center"
+        maxW="1300px"
+        mx="auto"
+      >
         
-        {/* ✅ Left Section - Logo (Clickable) */}
+        {/* ✅ Logo - Clickable */}
         <ChakraLink as={Link} to="/" display="flex" alignItems="center">
-          <Image src="/images/logo.png" alt="EstateOne Logo" h="40px" />
+        <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
         </ChakraLink>
 
         {/* ✅ Mobile Menu Button */}
@@ -38,23 +64,25 @@ const Header = () => {
           aria-label="Toggle Menu" 
           onClick={onToggle}
           bg="transparent"
-          fontSize="20px"
+          fontSize="22px"
         />
 
         {/* ✅ Desktop Navigation Links */}
         <Flex 
-          gap={6} fontWeight="bold" 
+          gap={{ base: 4, md: 6 }} 
+          fontWeight="bold" 
+          fontSize={{ base: "sm", md: "md" }} 
           display={{ base: "none", md: "flex" }}
         >
-          <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
-          <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
-          <ChakraLink as={Link} to="/faqs" color="black" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
-          <ChakraLink as={Link} to="/career" color="black" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+          <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+          <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
         </Flex>
 
-        {/* ✅ Right Section - Buttons (Hidden on Mobile) */}
+        {/* ✅ Right Section - Buttons */}
         <Flex 
-          gap={4} 
+          gap={{ base: 3, md: 4 }} 
           display={{ base: "none", md: "flex" }}
         >
           <Button 
@@ -62,6 +90,8 @@ const Header = () => {
             bg="yellow.500" 
             color="white" 
             fontWeight="bold" 
+            fontSize={{ base: "sm", md: "md" }}
+            px={{ base: 3, md: 4 }} 
             _hover={{ bg: "yellow.600" }}
           >
             Contact Us
@@ -70,11 +100,13 @@ const Header = () => {
             bg="yellow.100"
             color="yellow.600"
             fontWeight="bold"
+            fontSize={{ base: "sm", md: "md" }}
             leftIcon={<FaPhoneAlt />}
             _hover={{ bg: "yellow.200" }}
+            px={{ base: 3, md: 4 }} 
             onClick={(e) => {
-              e.preventDefault(); // ✅ Prevent navigation
-              setIsPopoverOpen(true); // ✅ Opens the popover
+              e.preventDefault();
+              setIsPopoverOpen(true);
             }}
           >
             Hotline
@@ -92,10 +124,10 @@ const Header = () => {
           align="stretch"
           display={{ base: "flex", md: "none" }}
         >
-          <ChakraLink as={Link} to="/blog" color="black" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
-          <ChakraLink as={Link} to="/partner" color="black" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
-          <ChakraLink as={Link} to="/faqs" color="black" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
-          <ChakraLink as={Link} to="/career" color="black" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+          <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+          <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
 
           {/* ✅ Mobile Menu Buttons */}
           <Button 
@@ -107,7 +139,7 @@ const Header = () => {
             width="full"
           >
             Contact Us
-            </Button>
+          </Button>
           <Button
             bg="yellow.100"
             color="yellow.600"
@@ -116,8 +148,8 @@ const Header = () => {
             _hover={{ bg: "yellow.200" }}
             width="full"
             onClick={(e) => {
-              e.preventDefault(); 
-              setIsPopoverOpen(true); 
+              e.preventDefault();
+              setIsPopoverOpen(true);
             }}
           >
             Hotline
