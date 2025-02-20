@@ -17,7 +17,7 @@ import SchedulePopover from "./SchedulePopover"; // ✅ Import SchedulePopover
 
 export default function PropertyAdvicePopover({ isOpen, onClose }) {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false); // ✅ State for Schedule Popover
-
+const whatsappUrl = "https://wa.me/919548056061";
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "lg" }} isCentered>
@@ -47,6 +47,7 @@ export default function PropertyAdvicePopover({ isOpen, onClose }) {
           <ModalBody p={6}>
             <Flex direction={{ base: "column", md: "row" }} gap={4} w="100%" justify="center">
               <Box
+              
                 p={4}
                 borderRadius="lg"
                 boxShadow="md"
@@ -75,6 +76,7 @@ export default function PropertyAdvicePopover({ isOpen, onClose }) {
 
               </Box>
               <Box
+              
                 p={4}
                 borderRadius="lg"
                 boxShadow="md"
@@ -89,7 +91,7 @@ export default function PropertyAdvicePopover({ isOpen, onClose }) {
                 <Text fontSize="sm" color="gray.600" mb={3}>
                   If you'd much rather prefer texting at your own pace, just hit us up on WhatsApp. 
                 </Text>
-                <Button bg="#25D366" color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
+                <Button bg="#25D366" onClick={() => window.location.href = whatsappUrl}color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
                   WhatsApp us
                 </Button>
               </Box>

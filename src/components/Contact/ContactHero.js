@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Text, Button, useDisclosure, Image } from "@chakra-ui/react";
+import { Box, Text, useDisclosure, Image } from "@chakra-ui/react";
 import { FaComments } from "react-icons/fa";
 import ContactModal from "./contactModal"; // ✅ Importing Modal Component
+import { PrimaryButton } from "../Buttons";
 
 const ContactHero = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,6 +24,7 @@ const ContactHero = () => {
         py={1} 
         borderRadius="full"
         display="inline-block"
+        marginTop={15}
       >
         CONTACT US
       </Text>
@@ -51,17 +53,17 @@ const ContactHero = () => {
         </Text>
 
         {/* ✅ Opens Modal */}
-        <Button 
+        <PrimaryButton
           bg="yellow.500" 
           color="white" 
           fontWeight="bold" 
           leftIcon={<FaComments />}
           _hover={{ bg: "yellow.600" }} 
           mt={4}
-          onClick={onOpen} 
+          isPopover={true}
+          text={"Talk to an Expert"}
         >
-          Talk to an Expert
-        </Button>
+        </PrimaryButton>
       </Box>
 
       {/* ✅ Render the Modal Component */}
