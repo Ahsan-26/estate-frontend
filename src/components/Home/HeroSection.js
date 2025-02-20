@@ -8,7 +8,6 @@ import { PrimaryButton, SecondaryButton } from "../Buttons"; // ✅ Import Butto
 const images = [
   "/images/hero_image1.png",
   "/images/hero_image2.png",
-  "/images/hero_image3.png",
 ];
 
 const HeroSection = () => {
@@ -45,7 +44,7 @@ const HeroSection = () => {
           </Stack>
 
           {/* Google Rating & Trust Statement */}
-          <HStack mt={6} spacing={3} justify={{ base: "center", md: "start" }}>
+          <HStack mt={12} position={"absolute"} spacing={3} justify={{ base: "center", md: "start" }}>
             <Image src="/images/google_rating.png" alt="Google Rating" w={{ base: "90px", md: "120px" }} />
             <VStack align="start" spacing={0}>
               <Text fontSize="sm" fontWeight="bold" textAlign={{ base: "center", md: "left" }}>
