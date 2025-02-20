@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, VStack, Grid, Image } from "@chakra-ui/react";
+import { Box, Text, VStack, Grid, Image, Container } from "@chakra-ui/react";
 
 const ExpertSection = () => {
   return (
@@ -19,44 +19,40 @@ const ExpertSection = () => {
       />
 
       {/* Content Container */}
-      <Box 
-        py={{ base: 10, md: 16 }} 
-        px={{ base: 5, md: 20 }} 
-        textAlign="center"
-      >
-        {/* Section Tag */}
-        <Text 
-          bg="yellow.500" 
-          color="white" 
-          fontSize="sm" 
-          fontWeight="bold" 
-          px={4} 
-          py={1} 
-          borderRadius="full"
-          display="inline-block"
-        >
-          SAY GOODBYE TO PUSHY AGENTS
-        </Text>
+      <Container maxW="1100px" py={{ base: 8, md: 14 }} px={{ base: 5, md: 10 }} textAlign="start">
+        <VStack alignItems="start" spacing={3} w="full">
+          {/* Section Tag */}
+          <Text
+            bg="white"
+            color="#da990e"
+            fontSize="sm"
+            fontWeight="bold"
+            px={4}
+            py={1}
+            borderRadius="full"
+            display="inline-block"
+          >
+            SAY GOODBYE TO PUSHY AGENTS
+          </Text>
 
-        {/* Section Heading */}
-        <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold" mt={3}>
-          Speak with a Real Estate Expert Today!
-        </Text>
+          {/* Section Heading */}
+          <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
+            Speak with a Real Estate Expert Today!
+          </Text>
 
-        {/* Description */}
-        <Text fontSize="md" color="gray.700" mt={3} maxW="800px" mx="auto">
-          At EstateOne, we believe in real advice you can trust. When you connect with us, 
-          you're engaging with professionals who genuinely care about your real estate journey.
-        </Text>
-      </Box>
+          {/* Description */}
+          <Text fontSize="md" color="gray.700">
+            At EstateOne, we believe in real advice you can trust. When you connect with us,
+            you're engaging with professionals who genuinely care about your real estate journey.
+          </Text>
+        </VStack>
+      </Container>
 
-      {/* Cards Section (Full Width) */}
-      <Box w="100vw" px={{ base: 4, md: 10 }} pb={{ base: 10, md: 16 }}>
+      {/* Cards Section - Now Properly Aligned */}
+      <Container maxW="1100px" px={{ base: 4, md: 10 }} pb={{ base: 8, md: 14 }}>
         <Grid 
-          templateColumns={{ base: "1fr", md: "repeat(4, 1fr)" }} 
+          templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }}
           gap={6} 
-          maxW="1100px" 
-          mx="auto"
         >
           {expertCards.map((card, index) => (
             <VStack 
@@ -76,7 +72,7 @@ const ExpertSection = () => {
             </VStack>
           ))}
         </Grid>
-      </Box>
+      </Container>
     </Box>
   );
 };
