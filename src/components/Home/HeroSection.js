@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Image, VStack, HStack, Flex, Stack } from "@chakra-ui/react";
+import { Box, Text, Image, VStack, Flex, Stack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay} from "swiper/modules"; // ✅ Using EffectFade for smooth transition
 import "swiper/css";
@@ -62,17 +62,15 @@ const HeroSection = () => {
           </Stack>
 
           {/* Google Rating & Trust Statement */}
-          <HStack mt={6} spacing={3} justify={{ base: "center", md: "start" }}>
-            <Image src="/images/google_rating.png" alt="Google Rating" w={{ base: "90px", md: "120px", lg: "140px" }} />
-            <VStack align="start" spacing={0}>
-              <Text fontSize="sm" fontWeight="bold" textAlign={{ base: "center", md: "left" }}>
-                Trusted by <Text as="span" color="yellow.500">thousands of happy clients</Text>
-              </Text>
-              <Text fontSize="sm" color="gray.600">
-                for expert guidance and genuine advice.
-              </Text>
+          <VStack mt={6} spacing={2} align="start">  
+          <Image src="/images/google_rating.svg" alt="Google Rating" w={{ base: "90px", md: "120px", lg: "140px" }} />
+            <Text fontSize="sm" fontWeight="bold" textAlign="center">
+              Trusted by <Text as="span" color="yellow.500">thousands of happy clients</Text>
+            </Text>
+            <Text fontSize="sm" color="gray.600" textAlign="center">
+              for expert guidance and genuine advice.
+            </Text>
             </VStack>
-          </HStack>
         </VStack>
 
         {/* Right Section - Image Slider with Smooth Zoom + Fade Animation */}
