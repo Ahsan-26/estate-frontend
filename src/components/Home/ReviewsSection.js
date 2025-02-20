@@ -3,18 +3,18 @@ import { Box, Text, VStack, HStack, Image, Grid } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 
 const reviews = [
-  { name: "Ravi Kumar", username: "@rabikumar49", text: "I appreciated their 'No-Spam' promise. EstateOne never bombarded me with calls or emails but was always available when I needed them. A refreshing experience in this industry!", image: "/images/p1.png" },
-  { name: "John Doe", username: "@johndoe22", text: "EstateOne helped me find my dream home with zero hassle. Their team was professional, transparent, and super helpful throughout the process!", image: "/images/p2.png" },
-  { name: "Sarah Johnson", username: "@sarahj", text: "The best real estate service I’ve ever used! No pressure, no stress—just clear and professional advice.", image: "/images/p4.png" },
-  { name: "Michael Lee", username: "@michaellee", text: "EstateOne’s customer service was beyond my expectations. They truly care about their clients and provide outstanding support!", image: "/images/p1.png" },
-  { name: "Emily White", username: "@emilyw", text: "A reliable real estate service with genuine professionals. EstateOne ensured I got the best deal for my property.", image: "/images/p4.png" },
-  { name: "David Brown", username: "@davidbrown", text: "I would highly recommend EstateOne! They took care of everything from property search to final paperwork, making the process stress-free.", image: "/images/p3.png" },
-  { name: "Sophia Green", username: "@sophiagreen", text: "Exceptional service with complete transparency. The team at EstateOne made the home-buying process enjoyable and simple.", image: "/images/p4.png" },
-  { name: "William Scott", username: "@willscott", text: "Professional, responsive, and highly knowledgeable. EstateOne is my go-to for all real estate needs.", image: "/images/p1.png" },
-  { name: "Alice Brown", username: "@aliceb", text: "I had an amazing experience with EstateOne. They made property investment so much easier!", image: "/images/p3.png" },
-  { name: "Jake Wilson", username: "@jakewilson", text: "Best decision ever! EstateOne provided fantastic guidance and ensured everything was smooth.", image: "/images/p2.png" },
-  { name: "Emma Watson", username: "@emmawatson", text: "I highly recommend EstateOne! Their transparency and professionalism are unmatched.", image: "/images/p4.png" },
-  { name: "Oliver Smith", username: "@oliversmith", text: "Outstanding service! They truly put their clients first and deliver the best solutions.", image: "/images/p1.png" }
+  { name: "Karan Luthra", username: "@KaranL49", text: "I appreciated their 'No-Spam' promise. EstateOne never bombarded me with calls or emails but was always available when I needed them. A refreshing experience in this industry!", image: "/images/p1.png" },
+  { name: "Dwij Adlakha", username: "@dwij", text: "EstateOne helped me find my dream home with zero hassle. Their team was professional, transparent, and super helpful throughout the process!", image: "/images/p2.png" },
+  { name: "Renu", username: "@renu077", text: "The best real estate service I’ve ever used! No pressure, no stress—just clear and professional advice.", image: "/images/p4.png" },
+  { name: "Rukmesh Bandhu", username: "@rukmesh01_", text: "EstateOne’s customer service was beyond my expectations. They truly care about their clients and provide outstanding support!", image: "/images/p1.png" },
+  { name: "Naman", username: "@Naman421", text: "A reliable real estate service with genuine professionals. EstateOne ensured I got the best deal for my property.", image: "/images/p4.png" },
+  { name: "Dikhsha Nagpal", username: "@DK69p", text: "I would highly recommend EstateOne! They took care of everything from property search to final paperwork, making the process stress-free.", image: "/images/p3.png" },
+  { name: "Nagendra Adlakha", username: "@Nag12adlakha", text: "Exceptional service with complete transparency. The team at EstateOne made the home-buying process enjoyable and simple.", image: "/images/p4.png" },
+  { name: "Sachin Tripathi", username: "@Sachin690", text: "Professional, responsive, and highly knowledgeable. EstateOne is my go-to for all real estate needs.", image: "/images/p1.png" },
+  { name: "Megha Kwatra", username: "@Megha23", text: "I had an amazing experience with EstateOne. They made property investment so much easier!", image: "/images/p3.png" },
+  { name: "Karan Kapoor", username: "@KK-e665", text: "Best decision ever! EstateOne provided fantastic guidance and ensured everything was smooth.", image: "/images/p2.png" },
+  { name: "Muskan Garg", username: "@Muskan_34", text: "I highly recommend EstateOne! Their transparency and professionalism are unmatched.", image: "/images/p4.png" },
+  { name: "Umang Dudeja", username: "@Umang420D", text: "Outstanding service! They truly put their clients first and deliver the best solutions.", image: "/images/p1.png" }
 ];
 
 const ReviewsSection = () => {
