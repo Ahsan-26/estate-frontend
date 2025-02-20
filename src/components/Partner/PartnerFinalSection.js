@@ -3,7 +3,9 @@ import { Box, Text, VStack, HStack, Grid, Link, Image, Icon } from "@chakra-ui/r
 import { FaEnvelope, FaWhatsapp, FaCheck } from "react-icons/fa"; // ✅ WhatsApp & Email Icons Restored
 
 const PartnerFinalSection = () => {
+  
   return (
+   
     <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 8 }}>
       <Grid 
         templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} 
@@ -69,8 +71,8 @@ const PartnerFinalSection = () => {
               </Link>
             </HStack>
             <HStack spacing={3}>
-              <Icon as={FaWhatsapp} color="green.500" boxSize="18px" /> {/* ✅ Restored WhatsApp Icon */}
-              <Link href="#" fontSize="sm" color="gray.700">WhatsApp Us</Link>
+              <Icon as={FaWhatsapp}  color="green.500" boxSize="18px" /> {/* ✅ Restored WhatsApp Icon */}
+              <Link href="https://wa.me/919548056061" fontSize="sm" color="gray.700">WhatsApp Us</Link>
             </HStack>
           </VStack>
         </VStack>

@@ -42,6 +42,7 @@ const ContactHelp = () => {
             color="white" 
             _hover={{ bg: "green.600" }}
             size="md"
+            onClick={() => window.open("https://wa.me/919548056061", "_blank")} // Open WhatsApp
           >
             WhatsApp Us
           </Button>

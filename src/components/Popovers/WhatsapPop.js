@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import SchedulePopover from "./SchedulePopover";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppPopover({ isOpen, onClose }) {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const whatsappUrl = "https://wa.me/919548056061";
 
   const handleBack = () => {
      // Close WhatsApp Popover
@@ -66,7 +68,7 @@ export default function WhatsAppPopover({ isOpen, onClose }) {
                 <Button onClick={handleExit} variant="outline" colorScheme="gray" px={4} flex={1} h="40px" fontSize="sm">
                   Exit
                 </Button>
-                <Button colorScheme="#25D366" px={4} flex={1} h="40px" fontSize="sm">
+                <Button colorScheme="#1EBE5D" bg="#25D366" leftIcon={<FaWhatsapp />} onClick={() => window.location.href = whatsappUrl} px={4} flex={1} h="40px" fontSize="sm">
                    WhatsApp us
                 </Button>
               </Flex>

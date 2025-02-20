@@ -67,7 +67,7 @@ const ContactFAQ = () => {
             </HStack>
             <HStack>
               <Icon as={FaWhatsapp} color="green.500" />
-              <Link href="#" fontSize="sm" color="gray.700">WhatsApp Us</Link>
+              <Link href="https://wa.me/919548056061" fontSize="sm" color="gray.700">WhatsApp Us</Link>
             </HStack>
           </VStack>
         </VStack>
