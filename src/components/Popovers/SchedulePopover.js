@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { 
   Box, Text, VStack, HStack, Button, Modal, ModalOverlay, ModalContent, ModalBody, 
-  Grid, Icon, Select, Divider,ModalCloseButton,Flex
+  Grid, Icon, Divider, ModalCloseButton, Flex, Image, useBreakpointValue
 } from "@chakra-ui/react";
-import { FaArrowLeft, FaGlobe, FaSun, FaMoon } from "react-icons/fa";
+import { FaArrowLeft, FaSun, FaMoon, FaGlobe } from "react-icons/fa";
+import TimezoneSelect from 'react-timezone-select';
 import WhatsapPop from "./WhatsapPop";
 
 const generateDates = (numDays = 6) => {
@@ -16,7 +17,8 @@ const generateDates = (numDays = 6) => {
     
     days.push({
       day: futureDate.getDate(),
-      label: futureDate.toLocaleDateString('en-US', { weekday: 'short' }) // e.g., Mon, Tue
+      label: futureDate.toLocaleDateString('en-US', { weekday: 'short' }),
+      fullDate: futureDate
     });
   }
   return days;
@@ -29,7 +31,6 @@ const generateTimeSlots = (startHour = 12, endHour = 20, interval = 30) => {
       const time = new Date();
       time.setHours(hour);
       time.setMinutes(minutes);
-
       slots.push(time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }));
     }
   }
@@ -39,18 +40,22 @@ const generateTimeSlots = (startHour = 12, endHour = 20, interval = 30) => {
 const SchedulePopover = ({ isOpen, onClose }) => {
   const [showWhatsapPop, setShowWhatsapPop] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTimezone, setSelectedTimezone] = useState('Asia/Kolkata');
   const [dates, setDates] = useState([]);
   const [slots, setSlots] = useState([]);
 
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   useEffect(() => {
-    setDates(generateDates()); 
-    setSlots(generateTimeSlots()); 
-    setSelectedDate(generateDates()[0]?.day); // Select the first available date by default
+    setDates(generateDates());
+    setSlots(generateTimeSlots());
   }, []);
+
   const handleBackClick = () => {
     onClose();
     setShowWhatsapPop(true);
   };
+
   if (showWhatsapPop) {
     return <WhatsapPop isOpen={showWhatsapPop} onClose={() => setShowWhatsapPop(false)} />;
   }
@@ -59,128 +64,161 @@ const SchedulePopover = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent 
-        borderRadius="lg" 
+        borderRadius="2xl" 
         boxShadow="2xl" 
-        p={{ base: 4, md: 6 }} 
+        p={0}
         minW={{ base: "90%", md: "700px" }}
       >
-             <ModalCloseButton 
-          size="lg" // Adjust size
-          top={3} right={3} // Position in the top right
-          color="gray.500" 
-          _hover={{ color: "black" }}
-        />
+        <ModalCloseButton size="lg" top={3} right={3} color="gray.500" _hover={{ color: "black" }} />
         <ModalBody p={0}>
-          <Flex 
-            direction={{ base: "column", md: "row" }} 
-            align="stretch"
-          >
-            {/* Left Section - Advisor Info */}
+          <Flex direction={{ base: "column", md: "row" }} align="stretch">
+            {/* Left Section */}
             <Box 
-              bg="gray.100" 
-              p={{ base: 4, md: 6 }} 
-              borderRadius="lg" 
-              w={{ base: "100%", md: "35%" }} 
-              textAlign={{ base: "center", md: "left" }}
+              bg="#F8FAFC" 
+              p={{ base: 4, md: 8 }} 
+              w={{ base: "100%", md: "40%" }} 
+              position="relative"
             >
-            <Button 
+              <Button 
                 variant="link" 
                 leftIcon={<FaArrowLeft />} 
-                
                 color="black" 
                 onClick={handleBackClick} 
-                mb={{ base: 3, md: 0 }}
+                mb={4}
+                pl={0}
               >
                 Back
               </Button>
-              <VStack align={{ base: "center", md: "start" }} spacing={3}>
-                <Text fontSize="lg" fontWeight="bold">Talk to an Advisor</Text>
+              
+              <VStack align="start" spacing={4} mt={8}>
+                <Image src="/images/logo.png" alt="Logo" w="120px" mb={4} />
+                <Text fontSize="xl" fontWeight="bold">Talk to an Advisor</Text>
                 <Text fontSize="sm" color="gray.600">
                   Schedule your slot and connect with our experts for personalized property guidance tailored to your needs.
                 </Text>
+                <Image 
+                  src="/images/imagePopover.png" 
+                  alt="Contact Agent" 
+                  mt={4}
+                  w="full"
+                  maxW="280px"
+                  mx="auto"
+                />
               </VStack>
-              <Box mt={4} textAlign="center">
-                <Text fontSize="xs" fontWeight="bold">ESTATE</Text>
-                <Box bg="yellow.500" h="4px" w="30px" mt={1} mx="auto" />
-              </Box>
             </Box>
 
-            {/* Right Section - Booking Slots */}
-            <Box flex="1" p={{ base: 4, md: 6 }}>
-              <Text fontSize="md" fontWeight="bold">Availability</Text>
+            {/* Right Section */}
+            <Box flex={1} p={{ base: 4, md: 8 }} bg="white">
+              <Text fontSize="lg" fontWeight="bold" mb={6}>Availability</Text>
               
               {/* Date Selection */}
-              <HStack spacing={2} mt={3} wrap="wrap">
+              <Grid 
+                templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(6, 1fr)" }} 
+                gap={2}
+                mb={6}
+              >
                 {dates.map(date => (
                   <Button 
-                    key={date.day} 
-                    size="sm" 
-                    borderRadius="full"
-                    variant={selectedDate === date.day ? "solid" : "outline"} 
-                    bg={selectedDate === date.day ? "yellow.500" : "white"} 
-                    color={selectedDate === date.day ? "white" : "black"} 
-                    _hover={{ bg: "yellow.600", color: "white" }}
-                    onClick={() => setSelectedDate(date.day)}
-                    flex={{ base: "1 1 30%", md: "auto" }}
+                    key={date.day}
+                    variant={selectedDate?.day === date.day ? "solid" : "outline"}
+                    bg={selectedDate?.day === date.day ? "#F59E0B" : "white"}
+                    color={selectedDate?.day === date.day ? "white" : "gray.700"}
+                    borderRadius="lg"
+                    h="70px"
+                    _hover={{ bg: selectedDate?.day === date.day ? "#F59E0B" : "gray.50" }}
+                    onClick={() => setSelectedDate(date)}
                   >
-                    {date.day} <br /> {date.label}
+                    <VStack spacing={0}>
+                      <Text fontSize="lg" fontWeight="bold">{date.day}</Text>
+                      <Text fontSize="sm">{date.label}</Text>
+                    </VStack>
                   </Button>
                 ))}
-              </HStack>
+              </Grid>
 
               {/* Timezone Selection */}
-              <HStack mt={5} justify="space-between" flexWrap="wrap">
+              <Flex justify="space-between" align="center" mb={6}>
                 <Text fontSize="sm" fontWeight="medium">Available Slots</Text>
-                <HStack>
-                  <Icon as={FaGlobe} color="blue.500" />
-                  <Select size="sm" defaultValue="Asia/Kolkata">
-                    <option value="Asia/Kolkata">Asia/Kolkata</option>
-                    <option value="America/New_York">America/New York</option>
-                    <option value="Europe/London">Europe/London</option>
-                  </Select>
+                <HStack spacing={2}>
+                  <Icon as={FaGlobe} color="gray.500" />
+                  <Box w="160px">
+                    <TimezoneSelect
+                      value={selectedTimezone}
+                      onChange={setSelectedTimezone}
+                      styles={{
+                        control: (base) => ({
+                          ...base,
+                          fontSize: '14px',
+                          minHeight: '40px'
+                        })
+                      }}
+                    />
+                  </Box>
                 </HStack>
-              </HStack>
+              </Flex>
 
               {/* Time Slots */}
-              <VStack mt={4} align="stretch" spacing={4}>
-                <Text fontSize="sm" fontWeight="bold">
-                  <Icon as={FaSun} color="yellow.500" mr={2} /> Afternoon
-                </Text>
-                <Grid templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(4, 1fr)" }} gap={2}>
-                  {slots.slice(0, 6).map((slot, index) => (
-                    <Button key={index} size="sm" borderRadius="full" variant="outline" _hover={{ bg: "gray.100" }}>
-                      {slot}
-                    </Button>
-                  ))}
-                </Grid>
+              {selectedDate && (
+                <VStack align="stretch" spacing={6}>
+                  <Box>
+                    <HStack mb={4}>
+                      <Icon as={FaSun} color="#F59E0B" />
+                      <Text fontWeight="semibold">Afternoon</Text>
+                    </HStack>
+                    <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+                      {slots.slice(0, 6).map((slot, index) => (
+                        <Button 
+                          key={index}
+                          variant="outline"
+                          borderRadius="lg"
+                          h="40px"
+                          _hover={{ bg: "gray.50" }}
+                        >
+                          {slot}
+                        </Button>
+                      ))}
+                    </Grid>
+                  </Box>
 
-                <Text fontSize="sm" fontWeight="bold" mt={4}>
-                  <Icon as={FaMoon} color="blue.500" mr={2} /> Evening
-                </Text>
-                <Grid templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(4, 1fr)" }} gap={2}>
-                  {slots.slice(6, 12).map((slot, index) => (
-                    <Button key={index} size="sm" borderRadius="full" variant="outline" _hover={{ bg: "gray.100" }}>
-                      {slot}
-                    </Button>
-                  ))}
-                </Grid>
-              </VStack>
+                  <Box>
+                    <HStack mb={4}>
+                      <Icon as={FaMoon} color="#3B82F6" />
+                      <Text fontWeight="semibold">Evening</Text>
+                    </HStack>
+                    <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+                      {slots.slice(6, 12).map((slot, index) => (
+                        <Button 
+                          key={index}
+                          variant="outline"
+                          borderRadius="lg"
+                          h="40px"
+                          _hover={{ bg: "gray.50" }}
+                        >
+                          {slot}
+                        </Button>
+                      ))}
+                    </Grid>
+                  </Box>
+                </VStack>
+              )}
 
-              {/* Divider & Confirm Button */}
-              <Divider mt={6} />
-              <Text fontSize="xs" color="gray.500" mt={3}>
-                A consultation with an EstateOne advisor generally takes 30 minutes.
-              </Text>
-              <Button 
-                bg="yellow.500" 
-                color="white" 
-                width="full" 
-                mt={4} 
-                borderRadius="full"
-                _hover={{ bg: "yellow.600" }}
-              >
-                Confirm schedule →
-              </Button>
+              {/* Footer */}
+              <Box mt={8}>
+                <Divider mb={4} />
+                <Text fontSize="sm" color="gray.500" mb={4}>
+                  A consultation with an EstateOne advisor generally takes 30 minutes.
+                </Text>
+                <Button 
+                  bg="#F59E0B"
+                  color="white"
+                  w="full"
+                  borderRadius="lg"
+                  _hover={{ bg: "#D97706" }}
+                  size="lg"
+                >
+                  Confirm schedule →
+                </Button>
+              </Box>
             </Box>
           </Flex>
         </ModalBody>
