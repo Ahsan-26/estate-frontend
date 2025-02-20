@@ -25,7 +25,7 @@ const ExpertSection = () => {
           <Text
             bg="white"
             color="#da990e"
-            fontSize="sm"
+            fontSize="l"
             fontWeight="bold"
             px={4}
             py={1}
@@ -80,22 +80,22 @@ const ExpertSection = () => {
 // Cards Data
 const expertCards = [
   {
-    icon: "/images/agent_icon.png",
+    icon: "/images/agent_icon.svg",
     title: "No Pushy Agents",
     description: "Say goodbye to pushy agents. Our team is made up of knowledgeable advisors who prioritize your needs, not hard sales pitches."
   },
   {
-    icon: "/images/folder_icon.png",
+    icon: "/images/folder_icon.svg",
     title: "No Spam Ever",
     description: "We respect your time and privacy. At EstateOne, we ensure a spam-free experience—no unexpected calls or emails."
   },
   {
-    icon: "/images/chat_icon.png",
+    icon: "/images/chat_icon.svg",
     title: "30 min Consultation",
     description: "Your time matters. We dedicate at least 30 minutes to understand your needs, offering tailored advice with complete focus."
   },
   {
-    icon: "/images/free_icon.png",
+    icon: "/images/free_icon.svg",
     title: "100% Free",
     description: "Our consultations are completely free, with no pressure to buy or commit. We're here to guide you in making confident decisions."
   }

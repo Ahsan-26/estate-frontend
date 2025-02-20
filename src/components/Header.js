@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { 
-  Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem
+  Box, Flex, Button, Link as ChakraLink, IconButton, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem
 } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";  
+import { Link, useLocation, useNavigate } from "react-router-dom";  
 import { FaPhoneAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import PropertyAdvicePopover from "./Popovers/HotlinePopover"; 
 
 const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure(); 
   const location = useLocation(); 
+  const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
@@ -30,14 +31,31 @@ const Header = () => {
     onClose();
   }, [location.pathname, onClose]); 
 
-  // ✅ Scroll to "What We Do" section instead of navigating
+  // ✅ Scroll to "How We Work" section or navigate if needed
   const handleServiceClick = () => {
-    const section = document.getElementById("whatwedo");
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80, // ✅ Adjusted for fixed header height
-        behavior: "smooth",
-      });
+    if (location.pathname === "/") {
+      const section = document.getElementById("howwework");
+      if (section) {
+        window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+      }
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        const section = document.getElementById("howwework");
+        if (section) {
+          window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+        }
+      }, 500);
+    }
+  };
+
+  // ✅ Handle logo click (scroll to top if on home page)
+  const handleLogoClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault(); // Prevent navigation reload
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
+    } else {
+      navigate("/"); // Navigate normally if not on home page
     }
   };
 
@@ -59,7 +77,7 @@ const Header = () => {
       <Flex justify="space-between" align="center" maxW="1300px" mx="auto">
         
         {/* ✅ Logo - Clickable */}
-        <ChakraLink as={Link} to="/" display="flex" alignItems="center">
+        <ChakraLink as={Link} to="/" onClick={handleLogoClick} display="flex" alignItems="center">
           <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
         </ChakraLink>
 
@@ -77,7 +95,7 @@ const Header = () => {
         <Flex gap={{ base: 4, md: 6 }} fontWeight="bold" fontSize={{ base: "sm", md: "md" }} display={{ base: "none", md: "flex" }}>
           <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
-          {/* ✅ Our Services Dropdown (Now Scrolls Instead of Navigating) */}
+          {/* ✅ Our Services Dropdown */}
           <Menu>
             <MenuButton 
               color="#1a202c"

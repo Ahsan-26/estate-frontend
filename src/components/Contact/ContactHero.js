@@ -5,7 +5,7 @@ import ContactModal from "./contactModal"; // ✅ Importing Modal Component
 import { PrimaryButton } from "../Buttons";
 
 const ContactHero = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
   return (
     <Box 

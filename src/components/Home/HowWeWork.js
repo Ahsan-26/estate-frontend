@@ -58,7 +58,10 @@ const HowWeWork = () => {
   ];
 
   return (
-    <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
+    <Box 
+      as="section" 
+      id="howwework"
+      py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
       {/* Section Heading */}
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
         How We Work
