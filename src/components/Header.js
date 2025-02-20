@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { 
-  Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem
+  Box, Flex, Button, Link as ChakraLink, IconButton, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";  
 import { FaPhoneAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
@@ -49,6 +49,16 @@ const Header = () => {
     }
   };
 
+  // ✅ Handle logo click (scroll to top if on home page)
+  const handleLogoClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault(); // Prevent navigation reload
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
+    } else {
+      navigate("/"); // Navigate normally if not on home page
+    }
+  };
+
   return (
     <Box 
       as="header"
@@ -67,7 +77,7 @@ const Header = () => {
       <Flex justify="space-between" align="center" maxW="1300px" mx="auto">
         
         {/* ✅ Logo - Clickable */}
-        <ChakraLink as={Link} to="/" display="flex" alignItems="center">
+        <ChakraLink as={Link} to="/" onClick={handleLogoClick} display="flex" alignItems="center">
           <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
         </ChakraLink>
 
@@ -141,42 +151,6 @@ const Header = () => {
         </Flex>
 
       </Flex>
-
-      {/* ✅ Mobile Menu (Collapsible) */}
-      <Collapse in={isOpen} animateOpacity>
-        <VStack 
-          bg="white"
-          p={4}
-          spacing={4}
-          align="stretch"
-          display={{ base: "flex", md: "none" }}
-        >
-          <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
-          
-          {/* ✅ Our Services in Mobile Menu */}
-          <Menu>
-            <MenuButton 
-              as={Button} 
-              rightIcon={<FaChevronDown />} 
-              variant="link"
-              fontWeight="bold"
-              _hover={{ textDecoration: "underline" }}
-            >
-              Our Services
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={handleServiceClick}>Buy</MenuItem>
-              <MenuItem onClick={handleServiceClick}>Manage</MenuItem>
-              <MenuItem onClick={handleServiceClick}>Sell</MenuItem>
-            </MenuList>
-          </Menu>
-
-          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
-          <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
-          <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
-        </VStack>
-      </Collapse>
 
       {/* ✅ Property Advice Popover */}
       <PropertyAdvicePopover isOpen={isPopoverOpen} onClose={() => setIsPopoverOpen(false)} />
