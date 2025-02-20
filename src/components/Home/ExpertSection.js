@@ -25,7 +25,7 @@ const ExpertSection = () => {
           <Text
             bg="white"
             color="#da990e"
-            fontSize="sm"
+            fontSize="l"
             fontWeight="bold"
             px={4}
             py={1}
