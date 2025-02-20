@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Text, Image, VStack, HStack, Flex, Stack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay} from "swiper/modules"; // ✅ Using EffectFade for smooth transition
 import "swiper/css";
-import { PrimaryButton, SecondaryButton } from "../Buttons"; // ✅ Import Buttons
+import "swiper/css/effect-fade"; // ✅ Import fade effect
+import { PrimaryButton, SecondaryButton } from "../Buttons";
 
 const images = [
   "/images/hero_image1.png",
@@ -19,7 +20,7 @@ const HeroSection = () => {
       py={{ base: 10, md: 16 }} 
       px={{ base: 5, md: 20 }}
       textAlign={{ base: "center", md: "left" }}
-      minH="100vh" // ✅ Ensuring Full View Height
+      minH="100vh"
       display="flex"
       alignItems="center"
     >
@@ -27,17 +28,17 @@ const HeroSection = () => {
         direction={{ base: "column", md: "row" }}
         align="center"
         justify="center"
-        gap={{ base: 6, md: 12, lg: 16 }} // ✅ Adjusting gap dynamically
+        gap={{ base: 6, md: 12, lg: 16 }}
         w="100%"
-        maxW="1400px" // ✅ Limiting max width to prevent excessive spacing
+        maxW="1400px"
         mx="auto"
       >
         {/* Left Section - Text Content */}
         <VStack 
           align={{ base: "center", md: "start" }} 
           spacing={6} 
-          maxW={{ base: "100%", md: "50%" }} // ✅ Allocating proper width
-          flexGrow={1} // ✅ Allowing flex growth to balance layout
+          maxW={{ base: "100%", md: "50%" }}
+          flexGrow={1}
         >
           <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }} fontWeight="bold">
             Property Solutions <br /> Made Easy
@@ -75,32 +76,38 @@ const HeroSection = () => {
           </HStack>
         </VStack>
 
-        {/* Right Section - Image Slider */}
+        {/* Right Section - Image Slider with Smooth Zoom + Fade Animation */}
         <Box 
-          w={{ base: "90%", md: "45%", lg: "40%" }} // ✅ Optimized Image Width 
+          w={{ base: "90%", md: "45%", lg: "40%" }} 
           maxW="500px"
-          flexGrow={1} // ✅ Allowing Flex Growth
+          flexGrow={1}
         >
-          <Swiper 
-            modules={[Autoplay]} 
-            spaceBetween={20} 
-            slidesPerView={1} 
-            autoplay={{ delay: 3000 }}
-            style={{ width: "100%", borderRadius: "10px" }}
-          >
-            {images.map((image, index) => (
-              <SwiperSlide key={index}>
-                <Image 
-                  src={image} 
-                  alt={`Hero ${index + 1}`} 
-                  w="100%" 
-                  maxH={{ base: "430px", md: "auto" }} 
-                  objectFit="cover" 
-                  borderRadius="10px" 
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+       <Swiper 
+  modules={[Autoplay]} 
+  spaceBetween={30} 
+  slidesPerView={1} 
+  autoplay={{ delay: 4000, disableOnInteraction: false }}
+  speed={2500} // ✅ Slower for a gentle effect
+  style={{ width: "100%", borderRadius: "10px" }}
+>
+  {images.map((image, index) => (
+    <SwiperSlide key={index} style={{ opacity: 0, transition: "opacity 2s ease-in-out" }}>
+      <Image 
+        src={image} 
+        alt={`Hero ${index + 1}`} 
+        w="100%" 
+        maxH={{ base: "430px", md: "auto" }} 
+        objectFit="cover" 
+        borderRadius="10px"
+        onLoad={(e) => e.target.parentNode.style.opacity = 1} // ✅ Ensures smooth fade-in
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
+
+
+
+      
         </Box>
       </Flex>
     </Box>

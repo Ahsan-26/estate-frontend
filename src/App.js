@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import BlogDetails from "./components/Blogs/BlogDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import FAQs from "./components/Faqs";
+import WhatWeDo from "./components/Home/WhatWeDo";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/career" element={<Career/>} />
+        <Route path="/whatwedo" element={<WhatWeDo/>} />
         <Route path="/partner" element={<Partner/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
