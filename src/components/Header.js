@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { 
   Box, Flex, Button, Link as ChakraLink, IconButton, Collapse, VStack, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem
 } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";  
+import { Link, useLocation, useNavigate } from "react-router-dom";  
 import { FaPhoneAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import PropertyAdvicePopover from "./Popovers/HotlinePopover"; 
 
 const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure(); 
   const location = useLocation(); 
+  const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
@@ -30,14 +31,21 @@ const Header = () => {
     onClose();
   }, [location.pathname, onClose]); 
 
-  // ✅ Scroll to "What We Do" section instead of navigating
+  // ✅ Scroll to "How We Work" section or navigate if needed
   const handleServiceClick = () => {
-    const section = document.getElementById("whatwedo");
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80, // ✅ Adjusted for fixed header height
-        behavior: "smooth",
-      });
+    if (location.pathname === "/") {
+      const section = document.getElementById("howwework");
+      if (section) {
+        window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+      }
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        const section = document.getElementById("howwework");
+        if (section) {
+          window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+        }
+      }, 500);
     }
   };
 
@@ -77,7 +85,7 @@ const Header = () => {
         <Flex gap={{ base: 4, md: 6 }} fontWeight="bold" fontSize={{ base: "sm", md: "md" }} display={{ base: "none", md: "flex" }}>
           <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
-          {/* ✅ Our Services Dropdown (Now Scrolls Instead of Navigating) */}
+          {/* ✅ Our Services Dropdown */}
           <Menu>
             <MenuButton 
               color="#1a202c"
@@ -133,6 +141,42 @@ const Header = () => {
         </Flex>
 
       </Flex>
+
+      {/* ✅ Mobile Menu (Collapsible) */}
+      <Collapse in={isOpen} animateOpacity>
+        <VStack 
+          bg="white"
+          p={4}
+          spacing={4}
+          align="stretch"
+          display={{ base: "flex", md: "none" }}
+        >
+          <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
+          
+          {/* ✅ Our Services in Mobile Menu */}
+          <Menu>
+            <MenuButton 
+              as={Button} 
+              rightIcon={<FaChevronDown />} 
+              variant="link"
+              fontWeight="bold"
+              _hover={{ textDecoration: "underline" }}
+            >
+              Our Services
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={handleServiceClick}>Buy</MenuItem>
+              <MenuItem onClick={handleServiceClick}>Manage</MenuItem>
+              <MenuItem onClick={handleServiceClick}>Sell</MenuItem>
+            </MenuList>
+          </Menu>
+
+          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+          <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+          <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+        </VStack>
+      </Collapse>
 
       {/* ✅ Property Advice Popover */}
       <PropertyAdvicePopover isOpen={isPopoverOpen} onClose={() => setIsPopoverOpen(false)} />
