@@ -45,11 +45,11 @@ export default function QueryPopover({ isOpen, onClose }) {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <RadioGroup onChange={setQueryType} value={queryType} mb={4}>
+          <RadioGroup onChange={setQueryType} value={queryType} mb={4} >
             <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-              <Radio value="buy">Buy Property</Radio>
-              <Radio value="sell">Sell Property</Radio>
-              <Radio value="manage">Manage Property</Radio>
+              <Radio value="buy"colorScheme="yellow">Buy Property</Radio>
+              <Radio value="sell"colorScheme="yellow">Sell Property</Radio>
+              <Radio value="manage"colorScheme="yellow">Manage Property</Radio>
             </Stack>
           </RadioGroup>
 
@@ -79,13 +79,14 @@ export default function QueryPopover({ isOpen, onClose }) {
           </Box>
 
           <Flex justifyContent="center" mt={4}>
-            <Button colorScheme="green" px={8}
+            <Button  color="white" bg="yellow.500" px={8} _hover={{ bg: "yellow.600" }}
              onClick={() => {
+              
               onClose(); 
               setTimeout(() => setIsScheduleOpen(true), 200); 
             }}
             >
-              Next →
+              Confirm →
             </Button>
           </Flex>
         </ModalBody>

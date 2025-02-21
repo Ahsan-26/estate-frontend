@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa"; // ✅ New icons
 import { useNavigate } from "react-router-dom";
-import QueryPopover from "./Popovers/QueryPopover";
+import SchedulePopover from "./Popovers/SchedulePopover";
 
 // ✅ Primary Button (Used for "Book a free call")
 export const PrimaryButton = ({ text, to, isPopover }) => {
@@ -31,7 +31,7 @@ export const PrimaryButton = ({ text, to, isPopover }) => {
       </Button>
 
       {/* Popover appears only when isPopover is true */}
-      {isPopover && <QueryPopover isOpen={isOpen} onClose={() => setIsOpen(false)} />}
+      {isPopover && <SchedulePopover isOpen={isOpen} onClose={() => setIsOpen(false)} />}
     </>
   );
 };

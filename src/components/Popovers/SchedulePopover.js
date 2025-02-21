@@ -6,6 +6,9 @@ import {
 import { FaArrowLeft, FaSun, FaMoon, FaGlobe } from "react-icons/fa";
 import TimezoneSelect from 'react-timezone-select';
 import WhatsapPop from "./WhatsapPop";
+import QueryPopover from "./QueryPopover";
+import { useNavigate } from "react-router-dom";
+
 
 const generateDates = (numDays = 6) => {
   const days = [];
@@ -38,6 +41,8 @@ const generateTimeSlots = (startHour = 12, endHour = 20, interval = 30) => {
 };
 
 const SchedulePopover = ({ isOpen, onClose }) => {
+  
+  const [isQueryPopoverOpen, setIsQueryPopoverOpen] = useState(false);
   const [showWhatsapPop, setShowWhatsapPop] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimezone, setSelectedTimezone] = useState('Asia/Kolkata');
@@ -74,38 +79,43 @@ const SchedulePopover = ({ isOpen, onClose }) => {
           <Flex direction={{ base: "column", md: "row" }} align="stretch">
             {/* Left Section */}
             <Box 
-              bg="#F8FAFC" 
-              p={{ base: 4, md: 8 }} 
-              w={{ base: "100%", md: "40%" }} 
-              position="relative"
-            >
-              <Button 
-                variant="link" 
-                leftIcon={<FaArrowLeft />} 
-                color="black" 
-                onClick={handleBackClick} 
-                mb={4}
-                pl={0}
-              >
-                Back
-              </Button>
-              
-              <VStack align="start" spacing={4} mt={8}>
-                <Image src="/images/logo.png" alt="Logo" w="120px" mb={4} />
-                <Text fontSize="xl" fontWeight="bold">Talk to an Advisor</Text>
-                <Text fontSize="sm" color="gray.600">
-                  Schedule your slot and connect with our experts for personalized property guidance tailored to your needs.
-                </Text>
-                <Image 
-                  src="/images/imagePopover.png" 
-                  alt="Contact Agent" 
-                  mt={4}
-                  w="full"
-                  maxW="280px"
-                  mx="auto"
-                />
-              </VStack>
-            </Box>
+  bg="#F8FAFC" 
+  p={{ base: 4, md: 8 }} 
+  w={{ base: "100%", sm: "80%", md: "50%", lg: "40%" }} 
+  position="relative"
+>
+  <Button 
+    variant="link" 
+    leftIcon={<FaArrowLeft />} 
+    color="black" 
+    onClick={handleBackClick} 
+    mb={4}
+    pl={0}
+  >
+    Back
+  </Button>
+  
+  <VStack align="start" spacing={2} mt={3}>
+    <HStack>
+      <Image src="/images/imagePopover.png" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
+      <Text fontSize={{ base: "14px", md: "15px" }} fontWeight="bold">Talk to an Advisor</Text>
+    </HStack>
+    <Text fontSize={{ base: "xs", md: "sm" }} color="gray.600" fontWeight="medium">
+      Schedule your slot and connect with our experts for personalized property guidance tailored to your needs.
+    </Text>
+  </VStack>
+
+  {/* Positioned Logo at the Bottom Left */}
+  <Flex justify="center" mt={4}>
+    <Image 
+      src="/images/logo.png" 
+      alt="Contact Agent" 
+      w={{ base: "80px", md: "100px" }} 
+    />
+  </Flex>
+</Box>
+
+
 
             {/* Right Section */}
             <Box flex={1} p={{ base: 4, md: 8 }} bg="white">
@@ -121,7 +131,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   <Button 
                     key={date.day}
                     variant={selectedDate?.day === date.day ? "solid" : "outline"}
-                    bg={selectedDate?.day === date.day ? "#F59E0B" : "white"}
+                    bg={selectedDate?.day === date.day ? "yellow.500" : "white"}
                     color={selectedDate?.day === date.day ? "white" : "gray.700"}
                     borderRadius="lg"
                     h="70px"
@@ -209,12 +219,15 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   A consultation with an EstateOne advisor generally takes 30 minutes.
                 </Text>
                 <Button 
-                  bg="#F59E0B"
+                  bg="yellow.500"
                   color="white"
                   w="full"
                   borderRadius="lg"
-                  _hover={{ bg: "#D97706" }}
+                  _hover={{ bg: "yellow.600" }}
                   size="lg"
+                  onClick={() => setIsQueryPopoverOpen(true)}
+
+
                 >
                   Confirm schedule →
                 </Button>
@@ -223,7 +236,12 @@ const SchedulePopover = ({ isOpen, onClose }) => {
           </Flex>
         </ModalBody>
       </ModalContent>
+      {isQueryPopoverOpen && (
+      <QueryPopover isOpen={isQueryPopoverOpen} onClose={() => setIsQueryPopoverOpen(false)} />
+    )}
+    
     </Modal>
+    
   );
 };
 
