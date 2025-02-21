@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import {
   Button,
   Input,
@@ -15,16 +16,24 @@ import {
   Box,
   Flex,
   Text,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import SchedulePopover from "./SchedulePopover"; // ✅ Import SchedulePopover
+
 
 export default function QueryPopover({ isOpen, onClose }) {
   const [queryType, setQueryType] = useState("sell");
   const [phone, setPhone] = useState("");
-  const [isScheduleOpen, setIsScheduleOpen] = useState(false); // ✅ State for Schedule Popover
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const cancelRef = React.useRef(); // For handling the dialog close
+
 
   return (
     <>
@@ -80,11 +89,12 @@ export default function QueryPopover({ isOpen, onClose }) {
 
           <Flex justifyContent="center" mt={4}>
             <Button  color="white" bg="yellow.500" px={8} _hover={{ bg: "yellow.600" }}
-             onClick={() => {
-              
-              onClose(); 
-              setTimeout(() => setIsScheduleOpen(true), 200); 
-            }}
+           onClick={() => {
+            onClose(); // Close SchedulePopover
+            setTimeout(() => {
+              setIsConfirmationOpen(true); // ✅ Show confirmation dialog after slight delay
+            }, 300); // Delay ensures smooth transition
+          }}
             >
               Confirm →
             </Button>
@@ -92,8 +102,38 @@ export default function QueryPopover({ isOpen, onClose }) {
         </ModalBody>
       </ModalContent>
     </Modal>
-      {/* ✅ Schedule Popover */}
-      <SchedulePopover isOpen={isScheduleOpen} onClose={() => setIsScheduleOpen(false)} />
+    <AlertDialog
+  isOpen={isConfirmationOpen}
+  leastDestructiveRef={cancelRef}
+  onClose={() => setIsConfirmationOpen(false)}
+>
+  <AlertDialogOverlay>
+    <AlertDialogContent borderRadius="xl" boxShadow="2xl">
+      <AlertDialogHeader fontSize="lg" fontWeight="bold" textAlign="center">
+        ✅ Query Submitted Successfully
+      </AlertDialogHeader>
+
+      <AlertDialogBody textAlign="center">
+        Your query has been submitted successfully. You will be entertained according to the booked schedule.
+      </AlertDialogBody>
+
+      <AlertDialogFooter>
+        <Button 
+          ref={cancelRef} 
+          onClick={() => setIsConfirmationOpen(false)} 
+          bg="yellow.500" 
+          color="white" 
+          _hover={{ bg: "yellow.600" }}
+          w="full"
+        >
+          Close
+        </Button>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialogOverlay>
+</AlertDialog>
+      {/* ✅ Schedule Popover
+      <SchedulePopover isOpen={isScheduleOpen} onClose={() => setIsScheduleOpen(false)} /> */}
     </>
   );
 }
