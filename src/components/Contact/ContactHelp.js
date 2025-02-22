@@ -32,11 +32,15 @@ const ContactHelp = () => {
             color="white" 
             _hover={{ bg: "yellow.600" }}
             size="md"
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
             onClick={() => setIsModalOpen(true)} // Open Modal
           >
             Pick a suitable time
           </Button>
           <Button 
+           _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
             leftIcon={<FaWhatsapp />} 
             colorScheme="#1EBE5D" bg="#25D366" 
             // color="white" 
