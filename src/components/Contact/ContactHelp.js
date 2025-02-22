@@ -16,10 +16,10 @@ const ContactHelp = () => {
         mx="auto"
       >
         {/* Icon */}
-        <Image src="/images/home_icon.png" alt="Support Icon" boxSize="60px" mx="auto" mb={3} />
+        <Image src="/images/home_icon.png" alt="Support Icon" boxSize="65px" mx="auto" mb={3} />
 
         {/* Text */}
-        <Text fontSize="md" color="gray.700" maxW="700px" mx="auto">
+        <Text fontSize="md" color="gray.700" maxW="700px" mx="auto" fontWeight="medium">
           At EstateOne, we’re committed to making your real estate journey smooth, secure, 
           and stress-free. Whatever the issue, we’re here to help—every step of the way.
         </Text>

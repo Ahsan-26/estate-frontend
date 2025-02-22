@@ -13,6 +13,8 @@ const ContactHero = () => {
       bgGradient="linear(to-b, #FEFEF9, #F7F3EA)"
       py={{ base: 3, md: 6 }}
       px={{ base: 5, md: 10 }}
+      maxW="1300px"   // sets the max width
+  mx="auto" 
       textAlign="center"
     >
       <Button

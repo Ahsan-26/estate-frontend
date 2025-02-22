@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text, VStack, HStack, Grid, Link, Icon, Image } from "@chakra-ui/react";
-import { FaEnvelope, FaWhatsapp, FaAngleRight } from "react-icons/fa";
+import {  FaWhatsapp, FaAngleRight } from "react-icons/fa";
+import { AtSignIcon } from '@chakra-ui/icons';
 
 const ContactFAQ = () => {
   return (
@@ -33,8 +34,10 @@ const ContactFAQ = () => {
         >
           {/* Icon & Title */}
           <HStack>
-            <Image src="/images/question_icon.png" alt="FAQ Icon" boxSize="50px" />
-            <Text fontSize="lg" fontWeight="bold">Popular Questions We Answer:</Text>
+            <Image src="/images/question_icon.png" alt="FAQ Icon" boxSize="80px" />
+          </HStack>
+          <HStack>
+          <Text mt={-6} fontSize="xl" fontWeight="bold">Popular Questions We Answer:</Text>
           </HStack>
 
           {/* Questions List */}
@@ -60,14 +63,14 @@ const ContactFAQ = () => {
           {/* Contact Info */}
           <VStack align="start" spacing={2}>
             <HStack>
-              <Icon as={FaEnvelope} color="yellow.500" />
-              <Link href="mailto:connect@estateone.in" fontSize="sm" color="gray.700">
+              <Icon as={ AtSignIcon} color="yellow.500" />
+              <Link href="mailto:connect@estateone.in" fontSize="sm" color="black">
                 connect@estateone.in
               </Link>
             </HStack>
             <HStack>
               <Icon as={FaWhatsapp} color="green.500" />
-              <Link href="https://wa.me/919548056061" fontSize="sm" color="gray.700">WhatsApp Us</Link>
+              <Link href="https://wa.me/919548056061" fontSize="sm" color="black">WhatsApp Us</Link>
             </HStack>
           </VStack>
         </VStack>
@@ -83,8 +86,11 @@ const ContactFAQ = () => {
         >
           {/* Icon & Title */}
           <HStack>
-            <Image src="/images/email_icon.png" alt="Escalation Icon" boxSize="50px" />
-            <Text fontSize="lg" fontWeight="bold">Escalation Procedure</Text>
+            <Image src="/images/email_icon.png" alt="Escalation Icon" boxSize="80px" />
+
+          </HStack>
+          <HStack>
+          <Text fontSize="xl" mt={-6} fontWeight="bold">Escalation Procedure</Text>
           </HStack>
 
           {/* Description */}
@@ -96,9 +102,9 @@ const ContactFAQ = () => {
           </Text>
 
           {/* Escalation Email */}
-          <HStack>
-            <Icon as={FaEnvelope} color="yellow.500" />
-            <Link href="mailto:grievance@estateone.in" fontSize="sm" color="yellow.600" fontWeight="bold">
+          <HStack mt={8} transform={"translateY(20px)"}>
+            <Icon as={ AtSignIcon} color="yellow.500" />
+            <Link href="mailto:grievance@estateone.in" fontSize="sm" color="black" >
               grievance@estateone.in
             </Link>
           </HStack>
