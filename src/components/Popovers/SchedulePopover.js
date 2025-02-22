@@ -8,9 +8,11 @@ import TimezoneSelect from 'react-timezone-select';
 import WhatsapPop from "./WhatsapPop";
 import QueryPopover from "./QueryPopover";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { DateTime } from "luxon";
 
 
-const generateDates = (numDays = 6) => {
+const generateDates = (numDays = 7) => {
   const days = [];
   const today = new Date();
   
@@ -21,11 +23,12 @@ const generateDates = (numDays = 6) => {
     days.push({
       day: futureDate.getDate(),
       label: futureDate.toLocaleDateString('en-US', { weekday: 'short' }),
-      fullDate: futureDate
+      fullDate: futureDate.toISOString().split('T')[0] // Format YYYY-MM-DD
     });
   }
   return days;
 };
+
 
 const generateTimeSlots = (startHour = 12, endHour = 20, interval = 30) => {
   let slots = [];
@@ -46,15 +49,66 @@ const SchedulePopover = ({ isOpen, onClose }) => {
   const [showWhatsapPop, setShowWhatsapPop] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimezone, setSelectedTimezone] = useState('Asia/Kolkata');
-  const [dates, setDates] = useState([]);
-  const [slots, setSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedSlotId, setSelectedSlotId] = useState(null);
 
+  const [dates, setDates] = useState([]);
+  //const [slots, setSlots] = useState([]);
+  const [availableSlots, setAvailableSlots] = useState({});
+  const [loading, setLoading] = useState(false);
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => {
     setDates(generateDates());
-    setSlots(generateTimeSlots());
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchAvailableSlots();
+    }
+  }, [isOpen]);
+  const fetchAvailableSlots = async () => {
+    const handleSlotSelect = (slotId) => {
+      setSelectedSlotId(slotId);
+      console.log("Selected Slot ID:", slotId); // Debugging
+  };
+  
+    try {
+        setLoading(true);
+        const response = await axios.get("http://127.0.0.1:8000/api/available_slots/");
+        console.log("Raw API Response:", response.data); // Debug log
+
+        // Transform API response into { "2025-02-22": ["01:15 AM", "11:30 PM"], ... }
+        const formattedSlots = {};
+        const datesData = response.data.dates || {}; // Extract 'dates' from response
+
+        Object.keys(datesData).forEach(date => {
+            formattedSlots[date] = datesData[date].map(slot => ({
+              start: slot.start_time,
+              end: slot.end_time
+            })); // Extract start_time
+        });
+
+        console.log("Formatted Available Slots:", formattedSlots); // Debug log
+
+        setAvailableSlots(formattedSlots);
+        setLoading(false);
+    } catch (error) {
+        console.error("Error fetching available slots:", error);
+        setLoading(false);
+    }
+};
+
+const convertToSelectedTimezone = (time, timezone) => {
+  try {
+    return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
+      .setZone(timezone)
+      .toFormat("hh:mm a");
+  } catch (error) {
+    console.error("Timezone conversion error:", error);
+    return time;
+  }
+};
 
   const handleBackClick = () => {
     onClose();
@@ -65,6 +119,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
     return <WhatsapPop isOpen={showWhatsapPop} onClose={() => setShowWhatsapPop(false)} />;
   }
 
+  
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
@@ -120,31 +175,31 @@ const SchedulePopover = ({ isOpen, onClose }) => {
             {/* Right Section */}
             <Box flex={1} p={{ base: 4, md: 8 }} bg="white">
               <Text fontSize="lg" fontWeight="bold" mb={6}>Availability</Text>
-              
               {/* Date Selection */}
-              <Grid 
-                templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(6, 1fr)" }} 
-                gap={2}
-                mb={6}
-              >
-                {dates.map(date => (
-                  <Button 
-                    key={date.day}
-                    variant={selectedDate?.day === date.day ? "solid" : "outline"}
-                    bg={selectedDate?.day === date.day ? "yellow.500" : "white"}
-                    color={selectedDate?.day === date.day ? "white" : "gray.700"}
-                    borderRadius="lg"
-                    h="70px"
-                    _hover={{ bg: selectedDate?.day === date.day ? "#F59E0B" : "gray.50" }}
-                    onClick={() => setSelectedDate(date)}
-                  >
-                    <VStack spacing={0}>
-                      <Text fontSize="lg" fontWeight="bold">{date.day}</Text>
-                      <Text fontSize="sm">{date.label}</Text>
-                    </VStack>
-                  </Button>
-                ))}
-              </Grid>
+              {dates.map(date => {
+    const isDisabled = !availableSlots[date.fullDate] || availableSlots[date.fullDate].length === 0;
+    console.log(`Date: ${date.fullDate}, Slots:`, availableSlots[date.fullDate]); // Debug log
+    
+    return (
+        <Button
+            key={date.fullDate}
+            variant={selectedDate?.fullDate === date.fullDate ? "solid" : "outline"}
+            bg={selectedDate?.fullDate === date.fullDate ? "yellow.500" : "white"}
+            color={selectedDate?.fullDate === date.fullDate ? "white" : "gray.700"}
+            borderRadius="lg"
+            h="70px"
+            _hover={{ bg: isDisabled ? "gray.200" : selectedDate?.fullDate === date.fullDate ? "#F59E0B" : "gray.50" }}
+            onClick={() => !isDisabled && setSelectedDate(date)}
+            isDisabled={isDisabled}
+        >
+            <VStack spacing={0}>
+                <Text fontSize="lg" fontWeight="bold">{date.day}</Text>
+                <Text fontSize="sm">{date.label}</Text>
+            </VStack>
+        </Button>
+    );
+})}
+
 
               {/* Timezone Selection */}
               <Flex justify="space-between" align="center" mb={6}>
@@ -154,7 +209,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   <Box w="160px">
                     <TimezoneSelect
                       value={selectedTimezone}
-                      onChange={setSelectedTimezone}
+                      onChange={e => setSelectedTimezone(e.value)}
                       styles={{
                         control: (base) => ({
                           ...base,
@@ -166,51 +221,30 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   </Box>
                 </HStack>
               </Flex>
+{/* Time Slots */}
+              {selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
+    <VStack align="stretch" spacing={6}>
+        <Box>
+            <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+                {availableSlots[selectedDate.fullDate]?.map((slot, index) => (
+                    <Button 
+                        key={index}
+                        variant="outline"
+                        borderRadius="lg"
+                        h="40px"
+                        _hover={{ bg: "gray.50" }}
+                        onClick={() => setSelectedSlot(slot.start)}
+                    >
+                      {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)}
+                        {/* {slot} */}
+                    </Button>
+                ))}
+            </Grid>
+        </Box>
+    </VStack>
+)}
 
-              {/* Time Slots */}
-              {selectedDate && (
-                <VStack align="stretch" spacing={6}>
-                  <Box>
-                    <HStack mb={4}>
-                      <Icon as={FaSun} color="#F59E0B" />
-                      <Text fontWeight="semibold">Afternoon</Text>
-                    </HStack>
-                    <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-                      {slots.slice(0, 6).map((slot, index) => (
-                        <Button 
-                          key={index}
-                          variant="outline"
-                          borderRadius="lg"
-                          h="40px"
-                          _hover={{ bg: "gray.50" }}
-                        >
-                          {slot}
-                        </Button>
-                      ))}
-                    </Grid>
-                  </Box>
 
-                  <Box>
-                    <HStack mb={4}>
-                      <Icon as={FaMoon} color="#3B82F6" />
-                      <Text fontWeight="semibold">Evening</Text>
-                    </HStack>
-                    <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-                      {slots.slice(6, 12).map((slot, index) => (
-                        <Button 
-                          key={index}
-                          variant="outline"
-                          borderRadius="lg"
-                          h="40px"
-                          _hover={{ bg: "gray.50" }}
-                        >
-                          {slot}
-                        </Button>
-                      ))}
-                    </Grid>
-                  </Box>
-                </VStack>
-              )}
 
               {/* Footer */}
               <Box mt={8}>
@@ -225,6 +259,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
                   borderRadius="lg"
                   _hover={{ bg: "yellow.600" }}
                   size="lg"
+                  isDisabled={!selectedSlot} 
                   onClick={() => setIsQueryPopoverOpen(true)}
 
 

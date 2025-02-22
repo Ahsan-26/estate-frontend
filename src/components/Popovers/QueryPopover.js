@@ -2,9 +2,6 @@ import { useState } from "react";
 import {
   Button,
   Input,
-  Radio,
-  RadioGroup,
-  Stack,
   Textarea,
   Modal,
   ModalOverlay,
@@ -15,19 +12,66 @@ import {
   Box,
   Flex,
   Text,
+  useToast
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import SchedulePopover from "./SchedulePopover"; // ✅ Import SchedulePopover
+import axios from "axios";
 
-export default function QueryPopover({ isOpen, onClose }) {
-  const [queryType, setQueryType] = useState("sell");
+export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [isScheduleOpen, setIsScheduleOpen] = useState(false); // ✅ State for Schedule Popover
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+
+  const handleConfirm = async () => {
+    if (!name || !email || !phone || !query || !selectedSlotId) {
+      toast({
+        title: "All fields are required!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await axios.post("http://127.0.0.1:8000/api/book_appointment/", {
+        time_slot_id: selectedSlotId,  // ✅ Matching backend field
+        name,
+        email,
+        phone,
+        query
+      });
+
+      toast({
+        title: "Booking Confirmed!",
+        description: "Your slot has been booked successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      onClose();
+    } catch (error) {
+      console.error("Error booking appointment:", error.response?.data || error.message);
+      toast({
+        title: "Something went wrong!",
+        description: "Please try again later.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
     <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "lg" }} isCentered>
       <ModalOverlay />
       <ModalContent
@@ -45,18 +89,10 @@ export default function QueryPopover({ isOpen, onClose }) {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <RadioGroup onChange={setQueryType} value={queryType} mb={4} >
-            <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-              <Radio value="buy"colorScheme="yellow">Buy Property</Radio>
-              <Radio value="sell"colorScheme="yellow">Sell Property</Radio>
-              <Radio value="manage"colorScheme="yellow">Manage Property</Radio>
-            </Stack>
-          </RadioGroup>
-
           <Flex flexDirection={{ base: "column", md: "row" }} gap={4} mb={3}>
             <Box flex={1}>
               <Text mb={1} fontWeight="bold">Your Name*</Text>
-              <Input placeholder="Write your name" />
+              <Input placeholder="Write your name" value={name} onChange={(e) => setName(e.target.value)} />
             </Box>
             <Box flex={1}>
               <Text mb={1} fontWeight="bold">Your Whatsapp no*</Text>
@@ -70,21 +106,23 @@ export default function QueryPopover({ isOpen, onClose }) {
           </Flex>
 
           <Box mb={3}>
-            <Text mb={1} fontWeight="bold">Tell us your query*</Text>
-            <Textarea placeholder="" />
+            <Text mb={1} fontWeight="bold">Your Email*</Text>
+            <Input placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </Box>
+
           <Box mb={3}>
-            <Text mb={1} fontWeight="bold">How did you get to know about EstateOne?</Text>
-            <Input placeholder="" />
+            <Text mb={1} fontWeight="bold">Tell us your query*</Text>
+            <Textarea placeholder="Write your query" value={query} onChange={(e) => setQuery(e.target.value)} />
           </Box>
 
           <Flex justifyContent="center" mt={4}>
-            <Button  color="white" bg="yellow.500" px={8} _hover={{ bg: "yellow.600" }}
-             onClick={() => {
-              
-              onClose(); 
-              setTimeout(() => setIsScheduleOpen(true), 200); 
-            }}
+            <Button
+              color="white"
+              bg="yellow.500"
+              px={8}
+              _hover={{ bg: "yellow.600" }}
+              isLoading={loading}
+              onClick={handleConfirm}
             >
               Confirm →
             </Button>
@@ -92,8 +130,5 @@ export default function QueryPopover({ isOpen, onClose }) {
         </ModalBody>
       </ModalContent>
     </Modal>
-      {/* ✅ Schedule Popover */}
-      <SchedulePopover isOpen={isScheduleOpen} onClose={() => setIsScheduleOpen(false)} />
-    </>
   );
 }
