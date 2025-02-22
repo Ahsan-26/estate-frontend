@@ -9,7 +9,7 @@ import WhatsapPop from "./WhatsapPop";
 import QueryPopover from "./QueryPopover";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { DateTime } from "luxon";
+
 
 
 const generateDates = (numDays = 7) => {
@@ -99,16 +99,16 @@ const SchedulePopover = ({ isOpen, onClose }) => {
     }
 };
 
-const convertToSelectedTimezone = (time, timezone) => {
-  try {
-    return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
-      .setZone(timezone)
-      .toFormat("hh:mm a");
-  } catch (error) {
-    console.error("Timezone conversion error:", error);
-    return time;
-  }
-};
+// const convertToSelectedTimezone = (time, timezone) => {
+//   try {
+//     // return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
+//       .setZone(timezone)
+//       .toFormat("hh:mm a");
+//   } catch (error) {
+//     console.error("Timezone conversion error:", error);
+//     return time;
+//   }
+// };
 
   const handleBackClick = () => {
     onClose();
@@ -235,7 +235,7 @@ const convertToSelectedTimezone = (time, timezone) => {
                         _hover={{ bg: "gray.50" }}
                         onClick={() => setSelectedSlot(slot.start)}
                     >
-                      {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)}
+                      {/* {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)} */}
                         {/* {slot} */}
                     </Button>
                 ))}

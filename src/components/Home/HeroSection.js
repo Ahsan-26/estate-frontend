@@ -16,8 +16,9 @@ const HeroSection = () => {
     <Box 
       as="section"
       bgGradient="linear(to-b, #FEFEF9, #F7F3EA)"
-      py={{ base: 10, md: 16 }} 
+      py={{ base: 12, md: 16 }} 
       px={{ base: 5, md: 20 }}
+      mt={{ base: 18, md: 6 }}
       textAlign={{ base: "center", md: "left" }}
       minH="100vh"
       display="flex"
