@@ -6,6 +6,7 @@ import Partner from "../pages/Partner.js";
 import Career from "../pages/Career.js";
 import Blog from "../pages/Blog.js";
 import Faqs from "./Faqs.js";
+import Contact from "../pages/Contact.js";
 
 const Footer = () => {
   return (
@@ -82,7 +83,15 @@ as={RouterLink}
         {/* Support */}
         <VStack align="flex-start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">Support</Text>
-          <Text fontSize="sm" color="gray.700">Contact Us</Text>
+          <Link     
+as={RouterLink}
+  to="/Contact"
+  fontSize="sm"
+  color="gray.700"
+  _hover={{ textDecoration: "underline" }}
+>
+  Contact us
+</Link> 
           <HStack spacing={4} mt={2}>
             <IconButton as="a" href="#" icon={<FaFacebookF />} aria-label="Facebook" color="gray.700" _hover={{ color: "blue.500" }} />
             <IconButton as="a" href="#" icon={<FaLinkedinIn />} aria-label="LinkedIn" color="gray.700" _hover={{ color: "blue.600" }} />
