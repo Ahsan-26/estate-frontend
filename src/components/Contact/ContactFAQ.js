@@ -33,11 +33,19 @@ const ContactFAQ = () => {
           spacing={4} 
         >
           {/* Icon & Title */}
+          <Box 
+            bg="white" 
+            borderRadius="xl"  
+            p={3}  
+            boxShadow="lg"
+            display="flex" 
+            alignItems="center" 
+            justifyContent="center"
+          >
+            <Image src="/images/question_icon.svg" alt="FAQ Icon" boxSize="30px" />
+          </Box>
           <HStack>
-            <Image src="/images/question_icon.png" alt="FAQ Icon" boxSize="80px" />
-          </HStack>
-          <HStack>
-          <Text mt={-6} fontSize="xl" fontWeight="bold">Popular Questions We Answer:</Text>
+          <Text mt={3} fontSize="xl" fontWeight="bold">Popular Questions We Answer:</Text>
           </HStack>
 
           {/* Questions List */}
@@ -85,12 +93,19 @@ const ContactFAQ = () => {
           spacing={4} 
         >
           {/* Icon & Title */}
+          <Box 
+            bg="white" 
+            borderRadius="xl"  
+            p={3}  
+            boxShadow="lg"
+            display="flex" 
+            alignItems="center" 
+            justifyContent="center"
+          >
+            <Image src="/images/email_icon.svg" alt="FAQ Icon" boxSize="30px" />
+          </Box>
           <HStack>
-            <Image src="/images/email_icon.png" alt="Escalation Icon" boxSize="80px" />
-
-          </HStack>
-          <HStack>
-          <Text fontSize="xl" mt={-6} fontWeight="bold">Escalation Procedure</Text>
+          <Text fontSize="xl" mt={3} fontWeight="bold">Escalation Procedure</Text>
           </HStack>
 
           {/* Description */}

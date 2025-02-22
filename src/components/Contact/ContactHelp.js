@@ -16,7 +16,7 @@ const ContactHelp = () => {
         mx="auto"
       >
         {/* Icon */}
-        <Image src="/images/home_icon.png" alt="Support Icon" boxSize="65px" mx="auto" mb={3} />
+        <Image src="/images/home_icon.svg" alt="Support Icon" boxSize="65px" mx="auto" mb={3} />
 
         {/* Text */}
         <Text fontSize="md" color="gray.700" maxW="700px" mx="auto" fontWeight="medium">

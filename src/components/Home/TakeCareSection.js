@@ -101,7 +101,7 @@ const TakeCareSection = () => {
         {/* Right Side - Image with Branding */}
         <Box flex="1" display="flex" justifyContent="center">
           <Image 
-            src="/images/house_icon.png" 
+            src="/images/house_icon.svg" 
             alt="House" 
             w={{ base: "90%", sm: "400px", md: "450px", lg: "480px" }}  
             maxW="500px"

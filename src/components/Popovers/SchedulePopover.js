@@ -152,7 +152,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
   
   <VStack align="start" spacing={2} mt={3}>
     <HStack>
-      <Image src="/images/imagePopover.png" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
+      <Image src="/images/contact_agent.svg" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
       <Text fontSize={{ base: "14px", md: "15px" }} fontWeight="bold">Talk to an Advisor</Text>
     </HStack>
     <Text fontSize={{ base: "xs", md: "sm" }} color="gray.600" fontWeight="medium">
@@ -163,7 +163,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
   {/* Positioned Logo at the Bottom Left */}
   <Flex justify="center" mt={4}>
     <Image 
-      src="/images/logo.png" 
+      src="/images/logo.svg" 
       alt="Contact Agent" 
       w={{ base: "80px", md: "100px" }} 
     />
