@@ -1,6 +1,11 @@
 import React from "react";
 import { Box, Flex, Text, Link, VStack, HStack, IconButton } from "@chakra-ui/react";
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa";
+import { Link as RouterLink } from "react-router-dom";
+import Partner from "../pages/Partner.js";
+import Career from "../pages/Career.js";
+import Blog from "../pages/Blog.js";
+import Faqs from "./Faqs.js";
 
 const Footer = () => {
   return (
@@ -21,17 +26,50 @@ const Footer = () => {
           style={{ width: "110px", height: "38px", marginBottom: "8px" }}  
         />
           <Text fontSize="sm" color="gray.600" mt={2}>
-            Lorem ipsum dolor sit amnsectetur Sit sagittis volutpat sed ut augue odio natoque elementum.
-          </Text>
+          With Estate One, you don’t just buy, manage, or sell. You strategize. Unlock potential.
+          Navigate markets and achieve your real estate goals          </Text>
         </Box>
 
         {/* Quick Links */}
         <VStack align="flex-start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">Quick Links</Text>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Partner with us</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Career</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Blog</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>FAQs</Link>
+          <Link
+  as={RouterLink}
+  to="/partner"
+  fontSize="sm"
+  color="gray.700"
+  _hover={{ textDecoration: "underline" }}
+>
+  Partner with us
+</Link>  
+    
+         <Link     
+as={RouterLink}
+  to="/Career"
+  fontSize="sm"
+  color="gray.700"
+  _hover={{ textDecoration: "underline" }}
+>
+  Career
+</Link> 
+<Link     
+as={RouterLink}
+  to="/Blog"
+  fontSize="sm"
+  color="gray.700"
+  _hover={{ textDecoration: "underline" }}
+>
+  Blogs
+</Link> 
+<Link     
+as={RouterLink}
+  to="/Faqs"
+  fontSize="sm"
+  color="gray.700"
+  _hover={{ textDecoration: "underline" }}
+>
+  FAQs
+</Link> 
         </VStack>
 
         {/* Legal */}
@@ -55,9 +93,10 @@ const Footer = () => {
       </Flex>
 
       {/* Footer Bottom */}
-      <Text fontSize="xs" color="gray.600" mt={6}>
-        © 2021-2024. All Rights Reserved.
+      <Text fontSize="xs" color="gray.600" mt={8}>
+      © Vedarc Infratech Pvt. Ltd
       </Text>
+      
     </Box>
   );
 };

@@ -47,7 +47,7 @@ export const SecondaryButton = ({ text }) => {
       color="white"
       bg="#25D366"
       _hover={{ bg: "#1EBE5D" }}  // ✅ Slightly darker green on hover
-      rightIcon={<FaWhatsapp />}  // ✅ Changed icon
+      leftIcon={<FaWhatsapp />}  // ✅ Changed icon
       px={6}
       onClick={() => window.location.href = whatsappUrl}
     >

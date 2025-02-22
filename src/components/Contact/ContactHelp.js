@@ -38,9 +38,9 @@ const ContactHelp = () => {
           </Button>
           <Button 
             leftIcon={<FaWhatsapp />} 
-            bg="green.500" 
-            color="white" 
-            _hover={{ bg: "green.600" }}
+            colorScheme="#1EBE5D" bg="#25D366" 
+            // color="white" 
+            _hover={{ bg: "green.500" }}
             size="md"
             onClick={() => window.open("https://wa.me/919548056061", "_blank")} // Open WhatsApp
           >
