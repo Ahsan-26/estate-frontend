@@ -68,7 +68,8 @@ export default function WhatsAppPopover({ isOpen, onClose }) {
                 <Button onClick={handleExit} variant="outline" colorScheme="gray" px={4} flex={1} h="40px" fontSize="sm">
                   Exit
                 </Button>
-                <Button colorScheme="#1EBE5D" bg="#25D366" leftIcon={<FaWhatsapp />} onClick={() => window.location.href = whatsappUrl} px={4} flex={1} h="40px" fontSize="sm">
+                <Button colorScheme="#1EBE5D"  _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out" bg="#25D366" leftIcon={<FaWhatsapp />} onClick={() => window.location.href = whatsappUrl} px={4} flex={1} h="40px" fontSize="sm">
                    WhatsApp us
                 </Button>
               </Flex>

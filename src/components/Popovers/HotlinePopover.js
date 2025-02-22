@@ -66,6 +66,8 @@ const whatsappUrl = "https://wa.me/919548056061";
   colorScheme="yellow"
   w="full"
   leftIcon={<FaRegCalendarAlt />}
+   _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
   onClick={() => {
     onClose(); // Close the current PropertyAdvicePopover
     setTimeout(() => setIsScheduleOpen(true), 200); // Open SchedulePopover after a small delay
@@ -91,7 +93,8 @@ const whatsappUrl = "https://wa.me/919548056061";
                 <Text fontSize="sm" color="gray.600" mb={3}>
                   If you'd much rather prefer texting at your own pace, just hit us up on WhatsApp. 
                 </Text>
-                <Button bg="#25D366" onClick={() => window.location.href = whatsappUrl}color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
+                <Button bg="#25D366"  _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out" onClick={() => window.location.href = whatsappUrl}color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
                   WhatsApp us
                 </Button>
               </Box>

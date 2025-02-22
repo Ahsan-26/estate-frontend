@@ -23,7 +23,9 @@ export const PrimaryButton = ({ text, to, isPopover,...props}) => {
         bg="yellow.500" 
         color="white" 
         _hover={{ bg: "yellow.600" }} 
-        rightIcon={<FaPhoneAlt />}  // ✅ Changed icon
+        rightIcon={<FaPhoneAlt />}  
+        _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
         px={6}
         onClick={handleClick}
           {...props}
@@ -46,6 +48,8 @@ export const SecondaryButton = ({ text }) => {
       border="2px solid #25D366"
       color="white"
       bg="#25D366"
+       _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
       _hover={{ bg: "#1EBE5D" }}  // ✅ Slightly darker green on hover
       leftIcon={<FaWhatsapp />}  // ✅ Changed icon
       px={6}

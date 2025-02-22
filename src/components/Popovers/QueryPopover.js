@@ -118,6 +118,8 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
 
           <Flex justifyContent="center" mt={4}>
             <Button  color="white" bg="yellow.500" px={8} _hover={{ bg: "yellow.600" }}
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
            onClick={() => {
             onClose(); // Close SchedulePopover
             setTimeout(() => {

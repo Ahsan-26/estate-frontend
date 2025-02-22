@@ -93,7 +93,8 @@ const Header = () => {
 
         {/* ✅ Desktop Navigation Links */}
         <Flex gap={{ base: 4, md: 6 }} fontWeight="bold" fontSize={{ base: "sm", md: "md" }} display={{ base: "none", md: "flex" }}>
-          <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
+          <ChakraLink as={Link} to="/"  _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
           {/* ✅ Our Services Dropdown */}
           <Menu>
@@ -114,10 +115,14 @@ const Header = () => {
             </MenuList>
           </Menu>
 
-          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
-          <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
-          <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+          <ChakraLink as={Link} to="/blog"  _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"_hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+          <ChakraLink as={Link} to="/faqs" _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+          <ChakraLink as={Link} to="/career" _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+          <ChakraLink as={Link} to="/partner"  _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"_hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
         </Flex>
 
         {/* ✅ Right Section - Buttons */}
@@ -129,6 +134,8 @@ const Header = () => {
             fontWeight="bold" 
             fontSize={{ base: "sm", md: "md" }}
             px={{ base: 3, md: 4 }} 
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
             _hover={{ bg: "yellow.600" }}
           >
             Contact Us
@@ -139,6 +146,8 @@ const Header = () => {
             fontWeight="bold"
             fontSize={{ base: "sm", md: "md" }}
             leftIcon={<FaPhoneAlt />}
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
             _hover={{ bg: "yellow.200" }}
             px={{ base: 3, md: 4 }} 
             onClick={(e) => {
