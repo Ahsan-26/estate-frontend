@@ -24,9 +24,11 @@ const PartnerWork = () => {
     <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 4, md: 20 }} textAlign="center">
     {/* Background Box for Styling */}
     <Box 
-      bg="y" 
+    maxW={"1200px"}
+    mx={"auto"}
+      bg="#FFF6E4" 
       borderRadius="lg" 
-      py={{ base: 12, md: 16 }} 
+      py={{ base: 4, md: 8 }} 
       position="relative"
       px={{ base: 4, md: 10 }}
     >
@@ -54,6 +56,8 @@ const PartnerWork = () => {
         px={{ base: 4, md: 6 }} 
         position="relative"
         top="50px"
+        transform={"translateY(50px)"}
+        mb={{ base: 6, md: 10 }}
       >
         <Grid 
           templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }} 

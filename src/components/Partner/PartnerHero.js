@@ -8,6 +8,9 @@ const PartnerHero = () => {
       bgGradient="linear(to-b, #FEFEF9, #F7F3EA)" // ✅ Background Gradient
       py={{ base: 12, md: 16 }}
       px={{ base: 5, md: 20 }}
+      maxW={"1500px"}
+      mx={"auto"}
+      mt={{ base: 6, md: 2 }}
     >
       <Flex 
         direction={{ base: "column-reverse", md: "row" }} // ✅ Reverse on mobile for better UX

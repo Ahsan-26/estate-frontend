@@ -153,7 +153,8 @@ const FAQs = () => {
         <SlideFade in={showAll} offsetY="20px">
           <Button
             mt={6}
-            colorScheme="red"
+            bg="#F3F3F3"
+  
             size="lg"
             borderRadius="full"
             px={6}

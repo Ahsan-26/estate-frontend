@@ -39,6 +39,7 @@ const PartnerWithUs = () => {
         mt={8} 
         maxW="1100px" 
         mx="auto"
+        
       >
         {partnerBenefits.map((benefit, index) => (
           <VStack 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text, VStack, HStack, Grid, Link, Image, Icon } from "@chakra-ui/react";
 import { FaEnvelope, FaWhatsapp, FaCheck } from "react-icons/fa"; // ✅ WhatsApp & Email Icons Restored
+import { AtSignIcon } from '@chakra-ui/icons';
 
 const PartnerFinalSection = () => {
   
@@ -16,7 +17,7 @@ const PartnerFinalSection = () => {
         {/* Left Card - Why EstateOne */}
         <VStack 
           p={8} 
-          bg="white" 
+          bg="#F3F3F3" 
           borderRadius="lg" 
           boxShadow="md" 
           align="start" 
@@ -24,8 +25,8 @@ const PartnerFinalSection = () => {
           width="100%"
         >
           {/* Icon Above Title */}
-          <Image src="/images/question_icon.png" alt="Why EstateOne?" boxSize="100px" />
-          <Text fontSize="lg" fontWeight="bold">Why EstateOne?</Text>
+          <Image src="/images/question_icon.png" alt="Why EstateOne?" boxSize="90px" />
+          <Text fontSize="xl" fontWeight="bold" mt={-4}>Why EstateOne?</Text>
 
           {/* Bullet Points */}
           <VStack align="start" spacing={3} width="100%">
@@ -47,7 +48,7 @@ const PartnerFinalSection = () => {
         {/* Right Card - Partner Success */}
         <VStack 
           p={8} 
-          bg="white" 
+          bg="#F3F3F3" 
           borderRadius="lg" 
           boxShadow="md" 
           align="start" 
@@ -55,8 +56,8 @@ const PartnerFinalSection = () => {
           width="100%"
         >
           {/* Icon Above Title */}
-          <Image src="/images/handshake_icon.png" alt="Partner Success" boxSize="100px" />
-          <Text fontSize="lg" fontWeight="bold">Let's Build Success Together!</Text>
+          <Image src="/images/handshake_icon.png" alt="Partner Success" boxSize="90px" />
+          <Text fontSize="xl" fontWeight="bold" mt={-4}>Let's Build Success Together!</Text>
 
           {/* Subtitle */}
           <Text fontSize="sm" color="gray.700">Become a valued partner today</Text>
@@ -65,7 +66,7 @@ const PartnerFinalSection = () => {
           <VStack align="start" spacing={3} width="100%">
             <Text fontSize="sm" fontWeight="bold">Have Questions?</Text>
             <HStack spacing={3}>
-              <Icon as={FaEnvelope} color="yellow.500" boxSize="18px" /> {/* ✅ Restored Email Icon */}
+              <Icon as={AtSignIcon} color="yellow.500" boxSize="18px" /> {/* ✅ Restored Email Icon */}
               <Link href="mailto:connect@estateone.in" fontSize="sm" color="gray.700">
                 connect@estateone.in
               </Link>
