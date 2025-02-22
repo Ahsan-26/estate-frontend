@@ -23,7 +23,7 @@ const CareerHero = () => {
             fontWeight="bold"
             textAlign={{ base: "center", md: "left" }} // ✅ Center on mobile
           >
-            Join Our Team at <br /> EstateOne
+             Career Opportunities<br />at EstateOne
           </Text>
 
           {/* Description */}

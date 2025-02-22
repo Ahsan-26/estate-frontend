@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text, VStack, HStack, Button, List, ListItem, Icon, Grid } from "@chakra-ui/react";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 const HowWeWork = () => {
   // Section Data
@@ -9,15 +9,15 @@ const HowWeWork = () => {
       title: "BUY",
       color: "yellow.500",
       items: [
-        "Book a Consultation (Meet 1)",
-        "Understand Market & Investment Areas",
-        "Visit Selected Properties with Advisor",
-        "Strategic Planning Session",
-        "Negotiate for Best Deals and Buy Your Property",
-        "Dedicated CRM Support and demand time Receive Bi-Monthly Property Insights",
-        "Personalized Post-Purchase Support",
-        "Regular Property Updates & Market Insights",
+        "Schedule a Consultation (Meet 1)",
+        "Explore Market & Investment Areas",
+        "Property tours with our Advisor",
+        "Strategic Planning Session(Meet 2)",
+        "Negotiate & Secure the Best Deal",
+        "Property updates and market trends",
         "Pre-Possession Inspection",
+        "Generate Income? Self-Use,Sell & Exit",
+        
       ],
       ctaText: "Book a free call",
       ctaLink: "/buy",
@@ -27,14 +27,14 @@ const HowWeWork = () => {
       title: "MANAGE",
       color: "yellow.500",
       items: [
-        "Schedule a Consultation",
-        "Understand Your Objectives: Long-Term Rental Income Short-Term Rental Income (Airbnb, etc.)",
+        "Schedule a Consultation(Meet 1)",
+        "Define your Objectives: Long Term Rental Income or Short Term Rental Income",
         "Property Inspection & Assessment",
-        "For Long-Term Rentals: Tenant Screening Add Property to Rental Listings",
-        "For Short-Term Rentals: Furnishing & Staging Add Basic Amenities (e.g., WiFi, Utilities) List on Short-Term Rental Platforms",
-        "Management & Monitoring: Rent Collection Property Maintenance Guest or Tenant Coordination",
+        "For Long-Term Rentals: Tenant Screening & Maximized Rental Listings",
+        "For Short-Term Rentals: Complete setup &Strategic listings",
+        "Management & Monitoring:For Long-Term Rentals:Secure Rent Collection &Property MaintenanceFor Short-Term Rentals:Streamlined Guest Coordination & Dynamic Pricing",
         "Maximize Income Potential",
-        "Qualify Potential Buyers Schedule Property Showings",
+        "Generate consistent income",
       ],
       ctaText: "Book a free call",
       ctaLink: "/manage",
@@ -44,12 +44,15 @@ const HowWeWork = () => {
       title: "SELL",
       color: "yellow.500",
       items: [
-        "Book a consultation",
-        "Evaluate Market Value & Finalize Selling Price",
-        "If project is approved or taking care by estateone, then list or include in advisor list for selling, and ask for other partners to sell",
-        "Market Property Across Relevant Channels",
-        "Qualify Potential Buyers Schedule Property Showings",
-        "Negotiation & Deal Closure Facilitate Buyer Negotiations Finalize and Close the Sale",
+        "Schedule a consultation (Meet 1)",
+        "EstateOne Approval & Strategic Collaboration",
+        "Property Tour with our Advisor",
+        "Evaluate Market Value &Finalize Selling Price",
+        "Targeted Marketing Exposure",
+        "Qualified Buyer Screening",
+        "Organise Property Showings",
+        "Facilitate Buyer Negotiations",
+        "Finalize & Close the Sale",
       ],
       ctaText: "Book a free call",
       ctaLink: "/sell",
@@ -64,12 +67,12 @@ const HowWeWork = () => {
       py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
       {/* Section Heading */}
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
-        How We Work
+        Your Real Estate Roadmap
       </Text>
       <Text fontSize="md" color="gray.600" maxW="800px" mx="auto" mt={3}>
-        At EstateOne, we simplify property ownership. Whether you're looking to buy, manage, or sell real estate,
-        we've got you covered. From finding the perfect property to handling day-to-day management and ensuring
-        a smooth selling process, we do it all.
+      We make real estate easy. At EstateOne, our roadmap takes
+you from where you are to where you want to be—quickly, confidently, and
+seamlessly
       </Text>
 
       {/* Grid Layout for the 3 Sections */}
@@ -101,7 +104,7 @@ const HowWeWork = () => {
             <List spacing={3} flex="1">
               {section.items.map((item, i) => (
                 <ListItem key={i} display="flex" alignItems="center">
-                  <Icon as={FaCheckCircle} color={section.color} mr={2} />
+                  <Icon as={FaChevronDown} color={section.color} mr={2} />
                   {item}
                 </ListItem>
               ))}

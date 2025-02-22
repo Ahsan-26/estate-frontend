@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import {
   Button,
   Input,
@@ -116,13 +117,13 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
           </Box>
 
           <Flex justifyContent="center" mt={4}>
-            <Button
-              color="white"
-              bg="yellow.500"
-              px={8}
-              _hover={{ bg: "yellow.600" }}
-              isLoading={loading}
-              onClick={handleConfirm}
+            <Button  color="white" bg="yellow.500" px={8} _hover={{ bg: "yellow.600" }}
+           onClick={() => {
+            onClose(); // Close SchedulePopover
+            setTimeout(() => {
+              //setIsConfirmationOpen(true); // ✅ Show confirmation dialog after slight delay
+            }, 300); // Delay ensures smooth transition
+          }}
             >
               Confirm →
             </Button>

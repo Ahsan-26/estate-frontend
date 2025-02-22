@@ -19,8 +19,8 @@ const PartnerHero = () => {
         <VStack align="stretch" spacing={{ base: 4, md: 5 }} maxW="600px">
           {/* Section Tag */}
           <Text 
-            bg="yellow.100" 
-            color="yellow.700" 
+          
+            color="#DA990E" 
             fontSize={{ base: "xs", md: "sm" }}
             fontWeight="bold" 
             px={4} 

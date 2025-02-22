@@ -25,7 +25,7 @@ const ContactFAQ = () => {
         {/* Left Card - Popular Questions */}
         <VStack 
           p={6} 
-          bg="white" 
+          bg="#F3F3F3" 
           borderRadius="lg" 
           boxShadow="md" 
           align="start" 
@@ -75,7 +75,7 @@ const ContactFAQ = () => {
         {/* Right Card - Escalation Procedure */}
         <VStack 
           p={6} 
-          bg="white" 
+          bg="#F3F3F3" 
           borderRadius="lg" 
           boxShadow="md" 
           align="start" 

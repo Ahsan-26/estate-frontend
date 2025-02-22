@@ -79,8 +79,14 @@ const ContactSupport = () => {
   };
 
   return (
-    <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }}>
+    <Box 
+  as="section" 
+  py={{ base: 10, md: 16 }} 
+  px={{ base: 5, md: 20 }}
+  mt={{ base: 20, md: 20 }}  // ✅ Added margin-top here
+>
       {/* Section Title */}
+     
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold" textAlign="center">
         Facing Challenges? We’ve Got <br /> You Covered
       </Text>
@@ -94,16 +100,16 @@ const ContactSupport = () => {
         gap={10}
       >
         {/* Left Side - Support Information */}
-        <VStack align="start" spacing={6} maxW="600px">
-          <Box>
-            <Text fontSize="lg" fontWeight="bold">Delayed Possession? We're Here to Help</Text>
+        <VStack align="start"  boxShadow="sm" spacing={6} maxW="570px" minH="490px">
+          <Box mt={5}>
+            <Text fontSize="lg" fontWeight="bold">Delayed Possession? We're here to help</Text>
             <Text fontSize="sm" color="gray.600">
               If your possession is delayed, don’t stress. Our expert legal team will stand by you, offering 
               step-by-step support to protect your rights and ensure you get what you deserve.
             </Text>
           </Box>
 
-          <Box>
+          <Box mt={5}>
             <Text fontSize="lg" fontWeight="bold">Pre-Possession Quality Checks</Text>
             <Text fontSize="sm" color="gray.600">
               Concerned about the quality of your property before moving in? With trusted partners, we 
@@ -111,7 +117,7 @@ const ContactSupport = () => {
             </Text>
           </Box>
 
-          <Box>
+          <Box mt={5}>
             <Text fontSize="lg" fontWeight="bold">Tailored Exit Strategies for Investors</Text>
             <Text fontSize="sm" color="gray.600">
               We help investors plan personalized exit strategies to maximize profits. Whether it’s finding 
@@ -119,7 +125,7 @@ const ContactSupport = () => {
             </Text>
           </Box>
 
-          <Box>
+          <Box mt={5}>
             <Text fontSize="lg" fontWeight="bold">Making Real Estate Laws Simple</Text>
             <Text fontSize="sm" color="gray.600">
               Navigating legal complexities can be tough. Whether it’s RERA guidelines, property taxes, or 
@@ -130,7 +136,7 @@ const ContactSupport = () => {
         </VStack>
 
         {/* Right Side - Contact Form */}
-        <Box bg="white" p={6} borderRadius="lg" boxShadow="md" maxW="450px" width="100%">
+        <Box bg="white" p={6} borderRadius="lg" boxShadow="lg" maxW="450px" width="100%">
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="stretch">
               {/* Name Field */}
