@@ -28,50 +28,6 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
-  const handleConfirm = async () => {
-    if (!name || !email || !phone || !query || !selectedSlotId) {
-      toast({
-        title: "All fields are required!",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return;
-    }
-
-    setLoading(true);
-    try {
-      await axios.post("http://127.0.0.1:8000/api/book_appointment/", {
-        time_slot_id: selectedSlotId,  // ✅ Matching backend field
-        name,
-        email,
-        phone,
-        query
-      });
-
-      toast({
-        title: "Booking Confirmed!",
-        description: "Your slot has been booked successfully.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-
-      onClose();
-    } catch (error) {
-      console.error("Error booking appointment:", error.response?.data || error.message);
-      toast({
-        title: "Something went wrong!",
-        description: "Please try again later.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "lg" }} isCentered>
       <ModalOverlay />

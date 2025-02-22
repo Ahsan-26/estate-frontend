@@ -26,11 +26,13 @@ const PartnerHero = () => {
             color="#DA990E" 
             fontSize={{ base: "xs", md: "sm" }}
             fontWeight="bold" 
+            bg= "white"
             px={4} 
             py={1} 
             borderRadius="full"
             display="inline-block"
-            alignSelf={{ base: "center", md: "flex-start" }} // ✅ Center on mobile
+            alignSelf={{ base: "center", md: "flex-start" }}
+            boxShadow="md"
           >
             Your Success, Our Priority!
           </Text>

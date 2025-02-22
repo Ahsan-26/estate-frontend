@@ -47,7 +47,7 @@ const TakeCareSection = () => {
         {/* Left Side - Text & Tabs */}
         <Box flex="1" textAlign={{ base: "center", lg: "left" }}>
           <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
-            What we Ensure
+            What We Ensure
           </Text>
 
           {/* Tabs */}

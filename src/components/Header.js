@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { 
-  Box, Flex, Button, Link as ChakraLink, IconButton, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem
+  Box, Flex, Button, Link as ChakraLink, IconButton, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem, VStack
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";  
-import { FaPhoneAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import PropertyAdvicePopover from "./Popovers/HotlinePopover"; 
 
 const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure(); 
   const location = useLocation(); 
   const navigate = useNavigate();
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
 
@@ -26,12 +25,12 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
-  // ✅ Close menu when navigating to another page
+  // ✅ Close menu when navigating
   useEffect(() => {
     onClose();
-  }, [location.pathname, onClose]); 
+  }, [location.pathname, onClose]);
 
-  // ✅ Scroll to "How We Work" section or navigate if needed
+  // ✅ Scroll to "How We Work" section
   const handleServiceClick = () => {
     if (location.pathname === "/") {
       const section = document.getElementById("howwework");
@@ -46,16 +45,6 @@ const Header = () => {
           window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
         }
       }, 500);
-    }
-  };
-
-  // ✅ Handle logo click (scroll to top if on home page)
-  const handleLogoClick = (e) => {
-    if (location.pathname === "/") {
-      e.preventDefault(); // Prevent navigation reload
-      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
-    } else {
-      navigate("/"); // Navigate normally if not on home page
     }
   };
 
@@ -76,8 +65,8 @@ const Header = () => {
     >
       <Flex justify="space-between" align="center" maxW="1300px" mx="auto">
         
-        {/* ✅ Logo - Clickable */}
-        <ChakraLink as={Link} to="/" onClick={handleLogoClick} display="flex" alignItems="center">
+        {/* ✅ Logo */}
+        <ChakraLink as={Link} to="/" display="flex" alignItems="center">
           <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
         </ChakraLink>
 
@@ -92,20 +81,12 @@ const Header = () => {
         />
 
         {/* ✅ Desktop Navigation Links */}
-        <Flex gap={{ base: 4, md: 6 }} fontWeight="bold" fontSize={{ base: "sm", md: "md" }} display={{ base: "none", md: "flex" }}>
-          <ChakraLink as={Link} to="/"  _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
+        <Flex gap={6} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }}>
+          <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
-          {/* ✅ Our Services Dropdown */}
+          {/* ✅ Dropdown - Scroll Instead of Navigate */}
           <Menu>
-            <MenuButton 
-              color="#1a202c"
-              as={Button} 
-              rightIcon={<FaChevronDown />} 
-              variant="link"
-              fontWeight="bold"
-              _hover={{ textDecoration: "underline" }}
-            >
+            <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" color = "#1a202c" fontWeight="bold" _hover={{ textDecoration: "underline" }}>
               Our Services
             </MenuButton>
             <MenuList>
@@ -115,54 +96,50 @@ const Header = () => {
             </MenuList>
           </Menu>
 
-          <ChakraLink as={Link} to="/blog"  _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out"_hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
-          <ChakraLink as={Link} to="/faqs" _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
-          <ChakraLink as={Link} to="/career" _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-          <ChakraLink as={Link} to="/partner"  _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out"_hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
-        </Flex>
-
-        {/* ✅ Right Section - Buttons */}
-        <Flex gap={{ base: 3, md: 4 }} display={{ base: "none", md: "flex" }}>
-          <Button 
-            as={Link} to="/contact"
-            bg="yellow.500" 
-            color="white" 
-            fontWeight="bold" 
-            fontSize={{ base: "sm", md: "md" }}
-            px={{ base: 3, md: 4 }} 
-             _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out"
-            _hover={{ bg: "yellow.600" }}
-          >
-            Contact Us
-          </Button>
-          <Button
-            bg="yellow.100"
-            color="yellow.600"
-            fontWeight="bold"
-            fontSize={{ base: "sm", md: "md" }}
-            leftIcon={<FaPhoneAlt />}
-             _active={{ transform: "scale(1.1)" }} 
-        transition="transform 0.1s ease-in-out"
-            _hover={{ bg: "yellow.200" }}
-            px={{ base: 3, md: 4 }} 
-            onClick={(e) => {
-              e.preventDefault();
-              setIsPopoverOpen(true);
-            }}
-          >
-            Hotline
-          </Button>
+          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+          <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+          <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
         </Flex>
 
       </Flex>
 
-      {/* ✅ Property Advice Popover */}
-      <PropertyAdvicePopover isOpen={isPopoverOpen} onClose={() => setIsPopoverOpen(false)} />
+      {/* ✅ Mobile Menu */}
+      {isOpen && (
+        <Box 
+          display={{ base: "block", md: "none" }} 
+          position="absolute" 
+          top="100%" 
+          left="0" 
+          right="0" 
+          bg="white" 
+          boxShadow="md" 
+          py={4} 
+          px={6}
+        >
+          <VStack spacing={4} align="start">
+            <ChakraLink as={Link} to="/" onClick={onClose} _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
+
+            {/* ✅ Mobile Dropdown - Scroll Instead of Navigate */}
+            <Menu>
+              <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" fontWeight="bold">
+                Our Services
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Buy</MenuItem>
+                <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Manage</MenuItem>
+                <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Sell</MenuItem>
+              </MenuList>
+            </Menu>
+
+            <ChakraLink as={Link} to="/blog" onClick={onClose} _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+            <ChakraLink as={Link} to="/faqs" onClick={onClose} _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+            <ChakraLink as={Link} to="/career" onClick={onClose} _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+            <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+          </VStack>
+        </Box>
+      )}
+
     </Box>
   );
 };
