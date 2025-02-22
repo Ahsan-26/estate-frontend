@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SchedulePopover from "./Popovers/SchedulePopover";
 
 // ✅ Primary Button (Used for "Book a free call")
-export const PrimaryButton = ({ text, to, isPopover }) => {
+export const PrimaryButton = ({ text, to, isPopover,...props}) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -25,7 +25,8 @@ export const PrimaryButton = ({ text, to, isPopover }) => {
         _hover={{ bg: "yellow.600" }} 
         rightIcon={<FaPhoneAlt />}  // ✅ Changed icon
         px={6}
-        onClick={handleClick} 
+        onClick={handleClick}
+          {...props}
       >
         {text}
       </Button>
