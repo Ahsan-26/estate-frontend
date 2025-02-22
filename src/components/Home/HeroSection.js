@@ -9,6 +9,7 @@ import { PrimaryButton, SecondaryButton } from "../Buttons";
 const images = [
   "/images/hero_image1.png",
   "/images/hero_image2.png",
+  "/images/hero_image3.png",
 ];
 
 const HeroSection = () => {
