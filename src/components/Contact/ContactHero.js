@@ -50,7 +50,7 @@ const ContactHero = () => {
        alignItems="center"
       
       >
-        <Image src="/images/contact_agent.png" alt="Expert" boxSize="60px" mx="auto" />
+        <Image src="/images/contact_agent.svg" alt="Expert" boxSize="60px" mx="auto" />
         <Text fontSize="lg" fontWeight="bold" mt={3}>
           Buying, Managing, or Selling? We’ve Got Your Back
         </Text>

@@ -63,7 +63,7 @@ const PartnerHero = () => {
         {/* Right Section - Image */}
         <Box w={{ base: "90%", sm: "80%", md: "500px" }} mx="auto">
           <Image 
-            src="/images/partner_hero.png" // ✅ Replace with actual image path
+            src="/images/partner_hero.svg" // ✅ Replace with actual image path
             alt="Partner with EstateOne"
             w="100%"
             borderRadius="10px"

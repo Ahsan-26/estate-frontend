@@ -6,7 +6,6 @@ import { AtSignIcon } from '@chakra-ui/icons';
 const PartnerFinalSection = () => {
   
   return (
-   
     <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 8 }}>
       <Grid 
         templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} 
@@ -24,14 +23,25 @@ const PartnerFinalSection = () => {
           spacing={4} 
           width="100%"
         >
-          {/* Icon Above Title */}
-          <Image src="/images/question_icon.png" alt="Why EstateOne?" boxSize="90px" />
+          {/* ✅ Image with Soft Rounded Background & Shadow */}
+          <Box 
+            bg="white" 
+            borderRadius="xl"  // Soft rounded edges
+            p={3}  
+            boxShadow="lg" // ✅ Soft shadow effect
+            display="flex" 
+            alignItems="center" 
+            justifyContent="center"
+          >
+            <Image src="/images/question_icon.svg" alt="Why EstateOne?" boxSize="30px" />
+          </Box>
+          
           <Text fontSize="xl" fontWeight="bold" mt={-4}>Why EstateOne?</Text>
 
           {/* Bullet Points */}
           <VStack align="start" spacing={3} width="100%">
             <HStack spacing={3}>
-              <Icon as={FaCheck} color="black" boxSize="16px" /> {/* ✅ Restored Check Icons */}
+              <Icon as={FaCheck} color="black" boxSize="16px" />
               <Text fontSize="sm" color="gray.700">500+ Successful Collaborations</Text>
             </HStack>
             <HStack spacing={3}>
@@ -55,8 +65,19 @@ const PartnerFinalSection = () => {
           spacing={4} 
           width="100%"
         >
-          {/* Icon Above Title */}
-          <Image src="/images/handshake_icon.png" alt="Partner Success" boxSize="90px" />
+          {/* ✅ Image with Soft Rounded Background & Shadow */}
+          <Box 
+            bg="white" 
+            borderRadius="xl"  // Soft rounded edges
+            p={3}  
+            boxShadow="lg" // ✅ Soft shadow effect
+            display="flex" 
+            alignItems="center" 
+            justifyContent="center"
+          >
+            <Image src="/images/handshake_icon.svg" alt="Partner Success" boxSize="30px" />
+          </Box>
+
           <Text fontSize="xl" fontWeight="bold" mt={-4}>Let's Build Success Together!</Text>
 
           {/* Subtitle */}
@@ -66,13 +87,13 @@ const PartnerFinalSection = () => {
           <VStack align="start" spacing={3} width="100%">
             <Text fontSize="sm" fontWeight="bold">Have Questions?</Text>
             <HStack spacing={3}>
-              <Icon as={AtSignIcon} color="yellow.500" boxSize="18px" /> {/* ✅ Restored Email Icon */}
+              <Icon as={AtSignIcon} color="yellow.500" boxSize="18px" />
               <Link href="mailto:connect@estateone.in" fontSize="sm" color="gray.700">
                 connect@estateone.in
               </Link>
             </HStack>
             <HStack spacing={3}>
-              <Icon as={FaWhatsapp}  color="green.500" boxSize="18px" /> {/* ✅ Restored WhatsApp Icon */}
+              <Icon as={FaWhatsapp} color="green.500" boxSize="18px" />
               <Link href="https://wa.me/919548056061" fontSize="sm" color="gray.700">WhatsApp Us</Link>
             </HStack>
           </VStack>

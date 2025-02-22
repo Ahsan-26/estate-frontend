@@ -7,27 +7,27 @@ const blogPosts = [
   {
     title: "Lorem ipsum dolor sit amet consectetur. Tellus ut feugiat vulputate",
     time: "10 min read",
-    image: "/images/blog_main.png", // ✅ Replace with actual image
+    image: "/images/blog_main.svg", // ✅ Replace with actual image
   },
   {
     title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
     time: "7 min read",
-    image: "/images/blog1.png", // ✅ Replace with actual image
+    image: "/images/blog1.svg", // ✅ Replace with actual image
   },
   {
     title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
     time: "7 min read",
-    image: "/images/blog2.png", // ✅ Replace with actual image
+    image: "/images/blog2.svg", // ✅ Replace with actual image
   },
   {
     title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
     time: "7 min read",
-    image: "/images/blog3.png", // ✅ Replace with actual image
+    image: "/images/blog3.svg", // ✅ Replace with actual image
   },
   {
     title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
     time: "7 min read",
-    image: "/images/blog2.png", // ✅ Replace with actual image
+    image: "/images/blog2.svg", // ✅ Replace with actual image
   },
 ];
 

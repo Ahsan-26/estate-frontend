@@ -3,13 +3,14 @@ import {
   Box, Flex, Button, Link as ChakraLink, IconButton, useDisclosure, Image, Menu, MenuButton, MenuList, MenuItem, VStack
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";  
-import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaPhoneAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import PropertyAdvicePopover from "./Popovers/HotlinePopover"; 
 
 const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure(); 
   const location = useLocation(); 
   const navigate = useNavigate();
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
 
@@ -30,14 +31,16 @@ const Header = () => {
     onClose();
   }, [location.pathname, onClose]);
 
-  // ✅ Scroll to "How We Work" section
+  // ✅ Scroll to "How We Work" section instead of navigating
   const handleServiceClick = () => {
     if (location.pathname === "/") {
+      // Scroll directly if already on the home page
       const section = document.getElementById("howwework");
       if (section) {
         window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
       }
     } else {
+      // Navigate to home first, then scroll
       navigate("/");
       setTimeout(() => {
         const section = document.getElementById("howwework");
@@ -70,23 +73,13 @@ const Header = () => {
           <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
         </ChakraLink>
 
-        {/* ✅ Mobile Menu Button */}
-        <IconButton 
-          display={{ base: "flex", md: "none" }} 
-          icon={isOpen ? <FaTimes /> : <FaBars />} 
-          aria-label="Toggle Menu" 
-          onClick={onToggle}
-          bg="transparent"
-          fontSize="22px"
-        />
-
         {/* ✅ Desktop Navigation Links */}
-        <Flex gap={6} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }}>
+        <Flex gap={6} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }} alignItems="center">
           <ChakraLink as={Link} to="/" _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
-          {/* ✅ Dropdown - Scroll Instead of Navigate */}
+          {/* ✅ Our Services Dropdown - Scroll Instead of Navigate */}
           <Menu>
-            <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" color = "#1a202c" fontWeight="bold" _hover={{ textDecoration: "underline" }}>
+            <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" color="#1a202c" fontWeight="bold" _hover={{ textDecoration: "underline" }}>
               Our Services
             </MenuButton>
             <MenuList>
@@ -102,12 +95,54 @@ const Header = () => {
           <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
         </Flex>
 
+        {/* ✅ Buttons - Contact Us & Hotline */}
+        <Flex gap={3} display={{ base: "none", md: "flex" }} alignItems="center">
+        <Button 
+            as={Link} to="/contact"
+            bg="yellow.500" 
+            color="white" 
+            fontWeight="bold" 
+            fontSize={{ base: "sm", md: "md" }}
+            px={{ base: 3, md: 4 }} 
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
+            _hover={{ bg: "yellow.600" }}
+          >
+            Contact Us
+          </Button>
+          <Button
+            bg="yellow.100"
+            color="yellow.600"
+            fontWeight="bold"
+            fontSize={{ base: "sm", md: "md" }}
+            leftIcon={<FaPhoneAlt />}
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
+            _hover={{ bg: "yellow.200" }}
+            px={{ base: 3, md: 4 }} 
+            onClick={(e) => {
+              e.preventDefault();
+              setIsPopoverOpen(true);
+            }}
+          >
+            Hotline
+          </Button>
+        </Flex>
+
+        {/* ✅ Mobile Menu Button */}
+        <IconButton 
+          display={{ base: "flex", md: "none" }} 
+          icon={isOpen ? <FaTimes /> : <FaBars />} 
+          aria-label="Toggle Menu" 
+          onClick={onToggle}
+          bg="transparent"
+          fontSize="22px"
+        />
       </Flex>
 
-      {/* ✅ Mobile Menu */}
+      {/* ✅ Mobile Menu Drawer */}
       {isOpen && (
         <Box 
-          display={{ base: "block", md: "none" }} 
           position="absolute" 
           top="100%" 
           left="0" 
@@ -115,12 +150,13 @@ const Header = () => {
           bg="white" 
           boxShadow="md" 
           py={4} 
-          px={6}
+          px={6} 
+          display={{ base: "block", md: "none" }} 
         >
           <VStack spacing={4} align="start">
             <ChakraLink as={Link} to="/" onClick={onClose} _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
-            {/* ✅ Mobile Dropdown - Scroll Instead of Navigate */}
+            {/* ✅ Mobile Services Dropdown */}
             <Menu>
               <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" fontWeight="bold">
                 Our Services
@@ -140,6 +176,8 @@ const Header = () => {
         </Box>
       )}
 
+      {/* ✅ Property Advice Popover */}
+      <PropertyAdvicePopover isOpen={isPopoverOpen} onClose={() => setIsPopoverOpen(false)} />
     </Box>
   );
 };
