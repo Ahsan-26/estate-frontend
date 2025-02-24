@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Box, Text, VStack, HStack, Image, Link, Divider, Flex } from "@chakra-ui/react";
 import { FaFacebook, FaTwitter, FaLinkedin, FaShareAlt } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 const BlogDetails = () => {
+  const [blog, setBlog] = useState(null);
+  const { id } = useParams()
+  
+useEffect(() => {
+  axios.get(`http://127.0.0.1:8000/api/blogs/${id}/`)
+    .then(response => setBlog(response.data))
+    .catch(error => console.error("Error fetching blog data:", error));
+}, [id]);
+
+
+  if (!blog) return <Text>Loading...</Text>;
+
   return (
     <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} maxW="1200px" mx="auto">
       
       {/* Blog Header */}   
       <VStack align="start" spacing={4} mb={6}>
         <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
-          Lorem ipsum dolor sit amet consectetur. Tellus ut feugiat vulputate
+        {blog.title}
         </Text>
         
         {/* Author and Social Share */}
         <HStack spacing={3} color="gray.600">
-          <Image src="/images/user.png" alt="Author" boxSize="40px" borderRadius="full" />
-          <Text fontWeight="bold">Pablo Santos</Text>
-          <Text>· 2h ago</Text>
+        <Image src={`http://127.0.0.1:8000${blog.author_image}`} alt="Author" boxSize="40px" borderRadius="full" />
+          <Text fontWeight="bold">{blog.author}</Text>
+          <Text>{new Date(blog.created_at).toLocaleDateString()}</Text>
           <HStack spacing={3} ml={4}>
             <FaFacebook size={18} />
             <FaTwitter size={18} />
@@ -26,7 +40,7 @@ const BlogDetails = () => {
         </HStack>
         
         {/* Blog Image */}
-        <Image src="/images/blog_main.png" alt="Blog" w="100%" borderRadius="lg" />
+        <Image src={blog.image} alt="Blog" w="100%" borderRadius="lg" />
       </VStack>
 
       {/* Sidebar + Blog Content Layout */}
@@ -46,10 +60,10 @@ const BlogDetails = () => {
         {/* Blog Content */}
         <Box flex="1">
           <Text fontSize="md" color="gray.700" lineHeight="1.8">
-            Lorem ipsum dolor sit amet consectetur. Duis tempor commodo morbi auctor diam tristique risus ac. Faucibus dignissim consequat tincidunt facilisis posuere integer magna tristique. Urna aliquam convallis eu habitasse justo. Lorem ipsum dolor sit amet consectetur.
+          {blog.content}
           </Text>
 
-          <Divider my={5} />
+          {/* <Divider my={5} />
 
           <Text fontSize="lg" fontWeight="bold">Lorem ipsum dolor sit amet consectetur.</Text>
           <Text fontSize="md" color="gray.700" lineHeight="1.8">
@@ -68,7 +82,7 @@ const BlogDetails = () => {
           <Text fontSize="lg" fontWeight="bold">Lorem ipsum dolor sit amet?</Text>
           <Text fontSize="md" color="gray.700" lineHeight="1.8">
             Lorem ipsum dolor sit amet consectetur. Duis tempor commodo morbi auctor diam tristique risus ac. Faucibus dignissim consequat tincidunt facilisis posuere integer magna tristique. Urna aliquam convallis eu habitasse justo.
-          </Text>
+          </Text> */}
         </Box>
 
       </Flex>

@@ -1,37 +1,32 @@
-import React from "react";
-import { Box, Text, VStack, HStack, Image, Grid, Link} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Text, VStack, HStack, Image, Grid, Link, Spinner } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-
-
-const blogPosts = [
-  {
-    title: "Lorem ipsum dolor sit amet consectetur. Tellus ut feugiat vulputate",
-    time: "10 min read",
-    image: "/images/blog_main.png", // ✅ Replace with actual image
-  },
-  {
-    title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
-    time: "7 min read",
-    image: "/images/blog1.png", // ✅ Replace with actual image
-  },
-  {
-    title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
-    time: "7 min read",
-    image: "/images/blog2.png", // ✅ Replace with actual image
-  },
-  {
-    title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
-    time: "7 min read",
-    image: "/images/blog3.png", // ✅ Replace with actual image
-  },
-  {
-    title: "Lorem ipsum dolor sit amet consectetur Tellus ut feugiat vulputate",
-    time: "7 min read",
-    image: "/images/blog2.png", // ✅ Replace with actual image
-  },
-];
+import axios from "axios";
 
 const BlogSection = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/blogs/") // Replace with your actual backend API URL
+      .then((response) => {
+        setBlogs(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching blogs:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <Spinner size="xl" />;
+  }
+
+  if (blogs.length === 0) {
+    return <Text textAlign="center">No blog posts available.</Text>;
+  }
+
   return (
     <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }}>
       {/* Section Heading */}
@@ -39,43 +34,37 @@ const BlogSection = () => {
         Blog
       </Text>
 
-      <Grid 
-        templateColumns={{ base: "1fr", md: "2fr 3fr" }} 
-        gap={8} 
-        maxW="1200px" 
-        mx="auto"
-      >
-        {/* Left - Main Blog Post */}
-        <VStack align="start" spacing={4} w="100%">
-          <Text fontSize="lg" fontWeight="bold">
-            {blogPosts[0].title}
-          </Text>
-          <Text fontSize="sm" color="gray.600">{blogPosts[0].time}</Text>
-          <Link as={RouterLink} to="/blog-details">
+      <Grid templateColumns={{ base: "1fr", md: "2fr 3fr" }} gap={8} maxW="1200px" mx="auto">
+  {/* Left - Main Blog Post */}
+  <VStack align="start" spacing={4} w="100%">
+    <Text fontSize="lg" fontWeight="bold">{blogs[0]?.title}</Text>
+    <Text fontSize="sm" color="gray.600">{blogs[0]?.reading_time} min read</Text>
+    <Link as={RouterLink} to={`/blog-details/${blogs[0]?.id}`}>
+      <Text fontSize="md" fontWeight="bold">Read all →</Text>
+    </Link>
+    <Image src={blogs[0]?.image} alt="Blog Main" w="100%" borderRadius="lg" />
+  </VStack>
+
+  {/* Right - Blog List */}
+  <VStack align="start" spacing={4} w="100%">
+    {blogs.slice(1).map((post, index) => (
+      <HStack key={index} align="start" spacing={4} w="full">
+        <Box w="100px" h="80px" bg="gray.200" borderRadius="lg">
+          <Image src={post.image} alt="Blog Thumbnail" w="100%" h="100%" borderRadius="lg" objectFit="cover" />
+        </Box>
+        <VStack align="start" spacing={1} flex="1">
+          <Text fontSize="sm" fontWeight="bold">{post.title}</Text>
+          <Text fontSize="xs" color="gray.600">{post.reading_time} min read</Text>
+          <Link as={RouterLink} to={`/blog-details/${post.id}`}>
+          console.log(post.id);
             <Text fontSize="md" fontWeight="bold">Read all →</Text>
           </Link>
-          <Image src={blogPosts[0].image} alt="Blog Main" w="100%" borderRadius="lg" />
         </VStack>
+      </HStack>
+    ))}
+  </VStack>
+</Grid>
 
-        {/* Right - Blog List */}
-        <VStack align="start" spacing={4} w="100%">
-          {blogPosts.slice(1).map((post, index) => (
-            <HStack key={index} align="start" spacing={4} w="full">
-              <Box w="100px" h="80px" bg="gray.200" borderRadius="lg">
-                {/* Placeholder Image */}
-                <Image src={post.image} alt="Blog Thumbnail" w="100%" h="100%" borderRadius="lg" objectFit="cover" />
-              </Box>
-              <VStack align="start" spacing={1} flex="1">
-                <Text fontSize="sm" fontWeight="bold">{post.title}</Text>
-                <Text fontSize="xs" color="gray.600">{post.time}</Text>
-                <Link as={RouterLink} to="/blog-details">
-                  <Text fontSize="md" fontWeight="bold">Read all →</Text>
-                </Link>
-              </VStack>
-            </HStack>
-          ))}
-        </VStack>
-      </Grid>
     </Box>
   );
 };

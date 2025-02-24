@@ -67,36 +67,40 @@ const SchedulePopover = ({ isOpen, onClose }) => {
       fetchAvailableSlots();
     }
   }, [isOpen]);
-  const fetchAvailableSlots = async () => {
-    const handleSlotSelect = (slotId) => {
-      setSelectedSlotId(slotId);
-      console.log("Selected Slot ID:", slotId); // Debugging
-  };
-  
-    try {
-        setLoading(true);
-        const response = await axios.get("http://127.0.0.1:8000/api/available_slots/");
-        console.log("Raw API Response:", response.data); // Debug log
+  const handleSlotSelect = (slot, startTime) => {
+    setSelectedSlotId(slot.id);  // ✅ Now passing actual ID
+    setSelectedSlot(startTime);
+    console.log("Selected Slot ID:", slot.id);  
+    console.log("Selected Time:", startTime);
+};
 
-        // Transform API response into { "2025-02-22": ["01:15 AM", "11:30 PM"], ... }
-        const formattedSlots = {};
-        const datesData = response.data.dates || {}; // Extract 'dates' from response
 
-        Object.keys(datesData).forEach(date => {
-            formattedSlots[date] = datesData[date].map(slot => ({
+
+const fetchAvailableSlots = async () => {
+  try {
+      setLoading(true);
+      const response = await axios.get("http://127.0.0.1:8000/api/available_slots/");
+      console.log("Raw API Response:", response.data); // Debug log
+
+      const formattedSlots = {};
+      const datesData = response.data.dates || {};
+
+      Object.keys(datesData).forEach(date => {
+          formattedSlots[date] = datesData[date].map(slot => ({
+              id: slot.id,  // ✅ Store the actual slot ID
               start: slot.start_time,
               end: slot.end_time
-            })); // Extract start_time
-        });
+          }));
+      });
 
-        console.log("Formatted Available Slots:", formattedSlots); // Debug log
+      console.log("Formatted Available Slots:", formattedSlots); // Debug log
 
-        setAvailableSlots(formattedSlots);
-        setLoading(false);
-    } catch (error) {
-        console.error("Error fetching available slots:", error);
-        setLoading(false);
-    }
+      setAvailableSlots(formattedSlots);
+      setLoading(false);
+  } catch (error) {
+      console.error("Error fetching available slots:", error);
+      setLoading(false);
+  }
 };
 
 const convertToSelectedTimezone = (time, timezone) => {
@@ -222,27 +226,31 @@ const convertToSelectedTimezone = (time, timezone) => {
                 </HStack>
               </Flex>
 {/* Time Slots */}
-              {selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
-    <VStack align="stretch" spacing={6}>
-        <Box>
-            <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-                {availableSlots[selectedDate.fullDate]?.map((slot, index) => (
-                    <Button 
-                        key={index}
-                        variant="outline"
-                        borderRadius="lg"
-                        h="40px"
-                        _hover={{ bg: "gray.50" }}
-                        onClick={() => setSelectedSlot(slot.start)}
-                    >
-                      {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)}
-                        {/* {slot} */}
-                    </Button>
-                ))}
-            </Grid>
-        </Box>
-    </VStack>
+{selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
+  <VStack align="stretch" spacing={6}>
+    <Box>
+      <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+        {availableSlots[selectedDate.fullDate]?.map((slot, index) => {
+          const uniqueSlotId = `${selectedDate.fullDate}-${slot.start}-${slot.end}`; // Generate a unique ID
+
+          return (
+            <Button 
+              key={uniqueSlotId} // Use unique key
+              variant="outline"
+              borderRadius="lg"
+              h="40px"
+              _hover={{ bg: "gray.50" }}
+              onClick={() => handleSlotSelect(slot)}
+            >
+              {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)}
+            </Button>
+          );
+        })}
+      </Grid>
+    </Box>
+  </VStack>
 )}
+
 
 
 
@@ -259,7 +267,7 @@ const convertToSelectedTimezone = (time, timezone) => {
                   borderRadius="lg"
                   _hover={{ bg: "yellow.600" }}
                   size="lg"
-                  isDisabled={!selectedSlot} 
+                  isDisabled={!selectedSlotId} 
                   onClick={() => setIsQueryPopoverOpen(true)}
 
 
@@ -272,8 +280,12 @@ const convertToSelectedTimezone = (time, timezone) => {
         </ModalBody>
       </ModalContent>
       {isQueryPopoverOpen && (
-      <QueryPopover isOpen={isQueryPopoverOpen} onClose={() => setIsQueryPopoverOpen(false)} />
-    )}
+  <QueryPopover 
+  isOpen={isQueryPopoverOpen} 
+  onClose={() => setIsQueryPopoverOpen(false)} 
+  selectedSlotId={selectedSlotId}  // ✅ Now a number
+/>
+)}
     
     </Modal>
     
