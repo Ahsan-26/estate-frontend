@@ -7,9 +7,8 @@ import { FaArrowLeft, FaSun, FaMoon, FaGlobe } from "react-icons/fa";
 import TimezoneSelect from 'react-timezone-select';
 import WhatsapPop from "./WhatsapPop";
 import QueryPopover from "./QueryPopover";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { DateTime } from "luxon";
 
 
 const generateDates = (numDays = 7) => {
@@ -103,16 +102,16 @@ const fetchAvailableSlots = async () => {
   }
 };
 
-// const convertToSelectedTimezone = (time, timezone) => {
-//   try {
-//     // return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
-//       .setZone(timezone)
-//       .toFormat("hh:mm a");
-//   } catch (error) {
-//     console.error("Timezone conversion error:", error);
-//     return time;
-//   }
-// };
+const convertToSelectedTimezone = (time, timezone) => {
+  try {
+    return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
+      .setZone(timezone)
+      .toFormat("hh:mm a");
+  } catch (error) {
+    console.error("Timezone conversion error:", error);
+    return time;
+  }
+};
 
   const handleBackClick = () => {
     onClose();
@@ -182,7 +181,6 @@ const fetchAvailableSlots = async () => {
               {/* Date Selection */}
               {dates.map(date => {
     const isDisabled = !availableSlots[date.fullDate] || availableSlots[date.fullDate].length === 0;
-    console.log(`Date: ${date.fullDate}, Slots:`, availableSlots[date.fullDate]); // Debug log
     
     return (
         <Button
@@ -202,7 +200,7 @@ const fetchAvailableSlots = async () => {
             </VStack>
         </Button>
     );
-})}
+              })}
 
 
               {/* Timezone Selection */}
@@ -226,26 +224,29 @@ const fetchAvailableSlots = async () => {
                 </HStack>
               </Flex>
 {/* Time Slots */}
-              {selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
-    <VStack align="stretch" spacing={6}>
-        <Box>
-            <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-                {availableSlots[selectedDate.fullDate]?.map((slot, index) => (
-                    <Button 
-                        key={index}
-                        variant="outline"
-                        borderRadius="lg"
-                        h="40px"
-                        _hover={{ bg: "gray.50" }}
-                        onClick={() => setSelectedSlot(slot.start)}
-                    >
-                      {/* {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)} */}
-                        {/* {slot} */}
-                    </Button>
-                ))}
-            </Grid>
-        </Box>
-    </VStack>
+{selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
+  <VStack align="stretch" spacing={6}>
+    <Box>
+      <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+        {availableSlots[selectedDate.fullDate]?.map((slot, index) => {
+          const uniqueSlotId = `${selectedDate.fullDate}-${slot.start}-${slot.end}`; // Generate a unique ID
+
+          return (
+            <Button 
+              key={uniqueSlotId} // Use unique key
+              variant="outline"
+              borderRadius="lg"
+              h="40px"
+              _hover={{ bg: "gray.50" }}
+              onClick={() => handleSlotSelect(slot)}
+            >
+              {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)}
+            </Button>
+          );
+        })}
+      </Grid>
+    </Box>
+  </VStack>
 )}
 
 
