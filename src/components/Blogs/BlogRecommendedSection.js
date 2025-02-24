@@ -6,17 +6,17 @@ const recommendedPosts = [
   {
     title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate",
     description: "Lorem ipsum dolor sit amet consectetur nullam enim ut faucibus.",
-    image: "/images/recommended1.png", // ✅ Replace with actual image
+    image: "/images/recommended1.svg", // ✅ Replace with actual image
   },
   {
     title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate",
     description: "Lorem ipsum dolor sit amet consectetur nullam enim ut faucibus.",
-    image: "/images/recommended2.png", // ✅ Replace with actual image
+    image: "/images/recommended2.svg", // ✅ Replace with actual image
   },
   {
     title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate",
     description: "Lorem ipsum dolor sit amet consectetur nullam enim ut faucibus.",
-    image: "/images/recommended3.png", // ✅ Replace with actual image
+    image: "/images/recommended3.svg", // ✅ Replace with actual image
   },
 ];
 

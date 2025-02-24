@@ -5,22 +5,22 @@ const partnerBenefits = [
   {
     title: "Smart Dashboard",
     description: "Track deals & payments in one place",
-    image: "/images/smart_dashboard.png",
+    image: "/images/partner1.svg",
   },
   {
     title: "Instant Notifications",
     description: "Stay updated effortlessly",
-    image: "/images/instant_notif.png",
+    image: "/images/partner2.svg",
   },
   {
     title: "Exclusive Property Access",
     description: "Early insights on EstateOne listing",
-    image: "/images/exclusive_property.png",
+    image: "/images/partner3.svg",
   },
   {
     title: "Secure Transactions",
     description: "Trust and transparency at every step",
-    image: "/images/secure_trans.png",
+    image: "/images/partner4.svg",
   },
 ];
 
@@ -39,6 +39,7 @@ const PartnerWithUs = () => {
         mt={8} 
         maxW="1100px" 
         mx="auto"
+        
       >
         {partnerBenefits.map((benefit, index) => (
           <VStack 

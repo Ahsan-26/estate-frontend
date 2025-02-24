@@ -16,10 +16,10 @@ const ContactHelp = () => {
         mx="auto"
       >
         {/* Icon */}
-        <Image src="/images/home_icon.png" alt="Support Icon" boxSize="60px" mx="auto" mb={3} />
+        <Image src="/images/home_icon.svg" alt="Support Icon" boxSize="65px" mx="auto" mb={3} />
 
         {/* Text */}
-        <Text fontSize="md" color="gray.700" maxW="700px" mx="auto">
+        <Text fontSize="md" color="gray.700" maxW="700px" mx="auto" fontWeight="medium">
           At EstateOne, we’re committed to making your real estate journey smooth, secure, 
           and stress-free. Whatever the issue, we’re here to help—every step of the way.
         </Text>
@@ -32,15 +32,19 @@ const ContactHelp = () => {
             color="white" 
             _hover={{ bg: "yellow.600" }}
             size="md"
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
             onClick={() => setIsModalOpen(true)} // Open Modal
           >
             Pick a suitable time
           </Button>
           <Button 
+           _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
             leftIcon={<FaWhatsapp />} 
-            bg="green.500" 
-            color="white" 
-            _hover={{ bg: "green.600" }}
+            colorScheme="#1EBE5D" bg="#25D366" 
+            // color="white" 
+            _hover={{ bg: "green.500" }}
             size="md"
             onClick={() => window.open("https://wa.me/919548056061", "_blank")} // Open WhatsApp
           >

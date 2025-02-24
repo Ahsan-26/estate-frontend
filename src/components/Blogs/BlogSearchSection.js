@@ -6,14 +6,14 @@ import {
 import { FaSearch } from "react-icons/fa";
 
 const blogPosts = [
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog2.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog3.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog2.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog3.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog2.png" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search1.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search2.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search3.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search4.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search5.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search6.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/search7.svg" },
+  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.svg" },
 ];
 
 const BlogSearchSection = () => {
@@ -57,7 +57,7 @@ const BlogSearchSection = () => {
       </Text>
 
       <Grid 
-        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} 
+        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(2, 1fr)" }} 
         gap={6} 
         maxW="1200px" 
         mx="auto"

@@ -9,7 +9,7 @@ import WhatsapPop from "./WhatsapPop";
 import QueryPopover from "./QueryPopover";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { DateTime } from "luxon";
+
 
 
 const generateDates = (numDays = 7) => {
@@ -103,16 +103,16 @@ const fetchAvailableSlots = async () => {
   }
 };
 
-const convertToSelectedTimezone = (time, timezone) => {
-  try {
-    return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
-      .setZone(timezone)
-      .toFormat("hh:mm a");
-  } catch (error) {
-    console.error("Timezone conversion error:", error);
-    return time;
-  }
-};
+// const convertToSelectedTimezone = (time, timezone) => {
+//   try {
+//     // return DateTime.fromFormat(time, "hh:mm a", { zone: "Asia/Kolkata" })  // Assuming backend sends in IST
+//       .setZone(timezone)
+//       .toFormat("hh:mm a");
+//   } catch (error) {
+//     console.error("Timezone conversion error:", error);
+//     return time;
+//   }
+// };
 
   const handleBackClick = () => {
     onClose();
@@ -156,7 +156,7 @@ const convertToSelectedTimezone = (time, timezone) => {
   
   <VStack align="start" spacing={2} mt={3}>
     <HStack>
-      <Image src="/images/imagePopover.png" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
+      <Image src="/images/contact_agent.svg" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
       <Text fontSize={{ base: "14px", md: "15px" }} fontWeight="bold">Talk to an Advisor</Text>
     </HStack>
     <Text fontSize={{ base: "xs", md: "sm" }} color="gray.600" fontWeight="medium">
@@ -167,7 +167,7 @@ const convertToSelectedTimezone = (time, timezone) => {
   {/* Positioned Logo at the Bottom Left */}
   <Flex justify="center" mt={4}>
     <Image 
-      src="/images/logo.png" 
+      src="/images/logo.svg" 
       alt="Contact Agent" 
       w={{ base: "80px", md: "100px" }} 
     />
@@ -226,29 +226,26 @@ const convertToSelectedTimezone = (time, timezone) => {
                 </HStack>
               </Flex>
 {/* Time Slots */}
-{selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
-  <VStack align="stretch" spacing={6}>
-    <Box>
-      <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-        {availableSlots[selectedDate.fullDate]?.map((slot, index) => {
-          const uniqueSlotId = `${selectedDate.fullDate}-${slot.start}-${slot.end}`; // Generate a unique ID
-
-          return (
-            <Button 
-              key={uniqueSlotId} // Use unique key
-              variant="outline"
-              borderRadius="lg"
-              h="40px"
-              _hover={{ bg: "gray.50" }}
-              onClick={() => handleSlotSelect(slot)}
-            >
-              {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)}
-            </Button>
-          );
-        })}
-      </Grid>
-    </Box>
-  </VStack>
+              {selectedDate && availableSlots[selectedDate.fullDate]?.length > 0 && (
+    <VStack align="stretch" spacing={6}>
+        <Box>
+            <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+                {availableSlots[selectedDate.fullDate]?.map((slot, index) => (
+                    <Button 
+                        key={index}
+                        variant="outline"
+                        borderRadius="lg"
+                        h="40px"
+                        _hover={{ bg: "gray.50" }}
+                        onClick={() => setSelectedSlot(slot.start)}
+                    >
+                      {/* {convertToSelectedTimezone(slot.start, selectedTimezone)} - {convertToSelectedTimezone(slot.end, selectedTimezone)} */}
+                        {/* {slot} */}
+                    </Button>
+                ))}
+            </Grid>
+        </Box>
+    </VStack>
 )}
 
 

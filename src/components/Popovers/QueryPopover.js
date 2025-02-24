@@ -143,14 +143,15 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
 
           {/* Confirm Button */}
           <Flex justifyContent="center" mt={4}>
-            <Button 
-              color="white" 
-              bg="yellow.500" 
-              px={8} 
-              _hover={{ bg: "yellow.600" }}
-              isLoading={loading}
-              onClick={handleConfirm} 
-  isDisabled={!name || !email || !phone || !query || !selectedSlotId || !selectedOption} // Ensure all fields are filled
+            <Button  color="white" bg="yellow.500" px={8} _hover={{ bg: "yellow.600" }}
+             _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
+           onClick={() => {
+            onClose(); // Close SchedulePopover
+            setTimeout(() => {
+              //setIsConfirmationOpen(true); // ✅ Show confirmation dialog after slight delay
+            }, 300); // Delay ensures smooth transition
+          }}
             >
               Confirm →
             </Button>
