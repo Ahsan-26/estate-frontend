@@ -44,19 +44,19 @@ const Footer = () => {
           
           {/* Social Media Links with Custom Images */}
           <HStack spacing={4} mt={2}>
-            <Link href="https://www.youtube.com" target="_blank">
+            <Link href="http://www.youtube.com/@estateone_india" target="_blank">
               <Image src="images/youtube.svg" alt="YouTube" width="40px" />
             </Link>
             {/* <Link href="https://twitter.com" target="_blank">
               <Image src="https://upload.wikimedia.org/wikipedia/commons/6/60/X_logo_2023_original.pmg" alt="Twitter X" width="30px" />
             </Link> */}
-            <Link href="https://in.linkedin.com" target="_blank">
+            <Link href="https://www.linkedin.com/company/estateone/" target="_blank">
               <Image src="images/linkedin.svg" alt="LinkedIn" width="35px" />
             </Link>
-            <Link href="https://www.instagram.com" target="_blank">
+            <Link href="https://www.instagram.com/estateone.in?igsh=MXNrdHd0b3J0aHkwZA==" target="_blank">
               <Image src="images/instagram.svg" alt="Instagram" width="30px" />
             </Link>
-            <Link href="https://www.facebook.com" target="_blank">
+            <Link href="https://www.facebook.com/profile.php?id=61569533714774" target="_blank">
               <Image src="images/facebook.svg" alt="Facebook" width="30px" />
             </Link>
           </HStack>
