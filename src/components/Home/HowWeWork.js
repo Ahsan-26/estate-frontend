@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { Box, Text, VStack, HStack, Button, List, ListItem, Icon, Grid } from "@chakra-ui/react";
 import { FaChevronDown, FaCalendarAlt, } from "react-icons/fa";
-import { motion } from "framer-motion"; // Import framer-motion for animations
+import { motion } from "framer-motion";
+import { PrimaryButton } from "../Buttons";
+
 
 const MotionButton = motion(Button); // Create an animated button
 
@@ -145,20 +147,14 @@ const HowWeWork = () => {
             )}
 
             {/* Call to Action Button */}
-            <Button 
-            bg={section.color} 
-            color="white" 
-            // _hover={{ bg: "yellow.600" }} 
-            _hover={{ 
-              bg: "yellow.600", 
-              transform: "scale(1.1) translateY(-1px)", // ✅ Bounce effect
-              transition: "transform 0.2s ease-in-out" 
-            }}
-            leftIcon={<FaCalendarAlt />} 
-            width="full" mt={4}>
-              
-            {section.ctaText}
-            </Button>
+            <PrimaryButton 
+              text={section.ctaText}
+              to={section.ctaLink} 
+              isPopover={true} // ✅ Set to false to use navigation
+              leftIcon={<FaCalendarAlt />} 
+              width="full"
+              mt={4}
+            />
           </VStack>
         ))}
       </Grid>

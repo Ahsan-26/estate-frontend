@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text, VStack, HStack, Grid, Link, Image, Icon } from "@chakra-ui/react";
-import { FaEnvelope, FaWhatsapp, FaCheck } from "react-icons/fa"; // ✅ WhatsApp & Email Icons Restored
+import { FaWhatsapp, FaCheck } from "react-icons/fa"; // ✅ WhatsApp & Email Icons Restored
 import { AtSignIcon } from '@chakra-ui/icons';
 
 const PartnerFinalSection = () => {
