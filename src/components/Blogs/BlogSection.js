@@ -8,7 +8,7 @@ const BlogSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/blogs/") // Replace with your actual backend API URL
+    axios.get("http://127.0.0.1:8000/api/blogs/")
       .then((response) => {
         setBlogs(response.data);
         setLoading(false);
@@ -56,7 +56,6 @@ const BlogSection = () => {
           <Text fontSize="sm" fontWeight="bold">{post.title}</Text>
           <Text fontSize="xs" color="gray.600">{post.reading_time} min read</Text>
           <Link as={RouterLink} to={`/blog-details/${post.id}`}>
-          console.log(post.id);
             <Text fontSize="md" fontWeight="bold">Read all →</Text>
           </Link>
         </VStack>
