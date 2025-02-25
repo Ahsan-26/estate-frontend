@@ -29,19 +29,6 @@ const generateDates = (numDays = 7) => {
 };
 
 
-const generateTimeSlots = (startHour = 12, endHour = 20, interval = 30) => {
-  let slots = [];
-  for (let hour = startHour; hour < endHour; hour++) {
-    for (let minutes = 0; minutes < 60; minutes += interval) {
-      const time = new Date();
-      time.setHours(hour);
-      time.setMinutes(minutes);
-      slots.push(time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }));
-    }
-  }
-  return slots;
-};
-
 const SchedulePopover = ({ isOpen, onClose }) => {
   
   const [isQueryPopoverOpen, setIsQueryPopoverOpen] = useState(false);
@@ -71,6 +58,20 @@ const SchedulePopover = ({ isOpen, onClose }) => {
     setSelectedSlot(startTime);
     console.log("Selected Slot ID:", slot.id);  
     console.log("Selected Time:", startTime);
+};
+const [isSchedulePopoverOpen, setIsSchedulePopoverOpen] = useState(true);
+const onScheduleClose = () => setIsSchedulePopoverOpen(false);
+const handleCloseSchedulePopover = () => {
+  console.log("Closing Schedule Popover");
+  onScheduleClose();  // This should ideally close the SchedulePopover and update its state
+  setTimeout(() => {  // Using setTimeout to delay the opening of QueryPopover ensures that state updates have been processed
+    console.log("Opening Query Popover");
+    setIsQueryPopoverOpen(true);
+  }, 100);  // Small delay
+};
+
+const handleOpenQueryPopover = () => {
+  setIsQueryPopoverOpen(true); // This will open the QueryPopover
 };
 
 
@@ -249,29 +250,27 @@ const convertToSelectedTimezone = (time, timezone) => {
   </VStack>
 )}
 
-
-
-
               {/* Footer */}
               <Box mt={8}>
                 <Divider mb={4} />
                 <Text fontSize="sm" color="gray.500" mb={4}>
                   A consultation with an EstateOne advisor generally takes 30 minutes.
                 </Text>
-                <Button 
-                  bg="yellow.500"
-                  color="white"
-                  w="full"
-                  borderRadius="lg"
-                  _hover={{ bg: "yellow.600" }}
-                  size="lg"
-                  isDisabled={!selectedSlotId} 
-                  onClick={() => setIsQueryPopoverOpen(true)}
+              <Button 
+                bg="yellow.500"
+                color="white"
+                w="full"
+                borderRadius="lg"
+                _hover={{ bg: "yellow.600" }}
+                size="lg"
+                isDisabled={!selectedSlotId} 
+                onClick={() => {
+                  handleCloseSchedulePopover(); 
+                }}
+              >
+                Confirm schedule →
+              </Button>
 
-
-                >
-                  Confirm schedule →
-                </Button>
               </Box>
             </Box>
           </Flex>
@@ -281,7 +280,7 @@ const convertToSelectedTimezone = (time, timezone) => {
   <QueryPopover 
   isOpen={isQueryPopoverOpen} 
   onClose={() => setIsQueryPopoverOpen(false)} 
-  selectedSlotId={selectedSlotId}  // ✅ Now a number
+  selectedSlotId={selectedSlotId}
 />
 )}
     

@@ -24,7 +24,7 @@ import { motion } from "framer-motion";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
-
+import {useNavigate} from "react-router-dom";
 export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
@@ -35,7 +35,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
   const [location, setLocation] = useState("Gurgaon");
   const [customLocation, setCustomLocation] = useState(""); // ✅ Custom location field
   const toast = useToast();
-
+  const navigate = useNavigate();
   const modalSize = useBreakpointValue({ base: "full", sm: "md", md: "lg" });
 
   const handleConfirm = async () => {
@@ -82,6 +82,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
         isClosable: true,
       });
     } finally {
+      navigate("/");
       setLoading(false);
     }
   };
@@ -180,6 +181,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
               _hover={{ bg: "yellow.600" }}
               isLoading={loading}
               onClick={handleConfirm} 
+
               isDisabled={!name || !email || !phone || !query || !selectedSlotId || !selectedOption || (location === "other" && !customLocation)} 
             >
               Confirm →

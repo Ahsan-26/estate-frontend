@@ -92,7 +92,7 @@ const Header = () => {
           <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
           <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
           <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>Partner with Us</ChakraLink>
         </Flex>
 
         {/* ✅ Buttons - Contact Us & Hotline */}
@@ -171,7 +171,7 @@ const Header = () => {
             <ChakraLink as={Link} to="/blog" onClick={onClose} _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
             <ChakraLink as={Link} to="/faqs" onClick={onClose} _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
             <ChakraLink as={Link} to="/career" onClick={onClose} _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-            <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>Partner with us</ChakraLink>
+            <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>Partner with Us</ChakraLink>
           </VStack>
         </Box>
       )}

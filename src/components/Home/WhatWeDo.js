@@ -37,18 +37,18 @@ const WhatWeDo = () => {
         we make real estate simple, stress-free, and truly yours.
       </Text>
 
-          {/* Buttons (Stack on mobile) */}
-          <Stack 
-            direction={{ base: "column", sm: "row" }} 
-            spacing={4} 
-            mt={4} 
-            w="full" 
-            align={{ base: "center", md: "start" }}
-            justify= "center"
-          >
-            <PrimaryButton text="Book a free call" isPopover={true} />
-            <SecondaryButton text="WhatsApp us" to="/whatsapp" />
-          </Stack>
+      {/* Buttons (Stack on mobile) */}
+      <Stack 
+        direction={{ base: "column", sm: "row" }} 
+        spacing={4} 
+        mt={4} 
+        w="full" 
+        align={{ base: "center", md: "start" }}
+        justify="center"
+      >
+        <PrimaryButton text="Book a free call" isPopover={true} />
+        <SecondaryButton text="WhatsApp us" to="/whatsapp" />
+      </Stack>
 
       {/* Service Cards */}
       <Grid 
@@ -59,22 +59,32 @@ const WhatWeDo = () => {
         mx="auto"
       >
         {services.map((service, index) => (
-          <VStack key={index} sx={styles.card}>
-            <Image src={service.icon} alt={service.title} boxSize="60px" />
-            <Text fontSize="lg" fontWeight="bold" textAlign="center">{service.title}</Text>
+          <Box key={index} sx={styles.card}>
+            {/* Icon inside a slightly rounded background */}
+            <Box sx={styles.iconWrapper}>
+              <Image src={service.icon} alt={service.title} boxSize="40px" />
+            </Box>
+
+            {/* Button below the icon */}
             <Button 
               bg="yellow.100" 
               color="yellow.700" 
               fontSize="sm"
               fontWeight="bold"
-              borderRadius="full"
-              px={6} 
-              py={2}
+              borderRadius="full" 
+              px={4} 
+              py={1}
               _hover={{ bg: "yellow.200" }}
             >
               {service.buttonText}
             </Button>
-          </VStack>
+
+            {/* Content */}
+            <VStack spacing={2} align="start">
+              <Text fontSize="lg" fontWeight="bold">{service.title}</Text>
+              <Text fontSize="sm" color="gray.600">{service.description}</Text>
+            </VStack>
+          </Box>
         ))}
       </Grid>
     </Box>
@@ -83,9 +93,24 @@ const WhatWeDo = () => {
 
 // Service Cards Data
 const services = [
-  { title: "Discover Tailored Property Solutions for You", icon: "/images/buy_icon.svg", buttonText: "BUY" },
-  { title: "Let Us Manage Your Property, Maximize Your Returns", icon: "/images/manage_icon.svg", buttonText: "MANAGE" },
-  { title: "Sell Your Property with Confidence and Ease", icon: "/images/sale_icon.svg", buttonText: "SELL" }
+  { 
+    title: "Discover Tailored Property Solutions for You", 
+    icon: "/images/buy_icon.svg", 
+    buttonText: "BUY",
+    description: "Whether you're seeking your dream home, investment property, or commercial space, our experts provide personalized guidance to help you make an informed decision."
+  },
+  { 
+    title: "Let Us Manage Your Property, Maximize Your Returns", 
+    icon: "/images/manage_icon.svg", 
+    buttonText: "MANAGE",
+    description: "We take care of everything—from finding tenants and managing rent to handling finances and ensuring compliance. Let us make your property profitable and stress-free."
+  },
+  { 
+    title: "Sell Your Property with Confidence", 
+    icon: "/images/sale_icon.svg", 
+    buttonText: "SELL",
+    description: "Get the right value for your property with our transparent, end-to-end selling services. We provide honest evaluations and connect you with genuine buyers."
+  }
 ];
 
 // Card Styles
@@ -95,8 +120,7 @@ const styles = {
     borderRadius: "12px",
     boxShadow: "md",
     p: 6,
-    align: "center",
-    textAlign: "center",
+    textAlign: "left",
     spacing: 4,
     width: "100%",
     transition: "all 0.3s ease",
@@ -104,7 +128,22 @@ const styles = {
       transform: "translateY(-5px)",
       boxShadow: "lg",
     },
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 4,
   },
+  iconWrapper: {
+    bg: "white",
+    boxShadow: "md",
+    borderRadius: "lg",
+    padding: 3,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "60px",
+    height: "60px",
+  }
 };
 
 export default WhatWeDo;
