@@ -17,7 +17,7 @@ import SchedulePopover from "./SchedulePopover"; // ✅ Import SchedulePopover
 
 export default function PropertyAdvicePopover({ isOpen, onClose }) {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false); // ✅ State for Schedule Popover
-const whatsappUrl = "https://wa.me/919548056061";
+const whatsappUrl = "https://wa.me/918368626797";
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "lg" }} isCentered>
