@@ -30,7 +30,11 @@ const ContactHelp = () => {
             leftIcon={<FaCalendarAlt />} 
             bg="yellow.500" 
             color="white" 
-            _hover={{ bg: "yellow.600" }}
+            _hover={{ 
+              bg: "yellow.600", 
+              transform: "scale(1.1) translateY(-1px)", // ✅ Bounce effect
+              transition: "transform 0.2s ease-in-out" 
+            }}
             size="md"
              _active={{ transform: "scale(1.1)" }} 
         transition="transform 0.1s ease-in-out"
@@ -44,7 +48,11 @@ const ContactHelp = () => {
             leftIcon={<FaWhatsapp />} 
             colorScheme="#1EBE5D" bg="#25D366" 
             // color="white" 
-            _hover={{ bg: "green.500" }}
+            _hover={{ 
+              bg: "yellow.600", 
+              transform: "scale(1.1) translateY(-1px)", // ✅ Bounce effect
+              transition: "transform 0.2s ease-in-out" 
+            }}
             size="md"
             onClick={() => window.open("https://wa.me/919548056061", "_blank")} // Open WhatsApp
           >
