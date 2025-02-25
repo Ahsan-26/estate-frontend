@@ -142,39 +142,68 @@ const Header = () => {
 
       {/* ✅ Mobile Menu Drawer */}
       {isOpen && (
-        <Box 
-          position="absolute" 
-          top="100%" 
-          left="0" 
-          right="0" 
-          bg="white" 
-          boxShadow="md" 
-          py={4} 
-          px={6} 
-          display={{ base: "block", md: "none" }} 
-        >
-          <VStack spacing={4} align="start">
-            <ChakraLink as={Link} to="/" onClick={onClose} _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
+  <Box 
+    position="absolute" 
+    top="100%" 
+    left="0" 
+    right="0" 
+    bg="white" 
+    boxShadow="md" 
+    py={4} 
+    px={6} 
+    display={{ base: "block", md: "none" }} 
+  >
+    <VStack spacing={4} align="start">
+      <ChakraLink as={Link} to="/" onClick={onClose} _hover={{ textDecoration: "underline" }}>Home</ChakraLink>
 
-            {/* ✅ Mobile Services Dropdown */}
-            <Menu>
-              <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" fontWeight="bold">
-                Our Services
-              </MenuButton>
-              <MenuList>
-                <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Buy</MenuItem>
-                <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Manage</MenuItem>
-                <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Sell</MenuItem>
-              </MenuList>
-            </Menu>
+      {/* ✅ Mobile Services Dropdown */}
+      <Menu>
+        <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" fontWeight="bold">
+          Our Services
+        </MenuButton>
+        <MenuList>
+          <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Buy</MenuItem>
+          <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Manage</MenuItem>
+          <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Sell</MenuItem>
+        </MenuList>
+      </Menu>
 
-            <ChakraLink as={Link} to="/blog" onClick={onClose} _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
-            <ChakraLink as={Link} to="/faqs" onClick={onClose} _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
-            <ChakraLink as={Link} to="/career" onClick={onClose} _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
-            <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>Partner with Us</ChakraLink>
-          </VStack>
-        </Box>
-      )}
+      <ChakraLink as={Link} to="/blog" onClick={onClose} _hover={{ textDecoration: "underline" }}>Blog</ChakraLink>
+      <ChakraLink as={Link} to="/faqs" onClick={onClose} _hover={{ textDecoration: "underline" }}>FAQs</ChakraLink>
+      <ChakraLink as={Link} to="/career" onClick={onClose} _hover={{ textDecoration: "underline" }}>Career</ChakraLink>
+      <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>Partner with Us</ChakraLink>
+
+      {/* ✅ Buttons added inside mobile menu */}
+      <Button 
+        as={Link} to="/contact"
+        bg="yellow.500" 
+        color="white" 
+        fontWeight="bold" 
+        fontSize="md"
+        w="100%"
+        _hover={{ bg: "yellow.600" }}
+      >
+        Contact Us
+      </Button>
+      <Button
+        bg="yellow.100"
+        color="yellow.600"
+        fontWeight="bold"
+        fontSize="md"
+        leftIcon={<FaPhoneAlt />}
+        w="100%"
+        _hover={{ bg: "yellow.200" }}
+        onClick={(e) => {
+          e.preventDefault();
+          setIsPopoverOpen(true);
+        }}
+      >
+        Hotline
+      </Button>
+    </VStack>
+  </Box>
+)}
+
 
       {/* ✅ Property Advice Popover */}
       <PropertyAdvicePopover isOpen={isPopoverOpen} onClose={() => setIsPopoverOpen(false)} />
