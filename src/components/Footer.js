@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Flex, Text, Link, VStack, HStack, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+// import PrivacyPolicy from "./Legal/PrivacyPolicy";
 
 const Footer = () => {
   return (
@@ -32,8 +33,8 @@ const Footer = () => {
         {/* Legal */}
         <VStack align="flex-start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">Legal</Text>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Privacy Policy</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Terms & Conditions</Link>
+          <Link as={RouterLink} to="/privacy" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Privacy Policy</Link>
+          <Link as={RouterLink} to="/terms"fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Terms & Conditions</Link>
         </VStack>
 
         {/* Support */}
