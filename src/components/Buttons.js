@@ -44,7 +44,7 @@ export const PrimaryButton = ({ text, to, isPopover, ...props }) => {
 
 // ✅ Secondary Button (Used for "WhatsApp us")
 export const SecondaryButton = ({ text }) => {
-  const whatsappUrl = "https://wa.me/919548056061";
+  const whatsappUrl = "https://wa.me/918368626797";
 
   return (
     <Button 
