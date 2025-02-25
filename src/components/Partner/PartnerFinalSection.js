@@ -94,7 +94,7 @@ const PartnerFinalSection = () => {
             </HStack>
             <HStack spacing={3}>
               <Icon as={FaWhatsapp} color="green.500" boxSize="18px" />
-              <Link href="https://wa.me/919548056061" fontSize="sm" color="gray.700">WhatsApp Us</Link>
+              <Link href="https://wa.me/918368626797" fontSize="sm" color="gray.700">WhatsApp Us</Link>
             </HStack>
           </VStack>
         </VStack>

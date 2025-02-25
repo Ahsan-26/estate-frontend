@@ -54,7 +54,7 @@ const ContactHelp = () => {
               transition: "transform 0.2s ease-in-out" 
             }}
             size="md"
-            onClick={() => window.open("https://wa.me/919548056061", "_blank")} // Open WhatsApp
+            onClick={() => window.open("https://wa.me/918368626797", "_blank")} // Open WhatsApp
           >
             WhatsApp Us
           </Button>
