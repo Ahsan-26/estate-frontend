@@ -88,7 +88,8 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
       setLoading(false);
     }
   };
-
+  const modalWidth = useBreakpointValue({ base: "95%", sm: "80%", md: "700px", lg: "900px" });
+  const modalHeight = useBreakpointValue({ base: "full", md: "520px" });
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={modalSize} isCentered>
       <ModalOverlay />
@@ -100,7 +101,9 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
         p={6}
         borderRadius="lg"
         boxShadow="xl"
-        maxW={{ base: "95%", md: "600px" }}
+        maxW={modalWidth}  // Responsive width
+        maxH={modalHeight} // Responsive height
+        overflowY="auto"
       >
         <ModalHeader fontSize={{ base: "lg", md: "xl" }} fontWeight="bold">
           Let us know your query?
@@ -109,12 +112,54 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
         <ModalBody>
           {/* Radio Selection */}
           <RadioGroup onChange={setSelectedOption} value={selectedOption}>
-            <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-              <Radio value="buy">Buy</Radio>
-              <Radio value="sell">Sell</Radio>
-              <Radio value="manage">Manage</Radio>
-            </Stack>
-          </RadioGroup>
+  <Stack 
+    direction={{ base: "column", md: "row" }} // Stack vertically on small screens
+    spacing={2} 
+    flexWrap="wrap" 
+    justifyContent="start"
+  >
+    {["buy", "sell", "manage"].map((option) => (
+      <Box
+        key={option}
+        as="label"
+        border="1px solid"
+        borderColor={selectedOption === option ? "#40c051" : "gray.300"}
+        borderRadius="lg"
+        px={4}
+        py={2}
+        cursor="pointer"
+        display="flex"
+        alignItems="center"
+        gap={2}
+        w={{ base: "100%", md: "auto" }} // Full width on small screens
+        transition="all 0.3s ease"
+        bg="white"
+        _hover={{ borderColor: "#40c051" }}
+      >
+        <Radio value={option} display="none" />
+        <Box
+          w="14px"
+          h="14px"
+          borderRadius="full"
+          border="2px solid"
+          borderColor={selectedOption === option ? "#40c051" : "gray.300"}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {selectedOption === option && (
+            <Box w="8px" h="8px" borderRadius="full" bg="#40c051" />
+          )}
+        </Box>
+        <Text fontSize="sm" fontWeight="medium" color="gray.700">
+          {option.charAt(0).toUpperCase() + option.slice(1)} Property
+        </Text>
+      </Box>
+    ))}
+  </Stack>
+</RadioGroup>
+
+
 
           {/* Name and Phone Fields */}
           <Flex flexDirection={{ base: "column", md: "row" }} flexWrap="wrap" gap={4} mb={3}>
@@ -134,7 +179,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
           </Flex>
 
           {/* Email Field */}
-          <Box mb={3}>
+          <Box mb={1}>
             <Text mb={1} fontWeight="bold">Your Email*</Text>
             <Input 
               placeholder="Enter your email" 
@@ -144,7 +189,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
           </Box>
 
           {/* Location Dropdown */}
-          <Box mb={3}>
+          <Box mb={1}>
             <Text mb={1} fontWeight="bold">Location*</Text>
             <Select value={location} onChange={(e) => setLocation(e.target.value)}>
               <option value="Gurgaon">Gurgaon</option>
@@ -154,7 +199,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
 
           {/* Custom Location Input (Only if "Other" is selected) */}
           {location === "other" && (
-            <Box mb={3}>
+            <Box mb={1}>
               <Text mb={1} fontWeight="bold">Enter Location*</Text>
               <Input 
                 placeholder="Type your location" 
@@ -163,9 +208,9 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
               />
             </Box>
           )}
-
+          
           {/* Query Textarea */}
-          <Box mb={3}>
+          <Box mb={1}>
             <Text mb={1} fontWeight="bold">Tell us your query*</Text>
             <Textarea 
               placeholder="Write your query" 
@@ -173,20 +218,34 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
               onChange={(e) => setQuery(e.target.value)} 
             />
           </Box>
+            {/* Info Textarea */}
+             <Box mb={1}>
+            <Text mb={1} fontWeight="bold">How did you get to know about EsateOne*</Text>
+            <Textarea 
+              size="sm" 
+              h="50px" 
+              minH="30px"
+              resize="none"
+              rows={1}
+            />
+          </Box>
+
 
           {/* Confirm Button */}
-          <Flex justifyContent="center" mt={4}>
+          <Flex justifyContent="center" mt={3}>
             <Button 
-              color="white" 
-              bg="yellow.500" 
+              color="white"
+              width="200px" 
+              bg="#40c051" 
               px={8} 
               _hover={{ bg: "yellow.600" }}
               isLoading={loading}
               onClick={handleConfirm} 
+              borderRadius="full"
 
               isDisabled={!name || !email || !phone || !query || !selectedSlotId || !selectedOption || (location === "other" && !customLocation)} 
             >
-              Confirm →
+              Next →
             </Button>
           </Flex>
         </ModalBody>
