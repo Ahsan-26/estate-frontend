@@ -12,6 +12,9 @@ import BlogDetails from "./components/Blogs/BlogDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import FAQs from "./components/Faqs";
 import HowWeWork from "./components/Home/HowWeWork";
+import PrivacyPolicy from "./components/Legal/PrivacyPolicy";
+import Terms from "./components/Legal/Terms";
+
 
 const App = () => {
   return (
@@ -28,6 +31,8 @@ const App = () => {
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog-details/:id" element={<BlogDetails />} />
         <Route path="/faqs" element={<FAQs/>} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
       <Footer/>
     </Router>

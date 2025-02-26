@@ -1,16 +1,10 @@
 import React from "react";
 import { Box, Text, Image, VStack, Flex, Stack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay} from "swiper/modules"; // ✅ Using EffectFade for smooth transition
+import { Autoplay } from "swiper/modules"; 
 import "swiper/css";
-import "swiper/css/effect-fade"; // ✅ Import fade effect
-import { PrimaryButton, SecondaryButton } from "../Buttons";
 
-const images = [
-  "/images/hero_image1.png",
-  "/images/hero_image2.png",
-  "/images/hero_image3.png",
-];
+import { PrimaryButton, SecondaryButton } from "../Buttons";
 
 const HeroSection = () => {
   return (
@@ -64,49 +58,47 @@ const HeroSection = () => {
           </Stack>
 
           {/* Google Rating & Trust Statement */}
-          <VStack mt={6} spacing={2} align="start">  
-          <Image src="/images/google_rating.svg" alt="Google Rating" w={{ base: "90px", md: "120px", lg: "140px" }} />
+          <VStack mt={6} spacing={1} align="start">  
+            <Image src="/images/google_rating.svg" alt="Google Rating" w={{ base: "90px", md: "120px", lg: "140px" }} />
             <Text fontSize="sm" fontWeight="bold" textAlign="center">
               Trusted by <Text as="span" color="yellow.500">thousands of happy clients</Text>
             </Text>
             <Text fontSize="sm" color="gray.600" textAlign="center">
               for expert guidance and genuine advice.
             </Text>
-            </VStack>
+          </VStack>
         </VStack>
 
-        {/* Right Section - Image Slider with Smooth Zoom + Fade Animation */}
+        {/* Right Section - Single Image with Smooth Animation */}
         <Box 
           w={{ base: "90%", md: "45%", lg: "40%" }} 
           maxW="500px"
           flexGrow={1}
         >
-       <Swiper 
-  modules={[Autoplay]} 
-  spaceBetween={30} 
-  slidesPerView={1} 
-  autoplay={{ delay: 4000, disableOnInteraction: false }}
-  speed={2500} // ✅ Slower for a gentle effect
-  style={{ width: "100%", borderRadius: "10px" }}
->
-  {images.map((image, index) => (
-    <SwiperSlide key={index} style={{ opacity: 0, transition: "opacity 2s ease-in-out" }}>
-      <Image 
-        src={image} 
-        alt={`Hero ${index + 1}`} 
-        w="100%" 
-        maxH={{ base: "430px", md: "auto" }} 
-        objectFit="cover" 
-        borderRadius="10px"
-        onLoad={(e) => e.target.parentNode.style.opacity = 1} // ✅ Ensures smooth fade-in
-      />
-    </SwiperSlide>
-  ))}
-</Swiper>
-
-
-
-      
+          <Swiper 
+            modules={[Autoplay]} 
+            spaceBetween={0} 
+            slidesPerView={1} 
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            speed={2000} // ✅ Smooth animation speed
+            style={{ width: "100%", borderRadius: "10px" }}
+          >
+            <SwiperSlide>
+              <Image 
+                src="/images/hero_image1.png" 
+                alt="Hero Image"
+                w="100%" 
+                maxH={{ base: "460px", md: "auto" }} 
+                objectFit="cover" 
+                borderRadius="10px"
+                style={{
+                  opacity: 0,
+                  transition: "opacity 2s ease-in-out",
+                }}
+                onLoad={(e) => (e.target.style.opacity = 1)} // ✅ Smooth fade-in
+              />
+            </SwiperSlide>
+          </Swiper>
         </Box>
       </Flex>
     </Box>

@@ -132,8 +132,7 @@ const FAQs = () => {
       {!showAll && (
         <Button
           mt={6}
-         bg="yellow.500"
-  color="white"
+         bg="#F3F3F3"
           size="lg"
           borderRadius="full"
           px={6}

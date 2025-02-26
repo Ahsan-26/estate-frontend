@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Flex, Text, Link, VStack, HStack, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+// import PrivacyPolicy from "./Legal/PrivacyPolicy";
 
 const Footer = () => {
   return (
@@ -32,8 +33,8 @@ const Footer = () => {
         {/* Legal */}
         <VStack align="flex-start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">Legal</Text>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Privacy Policy</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Terms & Conditions</Link>
+          <Link as={RouterLink} to="/privacy" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Privacy Policy</Link>
+          <Link as={RouterLink} to="/terms"fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Terms & Conditions</Link>
         </VStack>
 
         {/* Support */}
@@ -43,19 +44,20 @@ const Footer = () => {
           
           {/* Social Media Links with Custom Images */}
           <HStack spacing={4} mt={2}>
-            <Link href="https://www.youtube.com" target="_blank">
+            <Link href="http://www.youtube.com/@estateone_india" target="_blank">
               <Image src="images/youtube.svg" alt="YouTube" width="40px" />
             </Link>
-            {/* <Link href="https://twitter.com" target="_blank">
-              <Image src="https://upload.wikimedia.org/wikipedia/commons/6/60/X_logo_2023_original.pmg" alt="Twitter X" width="30px" />
-            </Link> */}
-            <Link href="https://in.linkedin.com" target="_blank">
+            <Link href="https://wa.me/918368626797" target="_blank">
+              <Image src="images/whatsapp_icon3.svg" alt="Whatsapp" width="27px" />
+            </Link>
+            
+            <Link href="https://www.linkedin.com/company/estateone/" target="_blank">
               <Image src="images/linkedin.svg" alt="LinkedIn" width="35px" />
             </Link>
-            <Link href="https://www.instagram.com" target="_blank">
+            <Link href="https://www.instagram.com/estateone.in?igsh=MXNrdHd0b3J0aHkwZA==" target="_blank">
               <Image src="images/instagram.svg" alt="Instagram" width="30px" />
             </Link>
-            <Link href="https://www.facebook.com" target="_blank">
+            <Link href="https://www.facebook.com/profile.php?id=61569533714774" target="_blank">
               <Image src="images/facebook.svg" alt="Facebook" width="30px" />
             </Link>
           </HStack>
@@ -68,7 +70,7 @@ const Footer = () => {
           For Real Estate Queries: <Link href="mailto:connect@estateone.in" color="blue.600">connect@estateone.in</Link>
         </Text>
         <Text fontSize="sm" color="gray.600" mt={1}>
-          Company Name: Vedarc Infratech Private Limited | CIN: U68200HR2025PTC127756
+          Vedarc Infratech Private Limited | CIN: U68200HR2025PTC127756
         </Text>
         <Text fontSize="xs" color="gray.500" mt={3}>
           Disclaimer: The information on this website is for informational purposes only and is provided as a service to the online community. 

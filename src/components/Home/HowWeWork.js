@@ -1,23 +1,21 @@
 import React, { useRef } from "react";
 import { Box, Text, VStack, HStack, Button, List, ListItem, Icon, Grid } from "@chakra-ui/react";
-import { FaChevronDown } from "react-icons/fa";
-import { motion } from "framer-motion"; // Import framer-motion for animations
+import { FaChevronDown, FaCalendarAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { PrimaryButton } from "../Buttons";
 
-const MotionButton = motion(Button); // Create an animated button
+const MotionButton = motion(Button);
 
 const HowWeWork = () => {
-  // Refs for scrolling
   const manageRef = useRef(null);
   const sellRef = useRef(null);
 
-  // Scroll function
   const handleScroll = (ref) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  // Section Data
   const sections = [
     {
       title: "BUY",
@@ -41,7 +39,7 @@ const HowWeWork = () => {
     },
     {
       title: "MANAGE",
-      ref: manageRef, // Attach ref
+      ref: manageRef,
       color: "yellow.500",
       items: [
         "Schedule a Consultation(Meet 1)",
@@ -59,7 +57,7 @@ const HowWeWork = () => {
     },
     {
       title: "SELL",
-      ref: sellRef, // Attach ref
+      ref: sellRef,
       color: "yellow.500",
       items: [
         "Schedule a consultation (Meet 1)",
@@ -79,8 +77,7 @@ const HowWeWork = () => {
   ];
 
   return (
-    <Box as="section" id="howwework" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
-      {/* Section Heading */}
+    <Box as="section" id="howwework" py={{ base: 10, md: 16 }} px={{ base: 3, sm: 5, md: 20 }} textAlign="center">
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
         Your Real Estate Roadmap
       </Text>
@@ -89,12 +86,12 @@ const HowWeWork = () => {
         quickly, confidently, and seamlessly.
       </Text>
 
-      {/* Grid Layout for the 3 Sections */}
-      <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={8} mt={10} maxW="1100px" mx="auto">
+      {/* Responsive Grid Layout */}
+      <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }} gap={8} mt={10} maxW="1100px" mx="auto">
         {sections.map((section, index) => (
           <VStack
             key={index}
-            ref={section.ref} // Attach ref to sections
+            ref={section.ref}
             p={6}
             bg="white"
             borderRadius="lg"
@@ -104,12 +101,10 @@ const HowWeWork = () => {
             spacing={4}
             h="full"
           >
-            {/* Title */}
             <Text fontSize="xl" fontWeight="bold" color={section.color}>
               {section.title}
             </Text>
 
-            {/* List of Features */}
             <List spacing={3} flex="1">
               {section.items.map((item, i) => (
                 <ListItem key={i} display="flex" alignItems="center">
@@ -119,7 +114,6 @@ const HowWeWork = () => {
               ))}
             </List>
 
-            {/* Sub Actions (Only for Buy Section) */}
             {section.subActions.length > 0 && (
               <HStack spacing={3} mt={4}>
                 {section.subActions.map((actionObj, i) => (
@@ -132,8 +126,8 @@ const HowWeWork = () => {
                     size="sm"
                     px={4}
                     whileTap={{
-                      scale: 0.9, // Bounce Effect
-                      backgroundColor: "#333", // Dark on Click
+                      scale: 0.9,
+                      backgroundColor: "#333",
                       transition: { type: "spring", stiffness: 200 },
                     }}
                     onClick={actionObj.action}
@@ -145,9 +139,14 @@ const HowWeWork = () => {
             )}
 
             {/* Call to Action Button */}
-            <Button bg={section.color} color="white" _hover={{ bg: "yellow.600" }} width="full" mt={4}>
-              {section.ctaText}
-            </Button>
+            <PrimaryButton 
+              text={section.ctaText}
+              to={section.ctaLink} 
+              isPopover={true} 
+              leftIcon={<FaCalendarAlt />} 
+              width="full" 
+              mt={4}
+            />
           </VStack>
         ))}
       </Grid>
