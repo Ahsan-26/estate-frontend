@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ChakraProvider} from "@chakra-ui/react";
+import { ChakraProvider, extendTheme} from "@chakra-ui/react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -14,11 +14,19 @@ import FAQs from "./components/Faqs";
 import HowWeWork from "./components/Home/HowWeWork";
 import PrivacyPolicy from "./components/Legal/PrivacyPolicy";
 import Terms from "./components/Legal/Terms";
+import "@fontsource/outfit"; 
 
+const theme = extendTheme({
+  fonts: {
+    heading: `'Outfit', sans-serif`, // Apply Outfit to headings
+    body: `'Outfit', sans-serif`, // Apply Outfit to body text
+  },
+});
 
 const App = () => {
   return (
-    <ChakraProvider>
+    
+    <ChakraProvider theme={theme}>
     <Router>
     <ScrollToTop />
       <Header/>
