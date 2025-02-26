@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Text, VStack, HStack, Button, List, ListItem, Icon, Grid } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
+import { motion } from "framer-motion"; // Import framer-motion for animations
+
+const MotionButton = motion(Button); // Create an animated button
 
 const HowWeWork = () => {
+  // Refs for scrolling
+  const manageRef = useRef(null);
+  const sellRef = useRef(null);
+
+  // Scroll function
+  const handleScroll = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   // Section Data
   const sections = [
     {
@@ -16,15 +30,18 @@ const HowWeWork = () => {
         "Negotiate & Secure the Best Deal",
         "Property updates and market trends",
         "Pre-Possession Inspection",
-        "Generate Income? Self-Use,Sell & Exit",
-        
       ],
       ctaText: "Book a free call",
       ctaLink: "/buy",
-      subActions: ["Income?", "Want Live", "Sell & Exit"],
+      subActions: [
+        { text: "Generate Income?", action: () => handleScroll(manageRef) },
+        { text: "Self-Use", action: null },
+        { text: "Sell & Exit", action: () => handleScroll(sellRef) },
+      ],
     },
     {
       title: "MANAGE",
+      ref: manageRef, // Attach ref
       color: "yellow.500",
       items: [
         "Schedule a Consultation(Meet 1)",
@@ -32,7 +49,7 @@ const HowWeWork = () => {
         "Property Inspection & Assessment",
         "For Long-Term Rentals: Tenant Screening & Maximized Rental Listings",
         "For Short-Term Rentals: Complete setup &Strategic listings",
-        "Management & Monitoring:For Long-Term Rentals:Secure Rent Collection &Property MaintenanceFor Short-Term Rentals:Streamlined Guest Coordination & Dynamic Pricing",
+        "Management & Monitoring: For Long-Term Rentals: Secure Rent Collection & Property Maintenance. For Short-Term Rentals: Streamlined Guest Coordination & Dynamic Pricing",
         "Maximize Income Potential",
         "Generate consistent income",
       ],
@@ -42,6 +59,7 @@ const HowWeWork = () => {
     },
     {
       title: "SELL",
+      ref: sellRef, // Attach ref
       color: "yellow.500",
       items: [
         "Schedule a consultation (Meet 1)",
@@ -61,38 +79,29 @@ const HowWeWork = () => {
   ];
 
   return (
-    <Box 
-      as="section" 
-      id="howwework"
-      py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
+    <Box as="section" id="howwework" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
       {/* Section Heading */}
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
         Your Real Estate Roadmap
       </Text>
       <Text fontSize="md" color="gray.600" maxW="800px" mx="auto" mt={3}>
-      We make real estate easy. At EstateOne, our roadmap takes
-you from where you are to where you want to be—quickly, confidently, and
-seamlessly
+        We make real estate easy. At EstateOne, our roadmap takes you from where you are to where you want to be—
+        quickly, confidently, and seamlessly.
       </Text>
 
       {/* Grid Layout for the 3 Sections */}
-      <Grid 
-        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} 
-        gap={8} 
-        mt={10} 
-        maxW="1100px" 
-        mx="auto"
-      >
+      <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={8} mt={10} maxW="1100px" mx="auto">
         {sections.map((section, index) => (
-          <VStack 
-            key={index} 
-            p={6} 
-            bg="white" 
-            borderRadius="lg" 
-            boxShadow="md" 
-            align="start" 
-            textAlign="left" 
-            spacing={4} 
+          <VStack
+            key={index}
+            ref={section.ref} // Attach ref to sections
+            p={6}
+            bg="white"
+            borderRadius="lg"
+            boxShadow="md"
+            align="start"
+            textAlign="left"
+            spacing={4}
             h="full"
           >
             {/* Title */}
@@ -113,30 +122,30 @@ seamlessly
             {/* Sub Actions (Only for Buy Section) */}
             {section.subActions.length > 0 && (
               <HStack spacing={3} mt={4}>
-                {section.subActions.map((action, i) => (
-                  <Button 
-                    key={i} 
-                    bg="#F8F1E7" 
-                    color="black" 
-                    borderRadius="lg" 
-                    _hover={{ bg: "#f5e5d5" }} 
+                {section.subActions.map((actionObj, i) => (
+                  <MotionButton
+                    key={i}
+                    bg="#F8F1E7"
+                    color="black"
+                    borderRadius="lg"
+                    _hover={{ bg: "#f5e5d5" }}
                     size="sm"
                     px={4}
+                    whileTap={{
+                      scale: 0.9, // Bounce Effect
+                      backgroundColor: "#333", // Dark on Click
+                      transition: { type: "spring", stiffness: 200 },
+                    }}
+                    onClick={actionObj.action}
                   >
-                    {action}
-                  </Button>
+                    {actionObj.text}
+                  </MotionButton>
                 ))}
               </HStack>
             )}
 
             {/* Call to Action Button */}
-            <Button 
-              bg={section.color} 
-              color="white" 
-              _hover={{ bg: "yellow.600" }} 
-              width="full" 
-              mt={4}
-            >
+            <Button bg={section.color} color="white" _hover={{ bg: "yellow.600" }} width="full" mt={4}>
               {section.ctaText}
             </Button>
           </VStack>

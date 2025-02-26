@@ -79,7 +79,7 @@ const FAQs = () => {
   };
 
   return (
-    <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center">
+    <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }} textAlign="center" mt={{ base: 7, md: 5 }}>
       {/* Section Heading */}
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
         FAQs
@@ -153,7 +153,8 @@ const FAQs = () => {
         <SlideFade in={showAll} offsetY="20px">
           <Button
             mt={6}
-            colorScheme="red"
+            bg="#F3F3F3"
+  
             size="lg"
             borderRadius="full"
             px={6}

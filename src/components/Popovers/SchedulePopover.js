@@ -7,7 +7,6 @@ import { FaArrowLeft, FaSun, FaMoon, FaGlobe } from "react-icons/fa";
 import TimezoneSelect from 'react-timezone-select';
 import WhatsapPop from "./WhatsapPop";
 import QueryPopover from "./QueryPopover";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { DateTime } from "luxon";
 
@@ -156,7 +155,7 @@ const convertToSelectedTimezone = (time, timezone) => {
   
   <VStack align="start" spacing={2} mt={3}>
     <HStack>
-      <Image src="/images/imagePopover.png" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
+      <Image src="/images/contact_agent.svg" alt="Logo" w={{ base: "25px", md: "30px" }} mb={4} mt={1} />
       <Text fontSize={{ base: "14px", md: "15px" }} fontWeight="bold">Talk to an Advisor</Text>
     </HStack>
     <Text fontSize={{ base: "xs", md: "sm" }} color="gray.600" fontWeight="medium">
@@ -167,7 +166,7 @@ const convertToSelectedTimezone = (time, timezone) => {
   {/* Positioned Logo at the Bottom Left */}
   <Flex justify="center" mt={4}>
     <Image 
-      src="/images/logo.png" 
+      src="/images/logo.svg" 
       alt="Contact Agent" 
       w={{ base: "80px", md: "100px" }} 
     />
@@ -182,7 +181,6 @@ const convertToSelectedTimezone = (time, timezone) => {
               {/* Date Selection */}
               {dates.map(date => {
     const isDisabled = !availableSlots[date.fullDate] || availableSlots[date.fullDate].length === 0;
-    console.log(`Date: ${date.fullDate}, Slots:`, availableSlots[date.fullDate]); // Debug log
     
     return (
         <Button
@@ -202,7 +200,7 @@ const convertToSelectedTimezone = (time, timezone) => {
             </VStack>
         </Button>
     );
-})}
+              })}
 
 
               {/* Timezone Selection */}

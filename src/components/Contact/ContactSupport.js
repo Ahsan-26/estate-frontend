@@ -40,7 +40,7 @@ const ContactSupport = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/inquiries/submit/", {
+      const response = await fetch("http://127.0.0.1:8000/api/inquiries/submit/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -81,9 +81,12 @@ const ContactSupport = () => {
   return (
     <Box 
   as="section" 
+ 
   py={{ base: 10, md: 16 }} 
   px={{ base: 5, md: 20 }}
-  mt={{ base: 20, md: 20 }}  // ✅ Added margin-top here
+  mt={{ base: 20, md: 20 }} 
+  maxW="1200px"   // sets the max width
+  mx="auto"   // ✅ Added margin-top here
 >
       {/* Section Title */}
      
@@ -95,9 +98,10 @@ const ContactSupport = () => {
       <Flex 
         direction={{ base: "column", md: "row" }} 
         align="center" 
-        justify="space-between" 
+    justify="space-around"
         mt={10} 
-        gap={10}
+        gap={5}
+        
       >
         {/* Left Side - Support Information */}
         <VStack align="start"  boxShadow="sm" spacing={6} maxW="570px" minH="490px">
@@ -126,11 +130,12 @@ const ContactSupport = () => {
           </Box>
 
           <Box mt={5}>
-            <Text fontSize="lg" fontWeight="bold">Making Real Estate Laws Simple</Text>
+            <Text fontSize="lg" fontWeight="bold">Making Property Management Simple</Text>
             <Text fontSize="sm" color="gray.600">
-              Navigating legal complexities can be tough. Whether it’s RERA guidelines, property taxes, or 
-              ownership laws, our legal experts provide clear insights and actionable advice to keep you 
-              informed and empowered.
+            Managing properties can be challenging. From tenant screening and
+rent collection to maintenance and legal compliance, our experts provide clear
+guidance and effective solutions, keeping you informed and stress-free.
+
             </Text>
           </Box>
         </VStack>

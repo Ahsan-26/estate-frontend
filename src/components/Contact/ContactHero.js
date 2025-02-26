@@ -13,6 +13,8 @@ const ContactHero = () => {
       bgGradient="linear(to-b, #FEFEF9, #F7F3EA)"
       py={{ base: 3, md: 6 }}
       px={{ base: 5, md: 10 }}
+      maxW="1300px"   // sets the max width
+  mx="auto" 
       textAlign="center"
     >
       <Button
@@ -48,7 +50,7 @@ const ContactHero = () => {
        alignItems="center"
       
       >
-        <Image src="/images/contact_agent.png" alt="Expert" boxSize="60px" mx="auto" />
+        <Image src="/images/contact_agent.svg" alt="Expert" boxSize="60px" mx="auto" />
         <Text fontSize="lg" fontWeight="bold" mt={3}>
           Buying, Managing, or Selling? We’ve Got Your Back
         </Text>

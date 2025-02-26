@@ -52,7 +52,7 @@ const CareerHero = () => {
         {/* Right Section - Image */}
         <Box w={{ base: "90%", sm: "80%", md: "500px" }} mx="auto">
           <Image 
-            src="/images/career_hero.png" // ✅ Replace with actual image path
+            src="/images/career_hero.svg" // ✅ Replace with actual image path
             alt="Career at EstateOne"
             w="100%"
             borderRadius="10px"

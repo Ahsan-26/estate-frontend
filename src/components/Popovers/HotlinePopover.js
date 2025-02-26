@@ -36,7 +36,7 @@ const whatsappUrl = "https://wa.me/919548056061";
         >
           <ModalCloseButton position="absolute" top={4} right={4} />
           <Box bgGradient="linear(to-b, #FDF3E3, #FAF8F5)" borderTopRadius="xl" p={6}>
-            <Image src="/images/imagePopover2.png" alt="Property Advice" boxSize={{ base: "80px", md: "100px" }} mb={4} mx="auto" />
+            <Image src="/images/imagePopover2.svg" alt="Property Advice" boxSize={{ base: "80px", md: "100px" }} mb={4} mx="auto" />
             <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" mb={2}>
               Get Personalized Property Advice!
             </Text>
@@ -56,7 +56,7 @@ const whatsappUrl = "https://wa.me/919548056061";
                 textAlign="left"
               >
                 <Flex align="center" gap={2} mb={2}>
-                  <Image src="/images/imagePopover.png" alt="Call Icon" boxSize="35px" />
+                  <Image src="/images/contact_agent.svg" alt="Call Icon" boxSize="35px" />
                   <Text fontWeight="bold">Get on a Call with Us</Text>
                 </Flex>
                 <Text fontSize="sm" color="gray.600" mb={3}>
@@ -66,6 +66,8 @@ const whatsappUrl = "https://wa.me/919548056061";
   colorScheme="yellow"
   w="full"
   leftIcon={<FaRegCalendarAlt />}
+   _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out"
   onClick={() => {
     onClose(); // Close the current PropertyAdvicePopover
     setTimeout(() => setIsScheduleOpen(true), 200); // Open SchedulePopover after a small delay
@@ -85,13 +87,14 @@ const whatsappUrl = "https://wa.me/919548056061";
                 textAlign="left"
               >
                 <Flex align="center" gap={2} mb={2}>
-                  <Image src="/images/whatsapplogo.png" alt="WhatsApp Icon" boxSize="35px" />
+                  <Image src="/images/whatsapp_icon.svg" alt="WhatsApp Icon" boxSize="35px" />
                   <Text fontWeight="bold">WhatsApp us</Text>
                 </Flex>
                 <Text fontSize="sm" color="gray.600" mb={3}>
                   If you'd much rather prefer texting at your own pace, just hit us up on WhatsApp. 
                 </Text>
-                <Button bg="#25D366" onClick={() => window.location.href = whatsappUrl}color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
+                <Button bg="#25D366"  _active={{ transform: "scale(1.1)" }} 
+        transition="transform 0.1s ease-in-out" onClick={() => window.location.href = whatsappUrl}color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
                   WhatsApp us
                 </Button>
               </Box>

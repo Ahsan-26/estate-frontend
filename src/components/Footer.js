@@ -1,37 +1,32 @@
 import React from "react";
-import { Box, Flex, Text, Link, VStack, HStack, IconButton } from "@chakra-ui/react";
-import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa";
+import { Box, Flex, Text, Link, VStack, HStack, Image } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
 const Footer = () => {
   return (
     <Box bg="gray.100" py={10} textAlign="center">
-      <Flex 
-        maxW="1100px" 
-        mx="auto" 
-        px={5} 
-        justify="space-between" 
-        flexWrap="wrap"
-      >
+      <Flex maxW="1100px" mx="auto" px={5} justify="space-between" flexWrap="wrap">
+        
         {/* Left Section - Logo & Description */}
         <Box maxW="250px" textAlign="left">
-          
-        <img 
-          src="/images/logo.svg"  
-          alt="logo" 
-          style={{ width: "110px", height: "38px", marginBottom: "8px" }}  
-        />
+          <img 
+            src="/images/logo.svg"  
+            alt="logo" 
+            style={{ width: "110px", height: "38px", marginBottom: "8px" }}  
+          />
           <Text fontSize="sm" color="gray.600" mt={2}>
-            Lorem ipsum dolor sit amnsectetur Sit sagittis volutpat sed ut augue odio natoque elementum.
+            With Estate One, you don’t just buy, manage, or sell. You strategize. Unlock potential.
+            Navigate markets and achieve your real estate goals.
           </Text>
         </Box>
 
         {/* Quick Links */}
         <VStack align="flex-start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">Quick Links</Text>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Partner with us</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Career</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Blog</Link>
-          <Link href="#" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>FAQs</Link>
+          <Link as={RouterLink} to="/partner" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Partner with us</Link>
+          <Link as={RouterLink} to="/career" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Career</Link>
+          <Link as={RouterLink} to="/blog" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Blogs</Link>
+          <Link as={RouterLink} to="/faqs" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>FAQs</Link>
         </VStack>
 
         {/* Legal */}
@@ -44,19 +39,46 @@ const Footer = () => {
         {/* Support */}
         <VStack align="flex-start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">Support</Text>
-          <Text fontSize="sm" color="gray.700">Contact Us</Text>
+          <Link as={RouterLink} to="/contact" fontSize="sm" color="gray.700" _hover={{ textDecoration: "underline" }}>Contact us</Link>
+          
+          {/* Social Media Links with Custom Images */}
           <HStack spacing={4} mt={2}>
-            <IconButton as="a" href="#" icon={<FaFacebookF />} aria-label="Facebook" color="gray.700" _hover={{ color: "blue.500" }} />
-            <IconButton as="a" href="#" icon={<FaLinkedinIn />} aria-label="LinkedIn" color="gray.700" _hover={{ color: "blue.600" }} />
-            <IconButton as="a" href="#" icon={<FaInstagram />} aria-label="Instagram" color="gray.700" _hover={{ color: "pink.500" }} />
-            <IconButton as="a" href="#" icon={<FaYoutube />} aria-label="YouTube" color="gray.700" _hover={{ color: "red.500" }} />
+            <Link href="https://www.youtube.com" target="_blank">
+              <Image src="images/youtube.svg" alt="YouTube" width="40px" />
+            </Link>
+            {/* <Link href="https://twitter.com" target="_blank">
+              <Image src="https://upload.wikimedia.org/wikipedia/commons/6/60/X_logo_2023_original.pmg" alt="Twitter X" width="30px" />
+            </Link> */}
+            <Link href="https://in.linkedin.com" target="_blank">
+              <Image src="images/linkedin.svg" alt="LinkedIn" width="35px" />
+            </Link>
+            <Link href="https://www.instagram.com" target="_blank">
+              <Image src="images/instagram.svg" alt="Instagram" width="30px" />
+            </Link>
+            <Link href="https://www.facebook.com" target="_blank">
+              <Image src="images/facebook.svg" alt="Facebook" width="30px" />
+            </Link>
           </HStack>
         </VStack>
       </Flex>
 
+      {/* Additional Info Section */}
+      <Box maxW="1100px" mx="auto" px={5} mt={8} textAlign="center">
+        <Text fontSize="sm" fontWeight="bold" color="gray.700">
+          For Real Estate Queries: <Link href="mailto:connect@estateone.in" color="blue.600">connect@estateone.in</Link>
+        </Text>
+        <Text fontSize="sm" color="gray.600" mt={1}>
+          Company Name: Vedarc Infratech Private Limited | CIN: U68200HR2025PTC127756
+        </Text>
+        <Text fontSize="xs" color="gray.500" mt={3}>
+          Disclaimer: The information on this website is for informational purposes only and is provided as a service to the online community. 
+          It does not constitute real estate advice, and we do not guarantee the accuracy, adequacy, or completeness of the information presented here.
+        </Text>
+      </Box>
+
       {/* Footer Bottom */}
-      <Text fontSize="xs" color="gray.600" mt={6}>
-        © 2021-2024. All Rights Reserved.
+      <Text fontSize="xs" color="gray.600" mt={8}>
+        © Vedarc Infratech Pvt. Ltd
       </Text>
     </Box>
   );

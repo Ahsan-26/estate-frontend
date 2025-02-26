@@ -13,27 +13,33 @@ import {
   Box,
   Flex,
   Text,
-  useToast, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+  useToast,
+  Radio,
+  RadioGroup,
+  Stack,
+  Select,
+  useBreakpointValue
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 
 export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");  // ✅ Ensure email field is included
   const [phone, setPhone] = useState("");
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [location, setLocation] = useState("Gurgaon");
+  const [customLocation, setCustomLocation] = useState(""); // ✅ Custom location field
   const toast = useToast();
 
-  const [selectedOption, setSelectedOption] = useState(""); // ✅ New state for radio buttons
+  const modalSize = useBreakpointValue({ base: "full", sm: "md", md: "lg" });
 
-
-
-  // 🛠 Handles form submission and sends data to backend
   const handleConfirm = async () => {
-    if (!name || !email || !phone || !query || !selectedSlotId || !selectedOption) {
+    if (!name || !email || !phone || !query || !selectedSlotId || !selectedOption || !location) {
       toast({
         title: "All fields are required!",
         status: "error",
@@ -42,6 +48,8 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
       });
       return;
     }
+
+    const finalLocation = location === "other" ? customLocation : location;
 
     setLoading(true);
     // console.log("Sending data:", { name, email, phone, query, selectedSlotId, service_type: selectedOption });
@@ -52,8 +60,9 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
         email,
         phone,
         query,
-        time_slot_id: selectedSlotId,  // ✅ Correct field for backend
-        service_type: selectedOption,  
+        time_slot_id: selectedSlotId,
+        service_type: selectedOption,
+        location: finalLocation, // ✅ Send correct location to backend
       });
 
       toast({
@@ -80,7 +89,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "lg" }} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size={modalSize} isCentered>
       <ModalOverlay />
       <ModalContent
         as={motion.div}
@@ -90,22 +99,24 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
         p={6}
         borderRadius="lg"
         boxShadow="xl"
-        maxW={{ base: "90%", md: "600px" }}
+        maxW={{ base: "95%", md: "600px" }}
       >
         <ModalHeader fontSize={{ base: "lg", md: "xl" }} fontWeight="bold">
           Let us know your query?
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-        <RadioGroup onChange={setSelectedOption} value={selectedOption}>
-  <Stack direction="row" spacing={4}>
-    <Radio value="buy">Buy</Radio>
-    <Radio value="sell">Sell</Radio>
-    <Radio value="manage">Manage</Radio>
-  </Stack>
-</RadioGroup>
+          {/* Radio Selection */}
+          <RadioGroup onChange={setSelectedOption} value={selectedOption}>
+            <Stack direction={{ base: "column", md: "row" }} spacing={4}>
+              <Radio value="buy">Buy</Radio>
+              <Radio value="sell">Sell</Radio>
+              <Radio value="manage">Manage</Radio>
+            </Stack>
+          </RadioGroup>
+
           {/* Name and Phone Fields */}
-          <Flex flexDirection={{ base: "column", md: "row" }} gap={4} mb={3}>
+          <Flex flexDirection={{ base: "column", md: "row" }} flexWrap="wrap" gap={4} mb={3}>
             <Box flex={1}>
               <Text mb={1} fontWeight="bold">Your Name*</Text>
               <Input placeholder="Write your name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -131,6 +142,27 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
             />
           </Box>
 
+          {/* Location Dropdown */}
+          <Box mb={3}>
+            <Text mb={1} fontWeight="bold">Location*</Text>
+            <Select value={location} onChange={(e) => setLocation(e.target.value)}>
+              <option value="Gurgaon">Gurgaon</option>
+              <option value="other">Other</option> 
+            </Select>
+          </Box>
+
+          {/* Custom Location Input (Only if "Other" is selected) */}
+          {location === "other" && (
+            <Box mb={3}>
+              <Text mb={1} fontWeight="bold">Enter Location*</Text>
+              <Input 
+                placeholder="Type your location" 
+                value={customLocation} 
+                onChange={(e) => setCustomLocation(e.target.value)} 
+              />
+            </Box>
+          )}
+
           {/* Query Textarea */}
           <Box mb={3}>
             <Text mb={1} fontWeight="bold">Tell us your query*</Text>
@@ -150,7 +182,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
               _hover={{ bg: "yellow.600" }}
               isLoading={loading}
               onClick={handleConfirm} 
-  isDisabled={!name || !email || !phone || !query || !selectedSlotId || !selectedOption} // Ensure all fields are filled
+              isDisabled={!name || !email || !phone || !query || !selectedSlotId || !selectedOption || (location === "other" && !customLocation)} 
             >
               Confirm →
             </Button>

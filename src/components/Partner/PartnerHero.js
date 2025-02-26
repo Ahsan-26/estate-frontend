@@ -8,6 +8,9 @@ const PartnerHero = () => {
       bgGradient="linear(to-b, #FEFEF9, #F7F3EA)" // ✅ Background Gradient
       py={{ base: 12, md: 16 }}
       px={{ base: 5, md: 20 }}
+      maxW={"1500px"}
+      mx={"auto"}
+      mt={{ base: 6, md: 2 }}
     >
       <Flex 
         direction={{ base: "column-reverse", md: "row" }} // ✅ Reverse on mobile for better UX
@@ -23,11 +26,13 @@ const PartnerHero = () => {
             color="#DA990E" 
             fontSize={{ base: "xs", md: "sm" }}
             fontWeight="bold" 
+            bg= "white"
             px={4} 
             py={1} 
             borderRadius="full"
             display="inline-block"
-            alignSelf={{ base: "center", md: "flex-start" }} // ✅ Center on mobile
+            alignSelf={{ base: "center", md: "flex-start" }}
+            boxShadow="md"
           >
             Your Success, Our Priority!
           </Text>
@@ -58,7 +63,7 @@ const PartnerHero = () => {
         {/* Right Section - Image */}
         <Box w={{ base: "90%", sm: "80%", md: "500px" }} mx="auto">
           <Image 
-            src="/images/partner_hero.png" // ✅ Replace with actual image path
+            src="/images/partner_hero.svg" // ✅ Replace with actual image path
             alt="Partner with EstateOne"
             w="100%"
             borderRadius="10px"

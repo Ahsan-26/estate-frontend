@@ -1,26 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { 
   Box, Text, Input, InputGroup, InputRightElement, IconButton, VStack, Grid, HStack, Image, Link 
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
-
-const blogPosts = [
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog2.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog3.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog2.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog3.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog1.png" },
-  { title: "Lorem ipsum dolor sit amet Illus ut feugiat vulputate", time: "7 min read", image: "/images/blog2.png" },
-];
+import axios from "axios";
 
 const BlogSearchSection = () => {
-  return (
-    <Box as="section" py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }}>
+  const [blogPosts, setBlogPosts] = useState([]);
 
-      {/* 🔍 Search Bar Section */}
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/blogs/")
+      .then(response => setBlogPosts(response.data))
+      .catch(error => console.error("Error fetching blogs:", error));
+  }, []);
+
+  return (
+    <Box py={{ base: 10, md: 16 }} px={{ base: 5, md: 20 }}>
+      {/* 🔍 Search Bar */}
       <Box 
         bgGradient="linear(to-r, blackAlpha.900, blackAlpha.700)" 
         borderRadius="lg"
@@ -57,13 +54,13 @@ const BlogSearchSection = () => {
       </Text>
 
       <Grid 
-        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} 
+        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(2, 1fr)" }} 
         gap={6} 
         maxW="1200px" 
         mx="auto"
       >
-        {blogPosts.map((post, index) => (
-          <HStack key={index} align="start" spacing={4} w="full">
+        {blogPosts.map((post) => (
+          <HStack key={post.id} align="start" spacing={4} w="full">
             <Image 
               src={post.image} 
               alt="Blog Thumbnail" 
@@ -74,15 +71,14 @@ const BlogSearchSection = () => {
             />
             <VStack align="start" spacing={1} flex="1">
               <Text fontSize="sm" fontWeight="bold">{post.title}</Text>
-              <Text fontSize="xs" color="gray.600">{post.time}</Text>
-              <Link as={RouterLink} to="/blog-details">
+              <Text fontSize="xs" color="gray.600">{post.reading_time} min read</Text>
+              <Link as={RouterLink} to={`/blog-details/${post.id}`}>
                 <Text fontSize="md" fontWeight="bold">Read all →</Text>
               </Link>
             </VStack>
           </HStack>
         ))}
       </Grid>
-      
     </Box>
   );
 };
