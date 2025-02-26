@@ -146,15 +146,15 @@ const SchedulePopover = ({ isOpen, onClose }) => {
         <ModalBody p={0}>
           <Flex direction={{ base: "column", md: "row" }} align="stretch">
          {/* Left Section */}
-{/* Left Section */}
 <Box
   margin={{ base: 2, md: 4 }}
   bg="#F0F0F0"
   p={{ base: 3, md: 5 }}
-  w={{ base: "100%", sm: "90%", md: "50%", lg: "40%" }} // Ensure it doesn't exceed parent width
-  maxW="90%" // Ensure it doesn't overflow the parent container
+  w={{ base: "100%", sm: "90%", md: "50%", lg: "40%" }}
+  maxW="85%" // Ensure it doesn't overflow the parent container
   borderRadius="12px"
   boxShadow="0px 4px 6px rgba(0, 0, 0, 0.1)"
+  position="relative" // Required for absolute positioning of the logo
 >
   {/* Back Button */}
   <Button
@@ -204,7 +204,11 @@ const SchedulePopover = ({ isOpen, onClose }) => {
   <Flex
     justify="flex-start"
     align="flex-end"
-    mt={4} // Add margin-top to separate the logo from the text
+    position={{ base: "static", md: "absolute" }} // Static on mobile, absolute on larger screens
+    bottom={{ base: 0, md: 4 }} // Position at the bottom on larger screens
+    left={{ base: 0, md: 4 }} // Position at the left on larger screens
+    mt={{ base: 4, md: 0 }} // Add margin-top on mobile to separate from text
+    w="full" // Ensure it takes full width on mobile
   >
     <Image
       src="/images/logo.svg"
