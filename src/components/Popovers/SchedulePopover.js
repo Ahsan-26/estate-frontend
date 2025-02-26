@@ -146,11 +146,13 @@ const SchedulePopover = ({ isOpen, onClose }) => {
         <ModalBody p={0}>
           <Flex direction={{ base: "column", md: "row" }} align="stretch">
          {/* Left Section */}
+{/* Left Section */}
 <Box
   margin={{ base: 2, md: 4 }}
   bg="#F0F0F0"
   p={{ base: 3, md: 5 }}
-  w={{ base: "100%", sm: "90%", md: "50%", lg: "40%" }}
+  w={{ base: "100%", sm: "90%", md: "50%", lg: "40%" }} // Ensure it doesn't exceed parent width
+  maxW="90%" // Ensure it doesn't overflow the parent container
   borderRadius="12px"
   boxShadow="0px 4px 6px rgba(0, 0, 0, 0.1)"
 >
