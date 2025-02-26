@@ -48,9 +48,9 @@ export const SecondaryButton = ({ text }) => {
 
   return (
     <Button 
-      border="2px solid #da990e"
-      color="#da990e"
-      bg="#fff3d9"
+      border="2px solid rgb(52, 207, 75)"
+      color="white"
+      bg="rgb(22, 132, 39)"
        _active={{ transform: "scale(1.1)" }} 
         transition="transform 0.1s ease-in-out"
         _hover={{ 
