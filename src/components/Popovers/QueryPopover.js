@@ -28,7 +28,7 @@ import {useNavigate} from "react-router-dom";
 export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");  // ✅ Ensure email field is included
   const [phone, setPhone] = useState("");
   const [query, setQuery] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -52,6 +52,8 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
     const finalLocation = location === "other" ? customLocation : location;
 
     setLoading(true);
+    // console.log("Sending data:", { name, email, phone, query, selectedSlotId, service_type: selectedOption });
+
     try {
       await axios.post("http://127.0.0.1:8000/api/book_appointment/", {
         name,
