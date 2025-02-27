@@ -96,8 +96,8 @@ const FAQs = () => {
           >
             <Box
               w="full"
-              bg={openIndex === index ? "#D29400" : "#F7F7F7"}
-              color={openIndex === index ? "white" : "black"}
+              bg={openIndex === index ? "#F7F7F7" : "#F7F7F7"}
+              color={openIndex === index ? "black" : "black"}
               borderRadius="md"
               p={4}
               boxShadow="sm"
