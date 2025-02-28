@@ -11,10 +11,12 @@ const HeroSection = () => {
     <Box 
       as="section"
       bgGradient="linear(to-b, #FEFEF9, #F7F3EA)"
-      py={{ base: 12, md: 16 }} 
+      py={{ base: 16, md: 16 }} 
       px={{ base: 5, md: 20 }}
       mt={{ base: 18, md: 6 }}
       textAlign={{ base: "center", md: "left" }}
+      maxW="100%"
+      mx="auto"
       minH="100vh"
       display="flex"
       alignItems="center"
@@ -25,7 +27,7 @@ const HeroSection = () => {
         justify="center"
         gap={{ base: 6, md: 12, lg: 16 }}
         w="100%"
-        maxW="1400px"
+        maxW="1200px"//do not change this
         mx="auto"
       >
         {/* Left Section - Text Content */}
@@ -35,7 +37,7 @@ const HeroSection = () => {
           maxW={{ base: "100%", md: "50%" }}
           flexGrow={1}
         >
-          <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }} fontWeight="bold">
+          <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }}  fontWeight="bold" >
             Property Solutions <br /> Made Easy
           </Text>
           <Text fontSize={{ base: "sm", md: "md", lg: "lg" }} color="gray.700" textAlign={{ base: "center", md: "left" }}>

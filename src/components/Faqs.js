@@ -86,7 +86,7 @@ const FAQs = () => {
       </Text>
 
       {/* FAQ List */}
-      <VStack mt={8} spacing={4} maxW="640px" mx="auto" align="stretch">
+      <VStack mt={8} spacing={4} maxW="640px" mx="auto" align="stretch" textAlign="left">
         {faqs.slice(0, showAll ? faqs.length : 5).map((faq, index) => (
           <motion.div
             key={index}
