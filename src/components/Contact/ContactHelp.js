@@ -56,7 +56,7 @@ const ContactHelp = () => {
             size="md"
             onClick={() => window.open("https://wa.me/918368626797", "_blank")} // Open WhatsApp
           >
-            WhatsApp Us
+            Whatsapp Us
           </Button>
         </HStack>
 

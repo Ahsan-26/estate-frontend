@@ -48,7 +48,7 @@ const Footer = () => {
               <Image src="images/youtube.svg" alt="YouTube" width="40px" />
             </Link>
             <Link href="https://wa.me/918368626797" target="_blank">
-              <Image src="images/whatsapp_icon3.svg" alt="Whatsapp" width="27px" />
+              <Image src="images/whatsapp.svg" alt="Whatsapp" width="27px" />
             </Link>
             
             <Link href="https://www.linkedin.com/company/estateone/" target="_blank">

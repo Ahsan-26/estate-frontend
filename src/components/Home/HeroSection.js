@@ -54,7 +54,7 @@ const HeroSection = () => {
             align={{ base: "center", md: "start" }}
           >
             <PrimaryButton text="Book a free call" isPopover={true} />
-            <SecondaryButton text="WhatsApp us" to="/whatsapp" />
+            <SecondaryButton text="Whatsapp Us" to="/whatsapp" />
           </Stack>
 
           {/* Google Rating & Trust Statement */}

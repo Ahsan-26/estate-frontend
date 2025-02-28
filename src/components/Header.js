@@ -59,16 +59,17 @@ const Header = () => {
 
   return (
     <Box
+      align = "center"
       as="header"
       position="fixed"
       top={visible ? "20px" : "-80px"}
-      left="52%"
+      left="51.58%"
       transform="translateX(-50%)"
       width="90%"
       maxW="1200px"
       bg="white"
       borderRadius="15px"
-      boxShadow="lg"
+      boxShadow="0px 0px 15px rgba(0, 0, 0, 0.1)"
       py={2}
       px={{ base: 4, md: 10 }}
       transition="top 0.3s ease-in-out"
@@ -76,21 +77,23 @@ const Header = () => {
     >
       <Flex justify="space-between" align="center">
         {/* ✅ Logo */}
-        <ChakraLink as={Link} to="/" display="flex" alignItems="center">
-          <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
+        <ChakraLink as={Link} to="/" display="inline-flex" alignItems="center">
+          <Image 
+            src="/images/logo.svg" 
+            alt="EstateOne Logo" 
+            h={{ base: "35px", md: "40px" }} 
+            maxW="100%" 
+          />
         </ChakraLink>
+
 
         {/* ✅ Desktop Navigation */}
         <Flex gap={6} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }} alignItems="center">
-          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>
-            Blog
-          </ChakraLink>
-          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>
-            Partner with us
-          </ChakraLink>
-
+        <ChakraLink as={Link} to="/" onClick={onClose} _hover={{ textDecoration: "underline" }}>
+              Home
+            </ChakraLink>
           {/* ✅ Our Services Dropdown */}
-          <Menu>
+            <Menu>
             <MenuButton
               as={Button}
               rightIcon={<FaChevronDown />}
@@ -107,12 +110,17 @@ const Header = () => {
               <MenuItem onClick={handleServiceClick}>Sell</MenuItem>
             </MenuList>
           </Menu>
-
+          <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>
+            Blog
+          </ChakraLink>
           <ChakraLink as={Link} to="/faqs" _hover={{ textDecoration: "underline" }}>
             FAQs
           </ChakraLink>
           <ChakraLink as={Link} to="/career" _hover={{ textDecoration: "underline" }}>
             Career
+          </ChakraLink>
+          <ChakraLink as={Link} to="/partner" _hover={{ textDecoration: "underline" }}>
+            Partner with Us
           </ChakraLink>
         </Flex>
 
@@ -175,15 +183,11 @@ const Header = () => {
           display={{ base: "block", md: "none" }}
         >
           <VStack spacing={4} align="start">
-            <ChakraLink as={Link} to="/blog" onClick={onClose} _hover={{ textDecoration: "underline" }}>
-              Blog
+          <ChakraLink as={Link} to="/" onClick={onClose} _hover={{ textDecoration: "underline" }}>
+              Home
             </ChakraLink>
-            <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>
-              Partner with us
-            </ChakraLink>
-
-            {/* ✅ Mobile Services Dropdown */}
-            <Menu>
+                        {/* ✅ Mobile Services Dropdown */}
+                        <Menu>
               <MenuButton as={Button} rightIcon={<FaChevronDown />} variant="link" fontWeight="bold">
                 Our Services
               </MenuButton>
@@ -193,12 +197,17 @@ const Header = () => {
                 <MenuItem onClick={() => { handleServiceClick(); onClose(); }}>Sell</MenuItem>
               </MenuList>
             </Menu>
-
+            <ChakraLink as={Link} to="/blog" onClick={onClose} _hover={{ textDecoration: "underline" }}>
+              Blog
+            </ChakraLink>
             <ChakraLink as={Link} to="/faqs" onClick={onClose} _hover={{ textDecoration: "underline" }}>
               FAQs
             </ChakraLink>
             <ChakraLink as={Link} to="/career" onClick={onClose} _hover={{ textDecoration: "underline" }}>
               Career
+            </ChakraLink>
+            <ChakraLink as={Link} to="/partner" onClick={onClose} _hover={{ textDecoration: "underline" }}>
+              Partner with Us
             </ChakraLink>
 
             {/* ✅ Mobile Buttons */}
