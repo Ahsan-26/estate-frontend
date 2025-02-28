@@ -47,7 +47,7 @@ const WhatWeDo = () => {
         justify="center"
       >
         <PrimaryButton text="Book a free call" isPopover={true} />
-        <SecondaryButton text="WhatsApp us" to="/whatsapp" />
+        <SecondaryButton text="Whatsapp us" to="/whatsapp" />
       </Stack>
 
       {/* Service Cards */}
