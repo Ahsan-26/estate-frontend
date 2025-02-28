@@ -61,27 +61,30 @@ const Header = () => {
     <Box
       as="header"
       position="fixed"
-      top={visible ? "20px" : "-80px"}
-      left="52%"
+      top={visible ? "18px" : "-80px"}
+      left="50%"
       transform="translateX(-50%)"
       width="90%"
       maxW="1200px"
       bg="white"
       borderRadius="15px"
       boxShadow="lg"
-      py={2}
-      px={{ base: 4, md: 10 }}
+      py={3}
+      px={{ base: 3, md: 6 }}
       transition="top 0.3s ease-in-out"
       zIndex="1000"
+      //shadow outline should be all around, just shared in figma. 
+  border="1px solid"
+  borderColor="#EDE6DA"
     >
       <Flex justify="space-between" align="center">
         {/* ✅ Logo */}
         <ChakraLink as={Link} to="/" display="flex" alignItems="center">
           <Image src="/images/logo.svg" alt="EstateOne Logo" h={{ base: "35px", md: "40px" }} />
         </ChakraLink>
-
+        <Box flex="0.8" />
         {/* ✅ Desktop Navigation */}
-        <Flex gap={6} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }} alignItems="center">
+        <Flex gap={4} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }} alignItems="center">
           <ChakraLink as={Link} to="/blog" _hover={{ textDecoration: "underline" }}>
             Blog
           </ChakraLink>

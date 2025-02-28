@@ -63,8 +63,10 @@ const whatsappUrl = "https://wa.me/918368626797";
                   We have 150+ slots available daily. Choose a time, and we’ll call you at your convenience.
                 </Text>
                 <Button
-  colorScheme="yellow"
+  bg="yellow.500"
   w="full"
+  color={"white"}
+  _hover={{ bg: "yellow.600" }}
   leftIcon={<FaRegCalendarAlt />}
    _active={{ transform: "scale(1.1)" }} 
         transition="transform 0.1s ease-in-out"
@@ -88,14 +90,14 @@ const whatsappUrl = "https://wa.me/918368626797";
               >
                 <Flex align="center" gap={2} mb={2}>
                   <Image src="/images/whatsapp_icon.svg" alt="WhatsApp Icon" boxSize="35px" />
-                  <Text fontWeight="bold">WhatsApp us</Text>
+                  <Text fontWeight="bold">Whatsapp us</Text>
                 </Flex>
                 <Text fontSize="sm" color="gray.600" mb={3}>
-                  If you'd much rather prefer texting at your own pace, just hit us up on WhatsApp. 
+                  If you'd much rather prefer texting at your own pace, just hit us up on Whatsapp. 
                 </Text>
                 <Button bg="#25D366"  _active={{ transform: "scale(1.1)" }} 
         transition="transform 0.1s ease-in-out" onClick={() => window.location.href = whatsappUrl}color="white" _hover={{ bg: "#1EBE5D" }} w="full" leftIcon={<FaWhatsapp />}>
-                  WhatsApp us
+                  Whatsapp us
                 </Button>
               </Box>
             </Flex>
