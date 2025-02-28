@@ -60,15 +60,34 @@ const HeroSection = () => {
           </Stack>
 
           {/* Google Rating & Trust Statement */}
-          <VStack mt={6} spacing={1} align="start">  
-            <Image src="/images/google_rating.svg" alt="Google Rating" w={{ base: "90px", md: "120px", lg: "140px" }} />
-            <Text fontSize="sm" fontWeight="bold" textAlign="center">
-              Trusted by <Text as="span" color="yellow.500">thousands of happy clients</Text>
+          <VStack 
+            mt={6} 
+            spacing={1} 
+            align={{ base: "center", md: "start" }} // ✅ Centered in mobile, left-aligned in desktop
+            w="full" // ✅ Ensures full width for alignment
+          >
+            <Image 
+              src="/images/google_rating.svg" 
+              alt="Google Rating" 
+              w={{ base: "100px", md: "120px", lg: "140px" }} 
+              mx={{ base: "auto", md: "0" }} // ✅ Centers image in mobile
+            />
+            <Text 
+              fontSize="sm" 
+              color="#141414"  
+              textAlign={{ base: "center", md: "left" }} // ✅ Centers text in mobile, left-aligns in desktop
+            >
+              Trusted by <Text as="span" fontWeight="bold" color="#141414">thousands of happy clients</Text>
             </Text>
-            <Text fontSize="sm" color="gray.600" textAlign="center">
+            <Text 
+              fontSize="sm" 
+              color="#141414" 
+              textAlign={{ base: "center", md: "left" }} // ✅ Centers text in mobile, left-aligns in desktop
+            >
               for expert guidance and genuine advice.
             </Text>
           </VStack>
+
         </VStack>
 
         {/* Right Section - Single Image with Smooth Animation */}
