@@ -74,6 +74,9 @@ const Header = () => {
       px={{ base: 4, md: 10 }}
       transition="top 0.3s ease-in-out"
       zIndex="1000"
+      //shadow outline should be all around, just shared in figma. 
+  border="1px solid"
+  borderColor="#EDE6DA"
     >
       <Flex justify="space-between" align="center">
         {/* ✅ Logo */}
@@ -85,7 +88,6 @@ const Header = () => {
             maxW="100%" 
           />
         </ChakraLink>
-
 
         {/* ✅ Desktop Navigation */}
         <Flex gap={6} fontWeight="bold" fontSize="md" display={{ base: "none", md: "flex" }} alignItems="center">

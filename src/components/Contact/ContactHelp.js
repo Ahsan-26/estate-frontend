@@ -49,7 +49,7 @@ const ContactHelp = () => {
             colorScheme="#1EBE5D" bg="#25D366" 
             // color="white" 
             _hover={{ 
-              bg: "yellow.600", 
+              bg: "#25D366", 
               transform: "scale(1.1) translateY(-1px)", // ✅ Bounce effect
               transition: "transform 0.2s ease-in-out" 
             }}
