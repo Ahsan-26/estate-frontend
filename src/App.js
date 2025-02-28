@@ -14,14 +14,7 @@ import FAQs from "./components/Faqs";
 import HowWeWork from "./components/Home/HowWeWork";
 import PrivacyPolicy from "./components/Legal/PrivacyPolicy";
 import Terms from "./components/Legal/Terms";
-import "@fontsource/outfit"; 
 
-const theme = extendTheme({
-  fonts: {
-    heading: `'Outfit', sans-serif`, // Apply Outfit to headings
-    body: `'Outfit', sans-serif`, // Apply Outfit to body text
-  },
-});
 
 const App = () => {
   return (
