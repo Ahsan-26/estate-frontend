@@ -94,7 +94,7 @@ const HowWeWork = () => {
           <VStack
             key={index}
             ref={section.ref}
-            p={6}
+            p={2}
             bg="white"
             borderRadius="lg"
             boxShadow="md"

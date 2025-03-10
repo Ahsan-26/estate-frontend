@@ -13,7 +13,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/blogs/${id}/`)
+      .get(`${process.env.REACT_APP_API_BASE_URL}/api/blogs/${id}/`)
       .then((response) => setBlog(response.data))
       .catch((error) => console.error("Error fetching blog data:", error));
   }, [id]);

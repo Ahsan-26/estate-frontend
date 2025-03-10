@@ -8,7 +8,7 @@ const BlogSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/blogs/")
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/blogs/`)
       .then((response) => {
         setBlogs(response.data);
         setLoading(false);

@@ -55,7 +55,7 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
     // console.log("Sending data:", { name, email, phone, query, selectedSlotId, service_type: selectedOption });
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/book_appointment/", {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/book_appointment/`, {
         name,
         email,
         phone,
