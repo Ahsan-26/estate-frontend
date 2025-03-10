@@ -79,11 +79,11 @@ const HowWeWork = () => {
   ];
 
   return (
-    <Box as="section" id="howwework" py={{ base: 10, md: 16 }} px={{ base: 3, sm: 5, md: 20 }} textAlign="center">
+    <Box as="section" id="howwework" py={{ base: 5, md: 20 }} px={{ base: 5, md: 20 }} textAlign="center">
       <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
         Your Real Estate Roadmap
       </Text>
-      <Text fontSize="md" color="gray.600" maxW="800px" mx="auto" mt={3}>
+      <Text fontSize="md" color="gray.600" maxW="700" mx="auto" mt={3}>
         We make real estate easy. At EstateOne, our roadmap takes you from where you are to where you want to be—
         quickly, confidently, and seamlessly.
       </Text>
