@@ -77,6 +77,7 @@ const SchedulePopover = ({ isOpen, onClose }) => {
     try {
       setLoading(true);
       const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/available_slots/`);
+      // const response = await axios.get(`http://localhost:8000/api/available_slots/`);
       console.log("Raw API Response:", response.data);
 
       const formattedSlots = {};
