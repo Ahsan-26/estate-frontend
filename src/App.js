@@ -15,7 +15,6 @@ import HowWeWork from "./components/Home/HowWeWork";
 import PrivacyPolicy from "./components/Legal/PrivacyPolicy";
 import Terms from "./components/Legal/Terms";
 
-
 const App = () => {
   return (
     
