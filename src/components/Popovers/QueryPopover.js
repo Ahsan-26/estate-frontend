@@ -94,17 +94,22 @@ export default function QueryPopover({ isOpen, onClose, selectedSlotId }) {
     <Modal isOpen={isOpen} onClose={onClose} size={modalSize} isCentered>
       <ModalOverlay />
       <ModalContent
+      display="flex"
+  flexDirection="column"
         borderRadius="20px"
         boxShadow="2xl"
         p={0}
         minW={{ base: "90%", md: "900px" }}
+        // maxH="90vh"
+        maxH={{ base: "90vh", md: "80vh" }}
         overflowY="auto" 
       >
-        <ModalHeader fontSize={{ base: "lg", md: "xl" }} fontWeight="bold">
+        <ModalHeader fontSize={{ base: "lg", md: "xl" }} fontWeight="bold"
+        overflowY="auto" flex="1" >
           Let us know your query?
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody  overflowY="auto" >
+        <ModalBody overflowY="auto" css={{ "&::-webkit-scrollbar": { width: "4px" }, "&::-webkit-scrollbar-thumb": { background: "#40c051", borderRadius: "24px" } }}>
           {/* Radio Selection */}
           <RadioGroup onChange={setSelectedOption} value={selectedOption}>
   <Stack 
